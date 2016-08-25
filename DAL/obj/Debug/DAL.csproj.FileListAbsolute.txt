@@ -1,0 +1,7 @@
+C:\Users\Administrator\Desktop\Attendance\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Attendance\DAL\bin\Debug\DAL.dll
+C:\Users\Administrator\Desktop\Attendance\DAL\bin\Debug\DAL.pdb
+C:\Users\Administrator\Desktop\Attendance\DAL\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance\DAL\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance\DAL\obj\Debug\DAL.dll
+C:\Users\Administrator\Desktop\Attendance\DAL\obj\Debug\DAL.pdb

@@ -1,0 +1,5 @@
+C:\Users\Administrator\Desktop\Attendance\Entity\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance\Entity\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Attendance\Entity\obj\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance\Entity\obj\Debug\Entity.pdb

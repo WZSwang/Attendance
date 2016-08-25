@@ -1,0 +1,400 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body {
+    font-family: "微软雅黑";
+    overflow: hidden;
+}
+
+#divup {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: url(../Images/banner.jpg) no-repeat center top;
+    background-size: cover;
+    text-align: center;
+}
+
+#divdown {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    left: 0px;
+    top: 90%;
+    z-index: 6;
+    background-color:rgba(0,0,0,0.3);
+}
+
+#xhx {
+    width: 100%;
+    height: 20%;
+    text-align: center;
+    border:0px solid #ffffff;
+}
+
+#loginclick {
+    width: 150px;
+    height: 55px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #FFF;
+    opacity: 0.5;
+    color: #002E5D;
+    font-family: "微软雅黑";
+    font-size: 30px;
+    margin-top: 5%;
+}
+
+    #loginclick:hover {
+        opacity: 0.9;
+    }
+
+#TobPic {
+    text-align: center;
+    height: 400px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+}
+
+#TobFont1 {
+    font-size: 30px;
+    margin-top: 10%;
+}
+
+#TobFont2 {
+    font-size: 50px;
+    margin-top: 1%;
+}
+
+#TobFont3 {
+    font-size: 15px;
+    margin-top: 1%;
+}
+
+/*.btnopacityup{ opacity:1;-webkit-animation:btnopacityup 0.5s ease-out;}
+@-webkit-keyframes btnopacityup { 0%{ opacity:0.5;} 100%{ opacity:1;}  }
+.btnopacitydoen{ opacity:0.5;-webkit-animation:btnopacitydoen 0.5s ease-out;}
+@-webkit-keyframes btnopacitydoen { 0%{ opacity:1;} 100%{ opacity:0.5;}  }
+
+
+.ablurup{-webkit-filter: blur(0px) grayscale(0);-webkit-animation:ablurup 1s ease-out;}
+@-webkit-keyframes ablurup { 0%{ -webkit-filter: blur(5px) grayscale(0);} 100%{ -webkit-filter: blur(0px) grayscale(0);}  }
+.ablurdown{-webkit-filter: blur(5px) grayscale(0);-webkit-animation:ablurdown 1s ease-out;}
+@-webkit-keyframes ablurdown { 0%{ -webkit-filter: blur(0px) grayscale(0);} 100%{ -webkit-filter: blur(5px) grayscale(0);}  }*/
+
+
+
+/*弹出透明层样式*/
+.outc {
+    background-color: #000;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: none;
+}
+/*弹出登录层样式*/
+.loginc {
+    background-color: #ffffff;
+    width: 350px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left:-175px;
+    margin-top:-250px;
+    display: none;
+    z-index: 15;
+    border: solid 3px #16A085;
+    text-align: center;
+    padding:5px;
+}
+
+#logtitle {
+    width: 100%;
+    height: 45px;
+    background-color: #16A085;
+    font-size: 30px;
+    color: #FFF;
+}
+
+#touxiang {
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 3px #95A5A6;
+}
+
+.txt {
+    width: 250px;
+    height: 40px;
+    margin-top: 20px;
+    border: solid 1px #000000;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    color: gray;
+    background-color: #FFF;
+    border-radius: 5px;
+    text-align:center;
+}
+
+.btn {
+    width: 150px;
+    height: 50px;
+    margin-top: 40px;
+    background-color: #1ABC9C;
+    opacity: 1;
+    font-size: 25px;
+    font-family: "微软雅黑";
+    color: #FFF;
+    border: 0px;
+    border-radius: 5px;
+}
+
+#divdown .tbldown:hover
+{opacity:0.7;
+    }
+
+#Tips {
+    font-family: "微软雅黑";
+    color: #E74C3C;
+    margin-top: 5%;
+    display:none;
+}
+
+
+/*控制模糊程度blur(5px)以及是否为黑白彩色色调0彩色和1黑白 grayscale(3)  */
+#aboutus:not(:hover) {
+    -webkit-filter: blur(0px) grayscale(0);
+}
+
+
+.moveup 
+{
+    -webkit-animation: moveup 0.3s ease-out;
+}
+
+@-webkit-keyframes moveup {
+    0% {
+        top: 90%;
+    }
+
+    100% {
+        top: 50%;
+    }
+}
+
+.movedown {
+    -webkit-animation: movedown 0.3s ease-out;
+}
+
+@-webkit-keyframes movedown {
+    0% {
+        top: 50%;
+    }
+
+    100% {
+        top: 90%;
+    }
+}
+
+
+/*控制下划线对接代码*/
+.links {
+    font-family: "微软雅黑"; /*文本样式*/
+    font-size: 50px;
+    color: #002E5D;
+    text-decoration: none; /*字体下划线有无*/
+    position: relative;
+}
+
+    .links:before, .links:after { /*调节下划线前后属性*/
+        content: '';
+        border-bottom: solid 5px #fff; /*样式，粗细，颜色*/
+        position: absolute; /*下划线定位*/
+        bottom: 3px; /*下划线位置*/
+        width: 0; /*下划线起始宽度*/
+    }
+
+    .links:before {
+        left: 0;
+    }
+    /*调整左右下划线两边边距*/
+    .links:after {
+        right: 0;
+    }
+
+    .links:hover:before, .links:hover:after {
+        width: 50%;
+    }
+    /*调整两边下划线宽度*/
+    .links:before, .links:after {
+        -webkit-transition: all 0.5s ease;
+    }
+/*调整时间聚合离开时间*/
+
+
+
+
+
+.enterplorer-banner {
+    position:absolute;
+     border: solid 2px #ffffff;
+      width:100%;
+     top:1000px;
+     z-index:1;
+     display:none;
+}
+
+
+.bg-bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+/*调节li*/
+ul,li {
+    margin: 0;
+    padding: 0;
+}
+.bg-bubbles li {
+    position: absolute;
+    list-style: none;
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255,255,255,.8);
+/*	浮块相对低端的位置*/
+    bottom: 0px;
+    -webkit-animation: square 30s infinite;
+    animation: square 30s infinite;
+    -webkit-transition-timing-function:linear;
+    transition-timing-function: linear;}
+/*实例*/
+.bg-bubbles li:nth-child(1) {
+/*//距离左边距离*/
+	left: 8%;
+/*	控件长宽	*/
+    width: 50px;
+	height: 50px;
+/*	上浮出发等待时间	*/
+    -webkit-animation-delay:0s;
+	animation-delay: 0s;
+/*	一个来回，从下到上消失的时间*/
+	-webkit-animation-duration: 7s;
+	animation-duration: 7s;
+/*	透明度*/
+	background-color: rgba(255, 255, 255, .4)}
+	
+.bg-bubbles li:nth-child(2) {
+	left: 20%;
+	width: 50px;
+	height: 50px;
+	-webkit-animation-delay: 5s;
+	animation-delay:5s;
+	-webkit-animation-duration:15s;
+	animation-duration:15s;
+	background-color: rgba(255,255,255,.4)
+}
+
+.bg-bubbles li:nth-child(3) {
+	left:35%;
+	-webkit-animation-delay: 2s;
+	animation-delay: 2s
+}
+
+.bg-bubbles li:nth-child(4) {
+	left: 47%;
+	width: 75px;
+	height: 75px;
+	-webkit-animation-duration: 7s;
+	animation-duration: 7s;
+	-webkit-animation-duration:14s;
+	animation-duration:14s;
+	background-color: rgba(255, 255, 255, .6)
+}
+
+.bg-bubbles li:nth-child(5) {
+	left: 65%
+}
+
+.bg-bubbles li:nth-child(6) {
+	left: 92%;
+	width: 75px;
+	height: 75px;
+	-webkit-animation-delay: 3s;
+	animation-delay: 3s;
+	-webkit-animation-duration:12s;
+	animation-duration:12s;
+	background-color: rgba(255, 255, 255, .6)
+}
+
+.bg-bubbles li:nth-child(7) {
+	left: 35%;
+	width: 50px;
+	height: 50px;
+	-webkit-animation-delay:7s;
+	animation-delay: 7s;
+	-webkit-animation-duration:15s;
+	animation-duration:15s;
+	background-color: rgba(255, 255, 255, .4)
+}
+
+.bg-bubbles li:nth-child(8) {
+	left: 55%;
+	width: 75px;
+	height: 75px;
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+	-webkit-animation-duration: 12s;
+	animation-duration: 12s;
+	background-color: rgba(255, 255, 255, .6)
+}
+
+.bg-bubbles li:nth-child(9) {
+	left: 77%;
+	width: 50px;
+	height: 50px;
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+	-webkit-animation-duration: 6s;
+	animation-duration: 6s;
+	background-color: rgba(255,255, 255, .4)
+}
+
+.bg-bubbles li:nth-child(10) {
+	left: 2%;
+	width: 50px;
+	height: 50px;
+	-webkit-animation-delay: 2s;
+	animation-delay: 2s;
+	-webkit-animation-duration:8s;
+	animation-duration: 8s;
+	background-color: rgba(255, 255, 255, .6);
+}
+
+/*不旋转*/
+@-webkit-keyframes square {
+	0% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0)
+	}
+
+	100% {
+		-webkit-transform: translateY(-1100px) rotate(200deg);
+		transform: translateY(-1100px) rotate(200deg);
+	}
+
+}
+
+

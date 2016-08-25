@@ -1,0 +1,63 @@
+﻿body {
+}
+
+
+.searchUI {
+    text-align: left;
+    width: 100%;
+}
+
+.searchLab {
+    float: left;
+    text-align: right;
+    width: 80px;
+}
+
+.searchText {
+    float: left;
+    border: Solid 1px black;
+    font-family: 微软雅黑;
+    color: black;
+    Height: 15px;
+    Width: 100px;
+    background: White;
+}
+
+.searchBtn {
+    background: #2C3E50;
+    border: none;
+    font-family: 微软雅黑;
+    font-size: 20px;
+    color: White;
+    Height: 34px;
+    Width: 70px;
+}
+
+.Btn {
+    width: 100px;
+    height: 30px;
+    font-family: 微软雅黑;
+    font-size: 20px;
+    border: 0px;
+    color: white;
+    background-color: #2C3E50;
+}
+
+.gdvinfo {
+    margin-top: 12px;
+    border: 1px solid #34495E;
+    font-family: 微软雅黑;
+    Width: 100%;
+    Font-Size: 12pt;
+}
+
+.addBtn {
+    height: 40px;
+    margin-top: 30px;
+    background-color: #2C3E50;
+    border: 0px;
+    font-family: 微软雅黑;
+    color: white;
+    width: 290px;
+    font-size:25px;
+}

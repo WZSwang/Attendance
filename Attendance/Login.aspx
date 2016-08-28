@@ -60,8 +60,12 @@
                         $("#Tips").css("display", "block");
                     },
                     success: function (msg) {
-                        if (msg == "true") {
-                            location.href = "Index.aspx";//location.href实现客户端页面的跳转  
+                        if (msg == "Admin") {
+                            location.href = "Admin/DateSetting.aspx";//location.href实现客户端页面的跳转  
+                        } else if (msg == "Manage") {
+                            location.href = "Index.aspx";
+                        } else if (msg == "People") {
+                            location.href = "Index.aspx";
                         } else if (msg == "false") {
                             $("#Tips").css("display", "block");
                         } else
@@ -142,7 +146,7 @@
             <input type="button" value="Login" id="loginclick" onmouseover="mover(this)" onmouseout="mout(this)" />
         </div>
     </div>
-    <span style="position: absolute; right: 50px; bottom: 20px; font-family: 微软雅黑; font-size: 15px; color: White;">©2016 武软 软测1402</span>
+    <span style="position: absolute; right: 50px; bottom: 20px; font-family: 微软雅黑; font-size: 15px; color: White;">©2016 厚浦 N1612班</span>
 
     <!--白色下部div层-->
     <div id="divdown">

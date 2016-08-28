@@ -39,7 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PeopleManagement.cs" />
+    <Compile Include="AttendanceManagement.cs" />
+    <Compile Include="DeparmentManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManagement.cs" />
   </ItemGroup>

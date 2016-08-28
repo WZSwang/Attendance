@@ -3,11 +3,11 @@
   <siteMapNode url="" title="主页"  description="">
 
     <siteMapNode url="" title="管理员"  description="" >
-      <siteMapNode url="PeropleManage.aspx" title="用户管理">
+      <siteMapNode url="Admin/PeopleManage.aspx" title="用户管理">
       </siteMapNode>
       <siteMapNode url="ScheduleManage.aspx" title="部门管理">
       </siteMapNode>
-      <siteMapNode url="Schedule12anage.aspx" title="考勤设置">
+      <siteMapNode url="Admin/DateSetting.aspx" title="考勤设置">
       </siteMapNode>
     </siteMapNode>
 

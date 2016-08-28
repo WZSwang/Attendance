@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.SessionState;//使用session需要引用
 using BLL;
 using Entity;
+using System.Web.Security;
 
 namespace AttendanceSystem.HttpHandler
 {                 
@@ -23,8 +24,14 @@ namespace AttendanceSystem.HttpHandler
             us.Password = context.Request.Form["txtPwd"];
             if (uman.Login(ref us))
             {
-                context.Response.Write("true");
+                FormsAuthentication.SetAuthCookie(us.UserID, false);
                 context.Session["User"] = us;
+                if(us.UserType==2)
+                    context.Response.Write("Admin");
+                else if(us.UserType == 1)
+                    context.Response.Write("Manage");
+                else
+                    context.Response.Write("People");
             }
             else 
                 context.Response.Write("false");

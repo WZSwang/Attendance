@@ -71,7 +71,7 @@ namespace Attendance
                 use.DeptID = null;
             use.Cellphone = txttel0.Text;
             um.AddPeople(use);
-            Response.Redirect("PeropleManage.aspx");
+            Response.Redirect("PeopleManage.aspx");
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

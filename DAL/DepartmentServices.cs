@@ -46,7 +46,13 @@ namespace DAL
                 return dt;
             }
         }
+        public void AddDepart(Department dp)
+        {
+            string sql =string.Format("insert into Department values ('{0}','{1}','{2}')", dp.DeptName,dp.ManagerID,dp.DeptInfo);
+            DBhelper.Change(sql);
 
+
+        }
     }
 }
 

@@ -1,15 +1,48 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DepartmentManage.aspx.cs" Inherits="Attendance.Admin.DepartmentManage" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
+    <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../Styles/MainBody.css" type="text/css" />
     <link rel="stylesheet" href="../Styles/Department.css" type="text/css" />
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            $("#btnadd").click(function () {
+                $("#addoutc").fadeIn(500);
+                $("#divaddout").fadeIn(500);
+            });
+
+            $(".ImageButonEdit").click(function () {
+                $("#editoutc").fadeIn(500);
+                $("#<%=diveditout.ClientID %>").fadeIn(500);
+            });
+            $("#addoutc").click(function () {
+                $("#addoutc").fadeOut(500);
+                $("#exitout").fadeOut(500);
+                $("#divaddout").fadeOut(500);
+            });
+            $("#editoutc").click(function () {
+                $("#editoutc").fadeOut(500);
+                $("#<%=diveditout.ClientID %>").fadeOut(500);
+            });
+            $(".TipClose").click(function () {
+                $("#addoutc").fadeOut(500);
+                $("#divaddout").fadeOut(500);
+                $("#<%=diveditout.ClientID %>").fadeOut(500);
+                $("#editoutc").fadeOut(500);
+            });
+        });
+    </script>
+
 </asp:Content>
 <asp:Content ID="main" ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
     <div class="MainBox">
         <table id="rightTable">
             <tr class="searchUI">
-                <td >
-                    
+                <td>
+
                     <p class="searchLab">部门名称：</p>
                     <asp:TextBox ID="TxtSearchID" runat="server" CssClass="searchText"></asp:TextBox>
                     <p class="searchLab">主管：</p>
@@ -18,6 +51,11 @@
                         OnClick="btnSearch_Click" onmouseover="over(this)" onmouseout="out(this)" />
                 </td>
 
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <input id="btnadd" type="button" value="添加" class="Btn" onmouseover="over(this)" onmouseout="out(this)" />
+                </td>
             </tr>
         </table>
         <asp:GridView ID="gdvinfo" CssClass="gdvinfo" runat="server" AutoGenerateColumns="False"
@@ -66,7 +104,126 @@
 
 </asp:Content>
 <asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
+    <div id="divaddout" class="TipBox">
+        <div class="TipTitle" runat="server">
+            <+>添加用户
+        <div class="TipClose">×</div>
+        </div>
+        <div class="TipMain" runat="server">
+            <table id="tableadd" class="TipTable" runat="server">
+
+                <tbody>
+
+                    <tr>
+                        <td class="TipLab">
+                            <asp:Label ID="lnid" runat="server" Text="<span style='color: red; '>*</span>部门名称："></asp:Label>
+                        </td>
+                        <td class="TipTextBox">
+                            <asp:TextBox ID="tnid" runat="server" class="TipText"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="TipLab">
+                            <asp:Label ID="lnpname" runat="server" Text="主管："></asp:Label>
+                        </td>
+                        <td class="TipTextBox">
+                            <asp:DropDownList ID="drpdename" runat="server" Width="207px" Font-Names="微软雅黑"
+                                Font-Size="15pt">
+
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="TipLab">
+                            <asp:Label ID="lnDept" runat="server" Text="部门说明："></asp:Label>
+                        </td>
+                        <td class="TipTextBox">
+                            <asp:TextBox ID="TxtInfo" runat="server" class="TipText"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <asp:Button ID="btnin" runat="server" Text="添加" OnClick="btnin_Click" CssClass="addBtn"
+                                onmouseover="over(this)" onmouseout="out(this)" />
+                            <asp:Label ID="lblbrith0" runat="server" Text="" Style="display: none"></asp:Label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div id="diveditout" class="TipBox" runat="server">
+        <div class="TipTitle" runat="server">
+            <+>修改信息
+        <div class="TipClose">×</div>
+        </div>
+        <div class="TipMain" runat="server">
+            <table class="TipTable" runat="server">
+                <tr>
+                    <td class="TipLab">
+                        <asp:Label ID="Label1" runat="server" Text="<span style='color: red; '>*</span>用户ID："></asp:Label>
+                    </td>
+                    <td class="TipTextBox">
+                        <asp:TextBox ID="txtId" runat="server" ReadOnly="True" class="TipText"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="TipLab">
+                        <asp:Label ID="Label3" runat="server" Text="<span style='color: red; '>*</span>用户姓名："></asp:Label>
+                    </td>
+                    <td class="TipTextBox">
+                        <asp:TextBox ID="txtname" runat="server" class="TipText"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="TipLab">
+                        <asp:Label ID="Label4" runat="server" Text="<span style='color: red; '>*</span>用户类型："></asp:Label>
+                    </td>
+                    <td class="TipTextBox">
+                        <asp:DropDownList ID="drpdenameedit" runat="server" Width="207px" Font-Names="微软雅黑"
+                            Font-Size="15pt">
+                            <asp:ListItem Value="0">员工</asp:ListItem>
+                            <asp:ListItem Value="1">主管</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="TipLab">
+                        <asp:Label ID="Label5" runat="server" Text="所属部门："></asp:Label>
+                    </td>
+                    <td class="TipTextBox">
+                        <asp:DropDownList ID="drponameedit" runat="server" Width="207px" Font-Names="微软雅黑"
+                            Font-Size="15pt">
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="TipLab">
+                        <asp:Label ID="Label6" runat="server" Text="手机："></asp:Label>
+                    </td>
+                    <td class="TipTextBox">
+                        <asp:TextBox ID="txttel" runat="server" class="TipText"></asp:TextBox>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <asp:Button ID="btnedit" runat="server" Text="确认修改" CssClass="addBtn" OnClick="btnedit_Click"
+                            onmouseover="over(this)" onmouseout="out(this)" />
+                        <asp:Label ID="lblbrith" runat="server" Text="" Style="display: none"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="addoutc" class="out"></div>
+    <div id="editoutc" class="out"></div>
+
+
+
     <asp:Label ID="LabelCurrentPage" runat="server" Text="<%# ((GridView)Container.NamingContainer).PageIndex + 1 %>"></asp:Label>
     <asp:Label ID="LabelPageCount" runat="server" Text="<%# ((GridView)Container.NamingContainer).PageCount %>"></asp:Label>
-
 </asp:Content>

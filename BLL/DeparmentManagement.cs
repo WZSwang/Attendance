@@ -30,5 +30,9 @@ namespace BLL
             return Peopleserve.SearchManage( name, manage);
         }
 
+        public void AddDepart(Department dp)
+        {
+            Peopleserve.AddDepart(dp);
+        }
     }
 }

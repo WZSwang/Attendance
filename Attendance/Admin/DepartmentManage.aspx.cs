@@ -25,6 +25,13 @@ namespace Attendance.Admin
                 drpManage.DataTextField = "UserName";
                 drpManage.DataBind();
                 drpManage.Items.Insert(0, new ListItem("--请选择--", ""));
+
+                drpdename.DataSource= um.SearchManage();
+                drpdename.DataValueField = "UserId";
+                drpdename.DataTextField = "UserName";
+                drpdename.DataBind();
+                drpdename.Items.Insert(0, new ListItem("--请选择--", ""));
+
             }
 
             GridViewRow pagerRow = gdvinfo.BottomPagerRow;            // 获得 GridView 控件中的底部页导航行。
@@ -45,6 +52,35 @@ namespace Attendance.Admin
         {
             gdvinfo.DataSource = dt;
             gdvinfo.DataBind();
+        }
+
+
+        protected void btnin_Click(object sender, EventArgs e)
+        {
+            Department dp = new Department();
+            dp.DeptName = tnid.Text;
+            dp.ManagerID = drpdename.SelectedValue.Trim();
+            dp.DeptInfo = TxtInfo.Text;
+            dm.AddDepart(dp);
+            Response.Redirect("DepartmentManage.aspx");
+
+        }
+        protected void btnedit_Click(object sender, EventArgs e)
+        {
+
+            //bool f = true;
+            Department us = new Department();
+            us.UserID = editId.Value;
+            us.UserName = txtname.Text;
+            us.UserType = Convert.ToByte(drpdenameedit.SelectedValue);
+            byte DeptID;
+            if (byte.TryParse(drponameedit.SelectedValue, out DeptID))
+                us.DeptID = DeptID;
+            else
+                us.DeptID = null;
+            us.Cellphone = txttel.Text;
+            um.EditPeople(us);
+            Bind(dm.GetAllDepart());
         }
     }
 }

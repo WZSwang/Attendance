@@ -33,3 +33,10 @@ C:\Users\summer\Desktop\Attendance2016-7-9\DAL\bin\Debug\Entity.pdb
 C:\Users\summer\Desktop\Attendance2016-7-9\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\Users\summer\Desktop\Attendance2016-7-9\DAL\obj\Debug\DAL.dll
 C:\Users\summer\Desktop\Attendance2016-7-9\DAL\obj\Debug\DAL.pdb
+C:\Users\Administrator\Desktop\Attendance2016-7-10\DAL\bin\Debug\DAL.dll
+C:\Users\Administrator\Desktop\Attendance2016-7-10\DAL\bin\Debug\DAL.pdb
+C:\Users\Administrator\Desktop\Attendance2016-7-10\DAL\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-7-10\DAL\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-7-10\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Attendance2016-7-10\DAL\obj\Debug\DAL.dll
+C:\Users\Administrator\Desktop\Attendance2016-7-10\DAL\obj\Debug\DAL.pdb

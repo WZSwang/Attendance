@@ -5,90 +5,106 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>主页</title>
-    <link rel="stylesheet" type="text/css" href="Styles/common.css" />
-    <link rel="stylesheet" type="text/css" href="Styles/main.css" />
+    <title>Attendance - Home</title>
+
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/templatemo-style.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" name="menuForm" runat="server">
-        <div class="topbar-wrap white">
-            <div class="topbar-inner clearfix">
-                <div class="topbar-logo-wrap clearfix">
-                    <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">后台管理</a></h1>
-                    <ul class="navbar-list clearfix">
-                        <li><a class="on" href="Index.aspx">首页</a></li>
 
-                    </ul>
+        <!-- Left column -->
+        <div class="templatemo-flex-row">
+            <div class="templatemo-sidebar">
+                <header class="templatemo-site-header">
+                    <div class="square"></div>
+                    <h1>Attendace</h1>
+                </header>
+                <div class="profile-photo-container">
+                    <img src="../Images/WorkRight.png" width="300" height="215" alt="Profile Photo" class="img-responsive">
+                    <div class="profile-photo-overlay"></div>
                 </div>
-                <div class="top-info-wrap">
-                    <ul class="top-info-list clearfix">
-                        <li><asp:Literal Text="" ID="ltlOnlineUser" runat="server" /></li>
+                <%--                <!-- Search box -->
+                <form class="templatemo-search-form" role="search">
+                    <div class="input-group">
+                          <button type="submit" class="fa fa-search"></button>
+              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">    
+                    </div>
+                </form>--%>
+                <div class="mobile-menu-icon">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <nav class="templatemo-left-nav">
+                    <ul>
+
+                        <%if (UserType == 2)
+                            { %>
+                        <li><a href="Admin/PeopleManage.aspx"><i class="fa fa-users fa-fw"></i>USER - 用户管理 </a></li>
+                        <li><a href="Admin/DepartmentManage.aspx"><i class="fa fa-database fa-fw"></i>DEPART - 部门管理</a></li>
+                        <li><a href="Admin/DateSetting.aspx"><i class="fa fa-sliders fa-fw"></i>ATTENDAN - 考勤设置</a></li>
+                        <%}
+                            else if (UserType == 1)
+                            {%>
+                        <li><a href="ScheduleManage.aspx"><i class="fa fa-list  fa-fw"></i>考勤管理</a></li>
+                        <li><a href="ScheduleManage.aspx"><i class="fa fa-check fa-fw"></i>请假审批</a></li>
+                        <%}
+                            else
+                            { %>
+                        <li><a href="ScheduleManage.aspx"><i class="fa fa-user fa-fw"></i>我的考勤</a></li>
+                        <li><a href="ScheduleManage.aspx"><i class="fa fa-edit fa-fw"></i>请假申请</a></li>
+                        <%} %>
+                        <li><a href="ScheduleManage.aspx"><i class="fa fa-pencil fa-fw"></i>INFO - 资料编辑</a></li>
+
+
                         <li>
+                            <asp:LinkButton Text='<i class="fa fa-eject fa-fw"></i>EXIT - 退出登录' runat="server" ID="lnkSignOut" OnClick="lnkSignOut_Click" />
 
-                            <asp:LinkButton Text="退出" runat="server" ID="lnkSignOut" OnClick="lnkSignOut_Click" /></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container clearfix">
-            <div class="sidebar-wrap">
-                <div class="sidebar-title">
-                    <h1>菜单</h1>
-                </div>
-                <div class="sidebar-content">
-                    <ul class="sidebar-list">
-                        <li>
-                            <a href="#"><i class="icon-font">&#xe003;</i>管理平台</a>
-                            <ul class="sub-menu" id="AdminList" runat="server">
-                                <li><a href="PeropleManage.aspx"><i class="icon-font">&#xe008;</i>用户管理</a></li>
-                                <li><a href="ScheduleManage.aspx"><i class="icon-font">&#xe005;</i>部门管理</a></li>
-                                <li><a href="ScheduleManage.aspx"><i class="icon-font">&#xe002;</i>考勤设置</a></li>
-
-                            </ul>
-                            <ul class="sub-menu" id="MasterList" runat="server">
-                                <li><a href="ScheduleManage.aspx"><i class="icon-font">&#xe008;</i>考勤管理</a></li>
-                                <li><a href="ScheduleManage.aspx"><i class="icon-font">&#xe005;</i>请假审批</a></li>
-                            </ul>
-                            <ul class="sub-menu" id="PersonList" runat="server">
-                                <li><a href="ScheduleManage.aspx"><i class="icon-font">&#xe008;</i>我的考勤</a></li>
-                                <li><a href="ScheduleManage.aspx"><i class="icon-font">&#xe005;</i>请假申请</a></li>
-
-                            </ul>
                         </li>
-                        <li>
-                            <a href="#"><i class="icon-font">&#xe018;</i>用户管理</a>
-                            <ul class="sub-menu" style="display:block">
-                                <li><a href="UpdateUser.aspx"><i class="icon-font">&#xe017;</i>资料编辑</a></li>
-                            </ul>
-                        </li>
-
-
                     </ul>
-
-                </div>
+                </nav>
             </div>
-            <!--/sidebar-->
-            <div class="main-wrap">
-                <div class="crumb-wrap">
-                    <div class="crumb-list">
-                        <span>
-                            当前位置： <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
-                        </span>
+            <!-- Main content -->
+            <div class="templatemo-content col-1 light-gray-bg">
+                <div class="templatemo-top-nav-container">
+                    <div class="row">
 
+                        <ul class="top-info-list clearfix" style="float: right">
+                            <li>
+                                <asp:Literal Text="欢迎" ID="ltlOnlineUser" runat="server" /></li>
+                        </ul>
                     </div>
                 </div>
-                <div>
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
-                    </asp:ContentPlaceHolder>
+                <div class="templatemo-content-container">
+                    <%--<div class="templatemo-flex-row flex-content-row">--%>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
+                        </asp:ContentPlaceHolder>
+                    <%--</div>--%>
+                    <footer class="text-right">
+                        <p>
+                            Copyright &copy; 2016 N1412 
+            | Designed by <a href="#" target="_parent">WeCiao</a>
+                        </p>
+                    </footer>
                 </div>
-
             </div>
         </div>
-        
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolderHide" runat="server">
-                    </asp:ContentPlaceHolder>
+
+        <!-- JS -->
+        <script src="Scripts/jquery-1.4.1.js"></script>
+        <!-- jQuery -->
+
+
+
+
+
+
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderHide" runat="server">
+        </asp:ContentPlaceHolder>
     </form>
 </body>
 </html>

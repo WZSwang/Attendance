@@ -1,14 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="PeropleManage.aspx.cs" Inherits="Attendance.PeropleManage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="PeopleManage.aspx.cs" Inherits="Attendance.PeropleManage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="../Styles/MainBody.css" type="text/css" />
-    <link rel="stylesheet" href="../Styles/PeropleManage.css" type="text/css" />
+    <%--    <link rel="stylesheet" href="../Styles/MainBody.css" type="text/css" />--%>
+    <%--    <link rel="stylesheet" href="../Styles/PeropleManage.css" type="text/css" />--%>
     <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
             $(".gdvinfo>tbody>tr>td:gt(0):has(:checked)").parent().find("td").addClass("selected");
-            $(".gdvinfo>tbody>tr:gt(0)").click(function () {
+            $(".gdvinfo>tbody>tr:gt(0):lt(10)").click(function () {
                 if ($(this).find(":checkbox").attr("checked")) {
                     $(this).find("td").removeClass("selected")
                      .end().find(":checkbox").attr("checked", false);
@@ -27,7 +27,7 @@
         $(function () {
             $(".ImageButonEdit").click(function () {
                 //display
-                $("#<%=diveditout.ClientID %>").fadeIn(500);
+                $(".diveditout").fadeIn(500);
                 $("#editoutc").fadeIn(500);
 
                 //getelement
@@ -42,7 +42,7 @@
 
                 document.getElementById("<%=drponameedit.ClientID %>").options[0].selected = true;
                 for (var i = 0; i < document.getElementById("<%=drponameedit.ClientID %>").options.length; i++) {
-                    if (document.getElementById("<%=drponameedit.ClientID %>").options[i].text == obj.children[4].innerText)
+                    if (document.getElementById("<%=drponameedit.ClientID %>").options[i].text == obj.children[4].innerText.trim())
                         document.getElementById("<%=drponameedit.ClientID %>").options[i].selected = true;
                 }
                 $.ajax({
@@ -115,7 +115,7 @@
                 var drpdename = document.getElementById("<% =drpdename.ClientID%>").value;
                 if (drpdename == -1) {
                     document.getElementById("<%=lblbrith0.ClientID %>").style.display = "block";
-                    document.getElementById("<%=lblbrith0.ClientID %>").innerText = "请输入用户类型";
+                    document.getElementById("<%=lblbrith0.ClientID %>").innerText = "请选择用户类型";
                     return false;
                 }
                 //禁用按钮的提交   
@@ -153,12 +153,12 @@
             });
             $("#editoutc").click(function () {
                 $("#editoutc").fadeOut(500);
-                $("#<%=diveditout.ClientID %>").fadeOut(500);
+                $(".diveditout").fadeOut(500);
             });
             $(".TipClose").click(function () {
                 $("#addoutc").fadeOut(500);
                 $("#divaddout").fadeOut(500);
-                $("#<%=diveditout.ClientID %>").fadeOut(500);
+                $(".diveditout").fadeOut(500);
                 $("#editoutc").fadeOut(500);
             });
             $("#btndelete").click(function () {
@@ -173,6 +173,14 @@
 
 
         });
+            function TipClose() {
+                $("#addoutc").fadeOut(500);
+                $("#divaddout").fadeOut(500);
+                $(".diveditout").fadeOut(500);
+                $("#editoutc").fadeOut(500);
+                $(".MessageBox").fadeOut(500);
+                
+            }
         function over(theover) {
             theover.style.opacity = "0.7";
         }
@@ -205,224 +213,241 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
-    <div class="MainBox">
-        <table id="rightTable">
-            <tr>
-                <td class=" searchUI">
-                    <p class="searchLab">用户ID：</p>
-                    <asp:TextBox ID="TxtSearchID" runat="server" CssClass="searchText"></asp:TextBox>
-                    <p class="searchLab">用户名：</p>
-                    <asp:TextBox ID="TxtSearchName" runat="server" CssClass="searchText"></asp:TextBox>
-                    <p class="searchLab">部门：</p>
-                    <asp:Panel ID="PanelCheckList" runat="server" Width="50%" Style="float: left;" Wrap="False"></asp:Panel>
-                </td>
-                <td>
-                    <asp:Button ID="btnSearch" runat="server" Text="搜索" CssClass="searchBtn"
-                        OnClick="btnSearch_Click" onmouseover="over(this)" onmouseout="out(this)" />
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">
-                    <input id="btnadd" type="button" value="添加" class="Btn" onmouseover="over(this)" onmouseout="out(this)" />
-                    <input id="btndelete" type="button" value="删除" class="Btn" onmouseover="over(this)" onmouseout="out(this)" />
-                </td>
-            </tr>
-        </table>
-        <asp:GridView ID="gdvinfo" CssClass="gdvinfo" runat="server" AutoGenerateColumns="False" PageSize="10" AllowSorting="True"
-            AllowPaging="True" OnRowDataBound="gdvinfo_RowDataBound" GridLines="None" OnSorting="gdvinfo_Sorting"
-            OnPageIndexChanging="gdvinfo_PageIndexChanging">
-            <EmptyDataTemplate>
-                <div style="text-align: center">没有查询到数据，请检查查询条件是否正确</div>
-            </EmptyDataTemplate>
-            <Columns>
-                <asp:TemplateField HeaderText="序号" InsertVisible="False">
-                    <ItemStyle HorizontalAlign="Center" />
-                    <HeaderStyle HorizontalAlign="Center" />
-                    <ItemTemplate>
-                        <asp:Label ID="Label2" runat="server" Text='<%# this.gdvinfo.PageIndex * this.gdvinfo.PageSize + this.gdvinfo.Rows.Count + 1%>' />
-                    </ItemTemplate>
-                </asp:TemplateField>
+    <div class="panel panel-default margin-10">
+        <div class="panel-heading">
+            <h2 class="text-uppercase">搜索</h2>
+        </div>
+        <div class="panel-body">
+            <div class="templatemo-flex-row flex-content-row">
+                <div class="col-1">
+                    <div id="timeline_div" class="templatemo-chart"></div>
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-3 form-group">
+                            <asp:TextBox ID="TxtSearchID" runat="server" CssClass="form-control" placeholder="请输入用户ID" Style="float: left" Width="140px"></asp:TextBox>
+                        </div>
+                        <div class="col-lg-2 col-md-3 form-group">
+                            <asp:TextBox ID="TxtSearchName" runat="server" CssClass="form-control" placeholder="请输入用户名" Style="float: left" Width="140px"></asp:TextBox>
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <p style="float: left">部门：</p>
+                            <asp:Panel ID="PanelCheckList" runat="server" Style="float: left;" Wrap="False" ScrollBars="Horizontal" Width="91%"></asp:Panel>
+                        </div>
+                        <div class="col-lg-2 col-md-12  form-group">
+                            <asp:Button ID="btnSearch" runat="server" Text="搜索" CssClass="templatemo-blue-button"
+                                OnClick="btnSearch_Click" />
+                        </div>
+                    </div>
 
-                <asp:TemplateField HeaderText="TemplateField" FooterText="qq">
-                    <HeaderTemplate>
-                        <asp:CheckBox ID="CheckBoxHead" runat="server" OnCheckedChanged="CheckBoxHead_CheckedChanged" AutoPostBack="True" />
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <asp:CheckBox ID="CheckBoxList" runat="server" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="UserId" HeaderText="用户ID" SortExpression="UserId" />
-                <asp:BoundField DataField="UserName" HeaderText="用户姓名" SortExpression="UserName" />
-                <asp:BoundField DataField="DeptName" HeaderText="所属部门 " SortExpression="DeptName" />
-                <asp:TemplateField HeaderText="" ShowHeader="False">
-                    <ItemTemplate>
-                        <asp:ImageButton ID="ImageButonEdit" class="ImageButonEdit" runat="server" CausesValidation="false"
-                            CommandName="update" ImageUrl="~/Images/edit.png" Text="编辑" OnClientClick=" return false;" />
-                    </ItemTemplate>
-                    <ControlStyle BorderStyle="None" Height="30px" Width="50px" CssClass="ImageButonEdit" />
-                </asp:TemplateField>
-            </Columns>
-            <HeaderStyle BackColor="#34495E" BorderColor="Black" BorderStyle="None" Font-Size="15pt"
-                ForeColor="White" Height="40px" />
-            <PagerSettings Mode="NumericFirstLast" />
-            <RowStyle BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="0px"
-                ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
-
-            <%--(3) 首页、上一页、下一页、尾页--%>
-            <%-- http://liyuehui5205.blog.163.com/blog/static/6603115120075141364264/--%>
-            <PagerTemplate>
-                <asp:LinkButton ID="btnFirst" runat="server" CommandArgument="First" CommandName="Page" Text="首页" Enabled="<%# this.gdvinfo.PageIndex > 0 %>" />
-                <asp:LinkButton ID="btnPrev" runat="server" CommandArgument="Prev" CommandName="Page" Text="上一页" Enabled="<%# this.gdvinfo.PageIndex > 0 %>" />
-                <asp:LinkButton ID="btnNext" runat="server" CommandArgument="Next" CommandName="Page" Text="下一页" Enabled="<%# this.gdvinfo.PageIndex < this.gdvinfo.PageCount - 1 %>" />
-                <asp:LinkButton ID="btnLast" runat="server" CommandArgument="Last" CommandName="Page" Text="末页" Enabled="<%# this.gdvinfo.PageIndex < this.gdvinfo.PageCount - 1 %>" />
-                <asp:Label ID="Label7" runat="server" Text='<%# String.Format("{0}/{1}", this.gdvinfo.PageIndex + 1, this.gdvinfo.PageCount) %>'></asp:Label>
-                <asp:TextBox ID="tbxPage" runat="server" Width="30px" Text="<%# gdvinfo.PageIndex +1%>"></asp:TextBox>
-                <asp:LinkButton ID="btnGoto" runat="server" CommandName="Page" Text="Go" />
-                <asp:RegularExpressionValidator ID="revPage" runat="server" ControlToValidate="tbxPage" ValidationExpression="\d+" SetFocusOnError="True" Display="Dynamic"></asp:RegularExpressionValidator>
-                <asp:RangeValidator ID="rvlPage" runat="server" ControlToValidate="tbxPage" ErrorMessage="请输入正确的页数！"
-                    Type="Integer" MinimumValue="1" MaximumValue="<%# this.gdvinfo.PageCount %>"
-                    SetFocusOnError="True" Display="Dynamic"></asp:RangeValidator>
-            </PagerTemplate>
-        </asp:GridView>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <table id="rightTable">
+        <tr>
+            <td class=" searchUI"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <input id="btnadd" type="button" value="添加" class="templatemo-blue-button" />
+                <input id="btndelete" type="button" value="删除" class="templatemo-blue-button" />
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="templatemo-content-widget no-padding">
+        <div class="panel panel-default table-responsive">
+            <asp:GridView ID="gdvinfo" CssClass="table table-striped table-bordered templatemo-user-table gdvinfo" runat="server" AutoGenerateColumns="False" AllowSorting="True"
+                AllowPaging="True" OnRowDataBound="gdvinfo_RowDataBound" OnSorting="gdvinfo_Sorting" OnPageIndexChanging="gdvinfo_PageIndexChanging" Style="text-align: center">
+                <EmptyDataTemplate>
+                    <div style="text-align: center">没有查询到数据，请检查查询条件是否正确</div>
+                </EmptyDataTemplate>
+                <Columns>
+                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">序号</div>' InsertVisible="False">
+                        <ItemStyle />
+                        <ItemTemplate>
+                            <asp:Label ID="Label2" runat="server" Text='<%# this.gdvinfo.PageIndex * this.gdvinfo.PageSize + this.gdvinfo.Rows.Count + 1%>' />
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White"></HeaderStyle>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="TemplateField" FooterText="qq">
+                        <HeaderTemplate>
+                            <div style="width: 100%; text-align: center">
+                                <asp:CheckBox ID="CheckBoxHead" runat="server" OnCheckedChanged="CheckBoxHead_CheckedChanged" AutoPostBack="True" Text="<span></span>" />
+                            </div>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:CheckBox ID="CheckBoxList" runat="server" Text="<span></span>" />
+                        </ItemTemplate>
+                        <HeaderStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">用户ID<span class="caret"></span></div>' SortExpression="UserId">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelID" runat="server" Text='<%# Bind("UserId") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">用户姓名<span class="caret"></span></div>' SortExpression="UserName">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelName" runat="server" Text='<%# Bind("UserName") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">所属部门<span class="caret"></span></div>' SortExpression="DeptName">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelDepart" runat="server" Text='<%# Bind("DeptName") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="" ShowHeader="False">
+                        <ItemTemplate>
+
+                            <%--                            <asp:ImageButton ID="ImageButonEdit" class="ImageButonEdit" runat="server" CausesValidation="false"
+                                CommandName="update" ImageUrl="~/Images/edit.png" Text="编辑" OnClientClick=" return false;" />--%>
+                            <asp:Button ID="ImageButonEdit" runat="server" Text="修改" CssClass="templatemo-edit-btn ImageButonEdit" BackColo="white"  OnClientClick=" return false;"/>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />
+                <PagerSettings Mode="NumericFirstLast" />
+
+                <%--(3) 首页、上一页、下一页、尾页--%>
+                <%-- http://liyuehui5205.blog.163.com/blog/static/6603115120075141364264/--%>
+                <PagerTemplate>
+                    <asp:LinkButton ID="btnFirst" runat="server" CommandArgument="First" CommandName="Page" Text="首页" Enabled="<%# this.gdvinfo.PageIndex > 0 %>" />
+                    <asp:LinkButton ID="btnPrev" runat="server" CommandArgument="Prev" CommandName="Page" Text="上一页" Enabled="<%# this.gdvinfo.PageIndex > 0 %>" />
+                    <asp:LinkButton ID="btnNext" runat="server" CommandArgument="Next" CommandName="Page" Text="下一页" Enabled="<%# this.gdvinfo.PageIndex < this.gdvinfo.PageCount - 1 %>" />
+                    <asp:LinkButton ID="btnLast" runat="server" CommandArgument="Last" CommandName="Page" Text="末页" Enabled="<%# this.gdvinfo.PageIndex < this.gdvinfo.PageCount - 1 %>" />
+                    <asp:Label ID="Label7" runat="server" Text='<%# String.Format("{0}/{1}", this.gdvinfo.PageIndex + 1, this.gdvinfo.PageCount) %>'></asp:Label>
+                    <asp:TextBox ID="tbxPage" runat="server" Width="30px" Text="<%# gdvinfo.PageIndex +1%>"></asp:TextBox>
+                    <asp:LinkButton ID="btnGoto" runat="server" CommandName="Page" Text="Go" />
+                    <asp:RegularExpressionValidator ID="revPage" runat="server" ControlToValidate="tbxPage" ValidationExpression="\d+" SetFocusOnError="True" Display="Dynamic"></asp:RegularExpressionValidator>
+                    <asp:RangeValidator ID="rvlPage" runat="server" ControlToValidate="tbxPage" ErrorMessage="请输入正确的页数！"
+                        Type="Integer" MinimumValue="1" MaximumValue="<%# this.gdvinfo.PageCount %>"
+                        SetFocusOnError="True" Display="Dynamic"></asp:RangeValidator>
+                </PagerTemplate>
+            </asp:GridView>
+        </div>
+    </div>
 </asp:Content>
 
 <asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
-    <div id="divaddout" class="TipBox">
-        <div class="TipTitle" runat="server">
-            <+>添加用户
-        <div class="TipClose">×</div>
+    <div id="divaddout" class="panel panel-default margin-10 TipBox" style="display: none">
+        <div class="panel-heading" runat="server">
+            <h2 class="text-uppercase"><+>添加用户</h2>
         </div>
-        <div class="TipMain" runat="server">
-            <table id="tableadd" class="TipTable" runat="server">
-
-                <tbody>
-
-                    <tr>
-                        <td class="TipLab">
-                            <asp:Label ID="lnid" runat="server" Text="<span style='color: red; '>*</span>用户ID："></asp:Label>
-                        </td>
-                        <td class="TipTextBox">
-                            <asp:TextBox ID="tnid" runat="server" class="TipText"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="TipLab">
-                            <asp:Label ID="lnname" runat="server" Text="<span style='color: red; '>*</span>用户姓名："></asp:Label>
-                        </td>
-                        <td class="TipTextBox">
-                            <asp:TextBox ID="tnname" runat="server" class="TipText"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="TipLab">
-                            <asp:Label ID="lnpname" runat="server" Text="<span style='color: red; '>*</span>用户类型："></asp:Label>
-                        </td>
-                        <td class="TipTextBox">
-                            <asp:DropDownList ID="drpdename" runat="server" Width="207px" Font-Names="微软雅黑"
-                                Font-Size="15pt">
+        <div class="panel-body" runat="server">
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputFirstName"><span style='color: red;'>*</span>用户ID：</label>
+                    <asp:TextBox ID="tnid" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputLastName"><span style='color: red;'>*</span>用户姓名：</label>
+                    <asp:TextBox ID="tnname" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputFirstName"><span style='color: red; '>*</span>用户类型：</label>
+                            <asp:DropDownList ID="drpdename" runat="server"  class="form-control" >
                                 <asp:ListItem Value="-1">--请选择--</asp:ListItem>
                                 <asp:ListItem Value="0">员工</asp:ListItem>
                                 <asp:ListItem Value="1">主管</asp:ListItem>
                             </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="TipLab">
-                            <asp:Label ID="lnDept" runat="server" Text="所属部门："></asp:Label>
-                        </td>
-                        <td class="TipTextBox">
-                            <asp:DropDownList ID="drponame" runat="server" Width="207px" Font-Names="微软雅黑"
-                                Font-Size="15pt">
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputLastName">所属部门：</label>
+                            <asp:DropDownList ID="drponame" runat="server" class="form-control" >
                             </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="TipLab">
-                            <asp:Label ID="LnPhone" runat="server" Text="手机："></asp:Label>
-                        </td>
-                        <td class="TipTextBox">
-                            <asp:TextBox ID="txttel0" runat="server" class="TipText"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: center;">
-                            <asp:Button ID="btnin" runat="server" Text="添加" OnClick="btnin_Click" CssClass="addBtn"
-                                onmouseover="over(this)" onmouseout="out(this)" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-10 form-group">
+                    <label for="inputFirstName" >手机：</label>
+                            <asp:TextBox ID="txttel0" runat="server" class="form-control" ></asp:TextBox>
+                </div>
+            </div>
+            <div class="row form-group" style="text-align: center;" >
+
+                <div class="col-lg-12 col-md-12 form-group">
                             <asp:Label ID="lblbrith0" runat="server" Text="" Style="display: none"></asp:Label>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                            <asp:Button ID="btnin" runat="server" Text="添加新用户" OnClick="btnin_Click" CssClass="templatemo-blue-button" />
+                <button class="templatemo-white-button" type="reset" onclick="TipClose()">取消</button>
+              </div>
         </div>
     </div>
-    <div id="diveditout" class="TipBox" runat="server">
-        <div class="TipTitle" runat="server">
-            <+>修改信息
-        <div class="TipClose">×</div>
+    <div id="diveditout" class="panel panel-default margin-10 TipBox diveditout" runat="server" style="display: none">
+        
+        <div class="panel-heading" runat="server">
+            <h2 class="text-uppercase"><+>修改信息</h2>
         </div>
-        <div class="TipMain" runat="server">
-            <table class="TipTable" runat="server">
-                <tr>
-                    <td class="TipLab">
-                        <asp:Label ID="Label1" runat="server" Text="<span style='color: red; '>*</span>用户ID："></asp:Label>
-                    </td>
-                    <td class="TipTextBox">
-                        <asp:TextBox ID="txtId" runat="server" ReadOnly="True" class="TipText"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="TipLab">
-                        <asp:Label ID="Label3" runat="server" Text="<span style='color: red; '>*</span>用户姓名："></asp:Label>
-                    </td>
-                    <td class="TipTextBox">
-                        <asp:TextBox ID="txtname" runat="server" class="TipText"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="TipLab">
-                        <asp:Label ID="Label4" runat="server" Text="<span style='color: red; '>*</span>用户类型："></asp:Label>
-                    </td>
-                    <td class="TipTextBox">
-                        <asp:DropDownList ID="drpdenameedit" runat="server" Width="207px" Font-Names="微软雅黑"
-                            Font-Size="15pt">
+        <div class="panel-body" runat="server">
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputFirstName"><span style='color: red;'>*</span>用户ID：</label>
+                        <asp:TextBox ID="txtId" runat="server" ReadOnly="True" class="form-control"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputLastName"><span style='color: red;'>*</span>用户姓名：</label>
+                        <asp:TextBox ID="txtname" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputFirstName"><span style='color: red; '>*</span>用户类型：</label>
+                        <asp:DropDownList ID="drpdenameedit" runat="server" class="form-control">
                             <asp:ListItem Value="0">员工</asp:ListItem>
                             <asp:ListItem Value="1">主管</asp:ListItem>
                         </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="TipLab">
-                        <asp:Label ID="Label5" runat="server" Text="所属部门："></asp:Label>
-                    </td>
-                    <td class="TipTextBox">
-                        <asp:DropDownList ID="drponameedit" runat="server" Width="207px" Font-Names="微软雅黑"
-                            Font-Size="15pt">
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputLastName">所属部门：</label>
+                        <asp:DropDownList ID="drponameedit" runat="server" class="form-control">
                         </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="TipLab">
-                        <asp:Label ID="Label6" runat="server" Text="手机："></asp:Label>
-                    </td>
-                    <td class="TipTextBox">
-                        <asp:TextBox ID="txttel" runat="server" class="TipText"></asp:TextBox>
-                    </td>
-                </tr>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-10 form-group">
+                    <label for="inputFirstName" >手机：</label>
+                        <asp:TextBox ID="txttel" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row form-group" style="text-align: center;" >
 
-                <tr>
-                    <td colspan="2" style="text-align: center;">
-                        <asp:Button ID="btnedit" runat="server" Text="确认修改" CssClass="addBtn" OnClick="btnedit_Click"
-                            onmouseover="over(this)" onmouseout="out(this)" />
+                <div class="col-lg-12 col-md-12 form-group">
                         <asp:Label ID="lblbrith" runat="server" Text="" Style="display: none"></asp:Label>
-                    </td>
-                </tr>
-            </table>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                
+                        <asp:Button ID="btnedit" runat="server" Text="确认修改" OnClick="btnedit_Click" CssClass="templatemo-blue-button" />
+                <button class="templatemo-white-button" type="reset" onclick="TipClose()">取消</button>
+              </div>
         </div>
     </div>
 
-    <div id="exitout" class="MessageBox">
+
+    <div id="exitout" class="templatemo-content-widget pink-bg MessageBox" style="display: none">
+        <i class="fa fa-times" onclick="TipClose()"></i>
+                <h2 class="text-uppercase margin-bottom-10">&lt;!&gt;注意</h2>
+                <p class="margin-bottom-0">此操作无法撤销,确定要删除勾选的用户吗？ </p>   
+              
+            <div class=" text-right" style=" margin-top:40px;">
+                <div class="col-lg-12 col-md-12 form-group">
+                      <asp:Button ID="yesexit" runat="server" Text="删除"  class="templatemo-white-button" style="border:0px; color:#D7425C"  OnClick="btndelete_Click" /> 
+                </div>
+         
+              </div>
+
+        </div>
+<%--    <div id="exitout" class="MessageBox" style="display: none">
         <div class="MessageTitle">&lt;!&gt;注意</div>
         <table style="width: 100%; height: 155px; text-align: center; font-family: 微软雅黑; font-size: 20px; color: Black;">
             <tr>
@@ -436,7 +461,7 @@
                     <input id="noexit" type="button" class="MessageBtn" onmouseover="over(this)" onmouseout="out(this)" value="取消" /></td>
             </tr>
         </table>
-    </div>
+    </div>--%>
 
     <div id="addoutc" class="out"></div>
     <div id="editoutc" class="out"></div>

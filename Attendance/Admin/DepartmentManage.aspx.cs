@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BLL;
 using Entity;
 using System.Data;
+using System.Web.Services;
 
 namespace Attendance.Admin
 {
@@ -24,13 +25,19 @@ namespace Attendance.Admin
                 drpManage.DataValueField = "UserName";
                 drpManage.DataTextField = "UserName";
                 drpManage.DataBind();
-                drpManage.Items.Insert(0, new ListItem("--请选择--", ""));
+                drpManage.Items.Insert(0, new ListItem("--空--", ""));
 
-                drpdename.DataSource= um.SearchManage();
+                drpdename.DataSource = um.SearchManage();
                 drpdename.DataValueField = "UserId";
                 drpdename.DataTextField = "UserName";
                 drpdename.DataBind();
-                drpdename.Items.Insert(0, new ListItem("--请选择--", ""));
+                drpdename.Items.Insert(0, new ListItem("--空--", ""));
+
+                drpdenameedit.DataSource = um.SearchManage();
+                drpdenameedit.DataValueField = "UserId";
+                drpdenameedit.DataTextField = "UserName";
+                drpdenameedit.DataBind();
+                drpdenameedit.Items.Insert(0, new ListItem("--空--", ""));
 
             }
 
@@ -44,14 +51,26 @@ namespace Attendance.Admin
         }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Bind( dm.SearchManage(TxtSearchID.Text, drpManage.SelectedValue));
-    }
+            Bind(dm.SearchManage(TxtSearchID.Text, drpManage.SelectedValue));
+        }
 
 
         public void Bind(DataTable dt)
         {
             gdvinfo.DataSource = dt;
             gdvinfo.DataBind();
+        }
+        
+        //在Row绑定时触发
+        protected void gdvinfo_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            //删除按钮 默认隐藏
+            ImageButton txt = (ImageButton)e.Row.Cells[3].FindControl("ImageButonDelete");
+
+            //找得到删除按钮 部门中没有员工
+            if (txt != null && dm. DepartIsNull(e.Row.Cells[1].Text))
+                txt.Visible = true;
+
         }
 
 
@@ -68,19 +87,38 @@ namespace Attendance.Admin
         protected void btnedit_Click(object sender, EventArgs e)
         {
 
-            //bool f = true;
-            Department us = new Department();
-            us.UserID = editId.Value;
-            us.UserName = txtname.Text;
-            us.UserType = Convert.ToByte(drpdenameedit.SelectedValue);
-            byte DeptID;
-            if (byte.TryParse(drponameedit.SelectedValue, out DeptID))
-                us.DeptID = DeptID;
-            else
-                us.DeptID = null;
-            us.Cellphone = txttel.Text;
-            um.EditPeople(us);
+
+            Department dp = new Department();
+            dp.DeptName = txtId.Text;
+            dp.ManagerID = drpdenameedit.SelectedValue.Trim();
+            dp.DeptInfo = TxtEditInfo.Text;
+            dm.EditDepart(dp, DepartName.Value);
             Bind(dm.GetAllDepart());
         }
+        protected void btndelete_Click(object sender, EventArgs e)
+        {
+            string name = DepartName.Value;
+            dm.DelteDepart(name);
+            Bind(dm.GetAllDepart());
+        }
+
+
+
+        #region AJAX静态方法
+
+        [WebMethod]
+        public static string GetStr(string str)
+        {
+            return DeparmentManagement.DepartPadding(str) ? "true" : "false";
+        }
+
+        [WebMethod]
+        public static string DepartInfos(string str)
+        {
+            return DeparmentManagement.DepartInfos(str);
+        }
+
+        #endregion
+
     }
 }

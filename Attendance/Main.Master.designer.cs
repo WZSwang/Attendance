@@ -31,15 +31,6 @@ namespace Attendance {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// ltlOnlineUser 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlOnlineUser;
-        
-        /// <summary>
         /// lnkSignOut 控件。
         /// </summary>
         /// <remarks>
@@ -49,40 +40,13 @@ namespace Attendance {
         protected global::System.Web.UI.WebControls.LinkButton lnkSignOut;
         
         /// <summary>
-        /// AdminList 控件。
+        /// ltlOnlineUser 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AdminList;
-        
-        /// <summary>
-        /// MasterList 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MasterList;
-        
-        /// <summary>
-        /// PersonList 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PersonList;
-        
-        /// <summary>
-        /// SiteMapPath1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SiteMapPath SiteMapPath1;
+        protected global::System.Web.UI.WebControls.Literal ltlOnlineUser;
         
         /// <summary>
         /// ContentPlaceHolderMain 控件。

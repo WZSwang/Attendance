@@ -52,7 +52,7 @@ namespace Attendance
             for (int i = 0; i < dtES.Rows.Count; i++)
             {
                 checkBox = new CheckBox();
-                checkBox.Text = dtES.Rows[i]["DeptName"].ToString();
+                checkBox.Text = "<span></span>"+dtES.Rows[i]["DeptName"].ToString();
                 checkBox.ID = dtES.Rows[i]["DeptID"].ToString();
                 checkBox.Style.Add("margin-left", "3px");
                 this.PanelCheckList.Controls.Add(checkBox);
@@ -146,7 +146,7 @@ namespace Attendance
                 foreach (CheckBox c in PanelCheckList.Controls)
                 {
                     if (c.Checked == true)
-                        dept += "'" + c.Text + "',";
+                        dept += "'" + c.Text.Substring(13) + "',";
                 }
                 if (dept != "")
                     dept = dept.Remove(dept.Count() - 1);
@@ -198,7 +198,10 @@ namespace Attendance
             {
                 CheckBox cb = (CheckBox)row.FindControl("CheckBoxList");
                 if (cb.Checked)
-                    um.DelPeople(row.Cells[2].Text);
+                {
+                    Label lb= (Label)row.FindControl("LabelID");
+                    um.DelPeople(lb.Text);
+                }
             }
             Bind();
         }

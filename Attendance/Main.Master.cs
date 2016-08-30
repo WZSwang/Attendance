@@ -11,24 +11,18 @@ namespace Attendance
 {
     public partial class Main : System.Web.UI.MasterPage
     {
+        public byte? UserType;
         protected void Page_Load(object sender, EventArgs e)
         {
+            UserType = 2;
+            if (Session["User"] != null)
+            {
+                UserInfo userInfo = Session["User"] as UserInfo;
+                UserType = userInfo.UserType;
+                this.ltlOnlineUser.Text = userInfo.UserName + ",欢迎您";
+            }
             if (!IsPostBack)
             {
-                if (Session["User"] != null)
-                {
-                    UserInfo userInfo = Session["User"] as UserInfo;
-                    if (userInfo != null)
-                    {
-                        this.ltlOnlineUser.Text = userInfo.UserName + ",欢迎您";
-                        if (userInfo.UserType == 2)
-                            AdminList.Style.Add("display", "block");
-                        else if (userInfo.UserType == 1)
-                            MasterList.Style.Add("display", "block");
-                        else if (userInfo.UserType == 0)
-                            PersonList.Style.Add("display", "block");
-                    }
-                }
             }
         }
 

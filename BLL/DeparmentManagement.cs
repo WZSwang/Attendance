@@ -34,5 +34,30 @@ namespace BLL
         {
             Peopleserve.AddDepart(dp);
         }
+        public void EditDepart(Department dp,string OldName)
+        {
+            Peopleserve.EditDepart(dp, OldName);
+        }
+        public void DelteDepart(string OldName)
+        {
+            Peopleserve.DelteDepart( OldName);
+        }
+        public bool DepartIsNull(string id)
+        {
+            return Peopleserve.DepartIsNull(id);
+        }
+
+
+
+
+        public static bool DepartPadding(string id)
+        {
+            return DepartmentServices.DepartPadding(id);
+        }
+
+        public static string DepartInfos(string id)
+        {
+            return DepartmentServices.DepartInfos(id);
+        }
     }
 }

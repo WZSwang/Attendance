@@ -11,6 +11,16 @@
     Width: 70px;
     margin-left:20px;
 }
+.addBtn {
+    height: 40px;
+    margin-top: 30px;
+    background-color: #2C3E50;
+    border: 0px;
+    font-family: 微软雅黑;
+    color: white;
+    width: 290px;
+    font-size: 25px;
+}
 
 #rightTable {
     width:100%;

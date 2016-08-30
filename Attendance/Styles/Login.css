@@ -100,19 +100,23 @@ body {
 }
 /*弹出登录层样式*/
 .loginc {
-    background-color: #ffffff;
+    /*background-color: #ffffff;
     width: 350px;
     height: 500px;
     position: absolute;
-    top: 50%;
-    left: 50%;
     margin-left:-175px;
     margin-top:-250px;
     display: none;
-    z-index: 15;
     border: solid 3px #16A085;
     text-align: center;
-    padding:5px;
+    padding:5px;*/
+    top: 50%;
+    left: 50%;
+    margin-left:-225px;
+    margin-top:-235px;
+    position: absolute;
+    z-index: 15;
+    display: none;
 }
 
 #logtitle {
@@ -396,5 +400,8 @@ ul,li {
 	}
 
 }
+
+
+
 
 

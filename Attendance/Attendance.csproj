@@ -75,7 +75,11 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Scripts\bootstrap-filestyle.min.js" />
+    <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\People.js" />
+    <Content Include="Scripts\templatemo-script.js" />
     <Content Include="Styles\Department.css" />
     <Content Include="Web.sitemap" />
   </ItemGroup>

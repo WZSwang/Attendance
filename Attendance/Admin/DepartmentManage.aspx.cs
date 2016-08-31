@@ -20,12 +20,12 @@ namespace Attendance.Admin
         {
             if (!IsPostBack)
             {
-                Bind(dm.GetAllDepart());
+                Bind();
                 drpManage.DataSource = um.SearchManage();
                 drpManage.DataValueField = "UserName";
                 drpManage.DataTextField = "UserName";
                 drpManage.DataBind();
-                drpManage.Items.Insert(0, new ListItem("--空--", ""));
+                drpManage.Items.Insert(0, new ListItem("请选择主管名称", ""));
 
                 drpdename.DataSource = um.SearchManage();
                 drpdename.DataValueField = "UserId";
@@ -51,24 +51,42 @@ namespace Attendance.Admin
         }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Bind(dm.SearchManage(TxtSearchID.Text, drpManage.SelectedValue));
+            //点击搜索后将搜索标志设置为change
+            pagechange.Value = "change";
+            Bind();
         }
 
-
-        public void Bind(DataTable dt)
+        public void Bind()
         {
-            gdvinfo.DataSource = dt;
+            DataTable dtBind = new DataTable();
+            //判断是不是点击了搜索按钮  
+            if (pagechange.Value.ToString().Equals("change"))
+            {
+                dtBind = dm.SearchManage(TxtSearchID.Text, drpManage.SelectedValue);
+            }
+            else
+                // 调用业务数据获取方法
+                dtBind = dm.GetAllDepart();
+            gdvinfo.DataSource = dtBind;
             gdvinfo.DataBind();
         }
-        
+
+        protected void gdvinfo_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gdvinfo.PageIndex = e.NewPageIndex;
+            Bind();
+        }
+
         //在Row绑定时触发
         protected void gdvinfo_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            if (e.Row.Cells.Count== 1)
+                return;
             //删除按钮 默认隐藏
-            ImageButton txt = (ImageButton)e.Row.Cells[3].FindControl("ImageButonDelete");
-
+            Button txt = (Button)e.Row.Cells[3].FindControl("ImageButonDelete");
+            Label lb = (Label)e.Row.Cells[1].FindControl("LabelDeptName");
             //找得到删除按钮 部门中没有员工
-            if (txt != null && dm. DepartIsNull(e.Row.Cells[1].Text))
+            if (txt != null && dm. DepartIsNull(lb.Text))
                 txt.Visible = true;
 
         }
@@ -93,13 +111,13 @@ namespace Attendance.Admin
             dp.ManagerID = drpdenameedit.SelectedValue.Trim();
             dp.DeptInfo = TxtEditInfo.Text;
             dm.EditDepart(dp, DepartName.Value);
-            Bind(dm.GetAllDepart());
+            Bind();
         }
         protected void btndelete_Click(object sender, EventArgs e)
         {
             string name = DepartName.Value;
             dm.DelteDepart(name);
-            Bind(dm.GetAllDepart());
+            Bind();
         }
 
 

@@ -28,8 +28,3 @@ C:\Users\Administrator\Desktop\Attendance2016-7-10\Entity\bin\Debug\Entity.pdb
 C:\Users\Administrator\Desktop\Attendance2016-7-10\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Attendance2016-7-10\Entity\obj\Debug\Entity.dll
 C:\Users\Administrator\Desktop\Attendance2016-7-10\Entity\obj\Debug\Entity.pdb
-C:\Users\Administrator\Desktop\Attendance2016-7-13\Entity\bin\Debug\Entity.dll
-C:\Users\Administrator\Desktop\Attendance2016-7-13\Entity\bin\Debug\Entity.pdb
-C:\Users\Administrator\Desktop\Attendance2016-7-13\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\Attendance2016-7-13\Entity\obj\Debug\Entity.dll
-C:\Users\Administrator\Desktop\Attendance2016-7-13\Entity\obj\Debug\Entity.pdb

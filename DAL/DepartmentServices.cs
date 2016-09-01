@@ -23,8 +23,6 @@ namespace DAL
         }
         public DataTable SearchPeople(string id, string name, string dept)
         {
-            if (id == "" && name == "" && dept == "' '")
-                return this.GetAllPeople();
             DataTable dt = DBhelper.Select(string.Format(
                 "select * from Department right join UserInfo on UserInfo.DeptID=Department.DeptID  where UserID !='admin' and UserID like '%{0}%' and UserName like '%{1}%' and DeptName in ({2})"
                 , id, name, dept));

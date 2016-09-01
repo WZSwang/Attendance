@@ -52,7 +52,7 @@ namespace Attendance
             for (int i = 0; i < dtES.Rows.Count; i++)
             {
                 checkBox = new CheckBox();
-                checkBox.Text = "<span></span>" + dtES.Rows[i]["DeptName"].ToString();
+                checkBox.Text = "<span></span>"+dtES.Rows[i]["DeptName"].ToString();
                 checkBox.ID = dtES.Rows[i]["DeptID"].ToString();
                 checkBox.Style.Add("margin-left", "3px");
                 this.PanelCheckList.Controls.Add(checkBox);
@@ -87,7 +87,7 @@ namespace Attendance
             UserInfo us = new UserInfo();
             us.UserID = editId.Value;
             us.UserName = txtname.Text;
-            us.UserType = Convert.ToByte(drpdenameedit.SelectedValue);
+            us.UserType = Convert.ToByte(drpdenameedit.SelectedValue); 
             byte DeptID;
             if (byte.TryParse(drponameedit.SelectedValue, out DeptID))
                 us.DeptID = DeptID;
@@ -140,7 +140,7 @@ namespace Attendance
             DataTable dtBind = new DataTable();
 
             //判断是不是点击了搜索按钮  
-            if (pagechange.Value.ToString().Equals("change") )
+            if (pagechange.Value.ToString().Equals("change"))
             {
                 string dept = "";
                 foreach (CheckBox c in PanelCheckList.Controls)
@@ -199,7 +199,7 @@ namespace Attendance
                 CheckBox cb = (CheckBox)row.FindControl("CheckBoxList");
                 if (cb.Checked)
                 {
-                    Label lb = (Label)row.FindControl("LabelID");
+                    Label lb= (Label)row.FindControl("LabelID");
                     um.DelPeople(lb.Text);
                 }
             }
@@ -212,7 +212,7 @@ namespace Attendance
         [WebMethod]
         public static string GetStr(string str)
         {
-            return UserManagement.UserIDPadding(str) ? "true" : "false";
+            return UserManagement.UserIDPadding(str)?"true":"false";
         }
 
         [WebMethod]

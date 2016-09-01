@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
-  <siteMapNode  title="Attendance办公管理平台"  description="">
+  <siteMapNode url="" title="主页"  description="">
 
-    <siteMapNode title="管理员"  description="" >
+    <siteMapNode url="" title="管理员"  description="" >
       <siteMapNode url="Admin/PeopleManage.aspx" title="用户管理">
       </siteMapNode>
-      <siteMapNode url="Admin/DepartmentManage.aspx" title="部门管理">
+      <siteMapNode url="ScheduleManage.aspx" title="部门管理">
       </siteMapNode>
       <siteMapNode url="Admin/DateSetting.aspx" title="考勤设置">
       </siteMapNode>
     </siteMapNode>
 
     <siteMapNode url="" title="主管"  description="" >
-      <siteMapNode url="Manage/AttendanceManage.aspx" title="考勤管理">
+      <siteMapNode url="ScheduleM2anage.aspx" title="考勤管理">
       </siteMapNode>
-      <siteMapNode url="Manage/ApplyHolidy.aspx" title="请假审批">
+      <siteMapNode url="Schedule3Manage.aspx" title="请假审批">
       </siteMapNode>
     </siteMapNode>
 

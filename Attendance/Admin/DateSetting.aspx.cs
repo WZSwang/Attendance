@@ -15,14 +15,11 @@ namespace Attendance
         AttendanceManagement Atten = new AttendanceManagement();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 gdvinfo.DataBind();
-                
             }
-
         }
-
 
         protected void gdvinfo_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -43,7 +40,7 @@ namespace Attendance
             //计算年月有多少天,添加到dt中
             for (int i = 0; i < DateTime.DaysInMonth(year, month); i++)
             {
-                DateTime time = Convert.ToDateTime(year + "-" + month + "-" + (i+1).ToString());
+                DateTime time = Convert.ToDateTime(year + "-" + month + "-" + (i + 1).ToString());
                 //添加新数据
                 DataRow newRow = dt.NewRow();
                 newRow["Date"] = time.ToString();
@@ -86,7 +83,6 @@ namespace Attendance
                 string date = gdvinfo.Rows[dr.RowIndex].Cells[0].Text;
                 string status = (gdvinfo.Rows[dr.RowIndex].Cells[2].FindControl("DropDownListState") as DropDownList).SelectedValue;
                 Atten.ChangeDateStatus(date, status);
-                
             }
             LabTip.Visible = true;
         }

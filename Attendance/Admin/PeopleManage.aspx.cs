@@ -20,7 +20,8 @@ namespace Attendance
         {
             if (!IsPostBack)
             {
-                Bind();
+                ViewState["PageCount"] = (Math.Ceiling(um.SearchPeopleCount() / 10.0)).ToString();
+                ViewState["CurrentPage"] = "1";
                 //添加 职位 下拉框
                 drponame.DataSource = pm.GetAllDepart();
                 drponame.DataValueField = "DeptID";
@@ -33,16 +34,29 @@ namespace Attendance
                 drponameedit.DataTextField = "DeptName";
                 drponameedit.DataBind();
                 drponameedit.Items.Insert(0, new ListItem("--请选择--", ""));
+                Bind();
             }
-
             CheckBoxNew();
-            GridViewRow pagerRow = gdvinfo.BottomPagerRow;            // 获得 GridView 控件中的底部页导航行。
-            if (pagerRow != null)
+        }
+
+        public void SetPager()
+        {
+            GridViewRow pagerRow = gdvinfo.BottomPagerRow;
+            LinkButton btnPrev = (LinkButton)pagerRow.Cells[0].FindControl("btnPrev");
+            btnPrev.Enabled = ViewState["CurrentPage"].ToString() != "1";
+            LinkButton btnNext = (LinkButton)pagerRow.Cells[0].FindControl("btnNext");
+            btnNext.Enabled = ViewState["CurrentPage"].ToString() != ViewState["PageCount"].ToString();
+
+            
+            //绑定数据到下拉表
+            DropDownList ddl = pagerRow.FindControl("ddlIndex") as DropDownList;
+            for (int i = 1; i <= Convert.ToInt32( ViewState["PageCount"]); i++)
             {
-                TextBox txt = (TextBox)pagerRow.Cells[0].FindControl("tbxPage");
-                LinkButton link = (LinkButton)pagerRow.Cells[0].FindControl("btnGoto");
-                link.CommandArgument = txt.Text.Trim();
+                ListItem li = new ListItem("第"+i+"页",i.ToString());
+                ddl.Items.Add(li);
             }
+            ddl.SelectedValue = ViewState["CurrentPage"].ToString();
+
         }
 
         public void CheckBoxNew()
@@ -52,7 +66,7 @@ namespace Attendance
             for (int i = 0; i < dtES.Rows.Count; i++)
             {
                 checkBox = new CheckBox();
-                checkBox.Text = "<span></span>"+dtES.Rows[i]["DeptName"].ToString();
+                checkBox.Text = "<span></span>" + dtES.Rows[i]["DeptName"].ToString();
                 checkBox.ID = dtES.Rows[i]["DeptID"].ToString();
                 checkBox.Style.Add("margin-left", "3px");
                 this.PanelCheckList.Controls.Add(checkBox);
@@ -76,8 +90,18 @@ namespace Attendance
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //点击搜索后将搜索标志设置为change
-            pagechange.Value = "change";
+            string dept = "";
+            foreach (CheckBox c in PanelCheckList.Controls)
+            {
+                if (c.Checked == true)
+                    dept += "'" + c.Text.Substring(13) + "',";
+            }
+            if (dept != "")
+                dept = dept.Remove(dept.Count() - 1);
+            else
+                dept = "";
+            ViewState["CurrentPage"] = "1";
+            ViewState["PageCount"] = (Math.Ceiling(um.SearchPeopleCount(TxtSearchID.Text, TxtSearchName.Text, dept) / 10.0)).ToString();
             Bind();
         }
 
@@ -87,7 +111,7 @@ namespace Attendance
             UserInfo us = new UserInfo();
             us.UserID = editId.Value;
             us.UserName = txtname.Text;
-            us.UserType = Convert.ToByte(drpdenameedit.SelectedValue); 
+            us.UserType = Convert.ToByte(drpdenameedit.SelectedValue);
             byte DeptID;
             if (byte.TryParse(drponameedit.SelectedValue, out DeptID))
                 us.DeptID = DeptID;
@@ -109,6 +133,8 @@ namespace Attendance
                 e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#ffffff'");
 
             }
+
+
         }
 
         protected void gdvinfo_Sorting(object sender, GridViewSortEventArgs e)
@@ -139,25 +165,21 @@ namespace Attendance
             string sortDirection = this.gdvinfo.Attributes["SortDirection"];
             DataTable dtBind = new DataTable();
 
-            //判断是不是点击了搜索按钮  
-            if (pagechange.Value.ToString().Equals("change"))
+            string dept = "";
+            foreach (CheckBox c in PanelCheckList.Controls)
             {
-                string dept = "";
-                foreach (CheckBox c in PanelCheckList.Controls)
-                {
-                    if (c.Checked == true)
-                        dept += "'" + c.Text.Substring(13) + "',";
-                }
-                if (dept != "")
-                    dept = dept.Remove(dept.Count() - 1);
-                else
-                    dept = "' '";
-
-                dtBind = pm.SearchPeople(TxtSearchID.Text, TxtSearchName.Text, dept);
+                if (c.Checked == true)
+                    dept += "'" + c.Text.Substring(13) + "',";
             }
+            if (dept != "")
+                dept = dept.Remove(dept.Count() - 1);
             else
-                // 调用业务数据获取方法
-                dtBind = pm.GetAllPeople();
+                dept = "";
+
+            int pageindex = Convert.ToInt32(ViewState["CurrentPage"]);
+
+            // 调用业务数据获取方法
+            dtBind = um.SearchPeople(TxtSearchID.Text, TxtSearchName.Text, dept, gdvinfo.PageSize, pageindex);
 
             // 根据GridView排序数据列及排序方向设置显示的默认数据视图
             if ((!string.IsNullOrEmpty(sortExpression)) && (!string.IsNullOrEmpty(sortDirection)))
@@ -165,17 +187,17 @@ namespace Attendance
                 dtBind.DefaultView.Sort = string.Format("{0} {1}", sortExpression, sortDirection);
             }
 
+
             // GridView绑定并显示数据
             //  if(dtBind.Rows.Count>0)
             this.gdvinfo.DataSource = dtBind;
             this.gdvinfo.DataBind();
-
+            gdvinfo.BottomPagerRow.Visible = true;
+            SetPager();
         }
 
         protected void gdvinfo_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gdvinfo.PageIndex = e.NewPageIndex;
-            Bind();
         }
 
         protected void CheckBoxHead_CheckedChanged(object sender, EventArgs e)
@@ -199,12 +221,46 @@ namespace Attendance
                 CheckBox cb = (CheckBox)row.FindControl("CheckBoxList");
                 if (cb.Checked)
                 {
-                    Label lb= (Label)row.FindControl("LabelID");
+                    Label lb = (Label)row.FindControl("LabelID");
                     um.DelPeople(lb.Text);
                 }
             }
+            ViewState["CurrentPage"] = "1";
             Bind();
         }
+
+        protected void btnFirst_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = "1";
+            Bind();
+        }
+
+        protected void btnPrev_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) - 1;
+            Bind();
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) + 1;
+            Bind();
+        }
+
+        protected void btnLast_Click(object sender, EventArgs e)
+        {
+            ViewState["CurrentPage"] = ViewState["PageCount"];
+            Bind();
+        }
+
+        protected void ddlIndex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddls = sender as DropDownList;
+            ViewState["CurrentPage"] = int.Parse(ddls.SelectedValue);
+            Bind();
+
+        }
+
 
 
         #region AJAX静态方法
@@ -212,7 +268,7 @@ namespace Attendance
         [WebMethod]
         public static string GetStr(string str)
         {
-            return UserManagement.UserIDPadding(str)?"true":"false";
+            return UserManagement.UserIDPadding(str) ? "true" : "false";
         }
 
         [WebMethod]

@@ -6,17 +6,12 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Attendance - Login</title>
-    <link href="Styles/Login.css" rel="stylesheet" type="text/css" />
+    <link href="css/Login.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="Scripts/jquery-1.4.1.js"></script>
     <script type="text/javascript" src="Scripts/Login.js"></script>
-	    <link href="css/templatemo-style.css" rel="stylesheet">
-
-    
-	    <link href="css/font-awesome.min.css" rel="stylesheet">
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
-	    
-
-
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="enterplorer-banner">
@@ -39,7 +34,7 @@
             <div id="TobFont1">厚溥公司</div>
             <div id="TobFont2">管理人力  编排假日  统计考勤</div>
             <div id="TobFont3">默认用户名和密码为公司编号,建议初次登录后修改安全性更高的密码。</div>
-            <input type="button" value="Login" id="loginclick" onmouseover="mover(this)" onmouseout="mout(this)"  />
+            <input type="button" value="Login" id="loginclick" onmouseover="mover(this)" onmouseout="mout(this)" />
         </div>
     </div>
     <span style="position: absolute; right: 50px; bottom: 20px; font-family: 微软雅黑; font-size: 15px; color: White;">©2016 厚浦 N1612班 魏超</span>
@@ -55,11 +50,11 @@
 
                 </td>
                 <td>
-                  <%--  <img alt="" src="Images/qingjia.png" class="imgt" style="width: 400px; height: 200px; background-color: Blue; border: 0px;" onmouseover="this.style.zoom=1.8" onmouseout="this.style.zoom=1" />--%>
+                    <%--  <img alt="" src="Images/qingjia.png" class="imgt" style="width: 400px; height: 200px; background-color: Blue; border: 0px;" onmouseover="this.style.zoom=1.8" onmouseout="this.style.zoom=1" />--%>
 
                 </td>
                 <td>
-                   <%-- <img alt="" src="Images/baobiao.png" class="imgt" style="width: 400px; height: 200px; background-color: Green; border: 0px;" onmouseover="this.style.zoom=1.8" onmouseout="this.style.zoom=1" />--%>
+                    <%-- <img alt="" src="Images/baobiao.png" class="imgt" style="width: 400px; height: 200px; background-color: Green; border: 0px;" onmouseover="this.style.zoom=1.8" onmouseout="this.style.zoom=1" />--%>
 
                 </td>
             </tr>
@@ -104,37 +99,37 @@
 
     <!--登录div-->
     <div class="loginc">
-       <div class="templatemo-content-widget templatemo-login-widget white-bg">
-			<header class="text-center">
-	          <div class="square"></div>
-	          <h1>Welcome</h1>
-	        </header>
-	        <form action="index.html" class="templatemo-login-form" runat="server">
-	        	<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>	        		
-		              	<input type="text" id="txtName" class="form-control" placeholder="员工ID">           
-		          	</div>	
-	        	</div>
-	        	<div class="form-group">
-	        		<div class="input-group">
-		        		<div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>	        		
-		              	<input type="password" id="txtPwd" class="form-control" placeholder="******">           
-		          	</div>	
-	        	</div>	          	
-	          	<div class="form-group">
-				    <div class="checkbox squaredTwo" style="text-align:center">
+        <div class="templatemo-content-widget templatemo-login-widget white-bg">
+            <header class="text-center">
+                <div class="square"></div>
+                <h1>Welcome</h1>
+            </header>
+            <form action="index.html" class="templatemo-login-form" runat="server">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                        <input type="text" id="txtName" class="form-control" placeholder="员工ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>
+                        <input type="password" id="txtPwd" class="form-control" placeholder="******">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox squaredTwo" style="text-align: center">
                         <p id="Tips">*用户名或密码错误，请核对后再试！</p>
-				    </div>				    
-				</div>
-				<div class="form-group">
+                    </div>
+                </div>
+                <div class="form-group">
                     <input type="button" class="templatemo-blue-button width-100" id="loginin" value="登录" />
-				</div>
-	        </form>
-		</div>
-		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-			<p>还没有账号和密码? <strong><a href="#" class="blue-text">快去找老板!</a></strong></p>
-		</div>
+                </div>
+            </form>
+        </div>
+        <div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+            <p>还没有账号和密码? <strong><a href="#" class="blue-text">快去找老板!</a></strong></p>
+        </div>
     </div>
 </body>
 </html>

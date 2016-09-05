@@ -9,50 +9,36 @@ namespace DAL
 {
     public class DepartmentServices
     {
-        public DataTable GetAllPeople()
-        {
-            string sql = "select * from Department right join UserInfo on UserInfo.DeptID=Department.DeptID where UserID !='admin'";
-            DataTable dt = DBhelper.Select(sql);
-            return dt;
-        }
         public DataTable GetAllDepart()
         {
             DataTable dt = new DataTable();
             dt = DBhelper.Select("select *,(select UserName from UserInfo where UserID=ManagerID) as UserName from Department");
             return dt;
         }
-        public DataTable SearchPeople(string id, string name, string dept)
-        {
-            DataTable dt = DBhelper.Select(string.Format(
-                "select * from Department right join UserInfo on UserInfo.DeptID=Department.DeptID  where UserID !='admin' and UserID like '%{0}%' and UserName like '%{1}%' and DeptName in ({2})"
-                , id, name, dept));
-            return dt;
-        }
-        public DataTable SearchManage(string name, string manage)
+        public DataTable SearchManage(string name, string manage,int PageSize, int pageindex)
         {
             DataTable dt = new DataTable();
-            if (manage == "")
-            {
-                dt = DBhelper.Select(string.Format(
-            "select DeptName,ManagerID,(select UserName from UserInfo where UserID=ManagerID) as UserName from Department where  DeptName like '%{0}%'"
-            , name));
-                return dt;
-            }
+            string sql = "select  ROW_NUMBER() over (order by Department.DeptID) RowNumb,DeptName,ManagerID, UserName from Department left join UserInfo on Department.ManagerID=UserInfo.UserID where  DeptName like '%" + name + "%' ";
+            if (manage != "")
+                sql += "and UserName like  '%" + manage + "%'";
+
+                int StarNum = (pageindex - 1) * PageSize + 1;
+            int EndNum = PageSize * pageindex;
+
+            string sqlComb = "select * from (" + sql + ") A where RowNumb between " + StarNum + " and " + EndNum;
+            if (pageindex != 0)
+                dt = DBhelper.Select(sqlComb);
             else
-            {
-                dt = DBhelper.Select(string.Format(
-            "select * from (select DeptName,ManagerID,(select UserName from UserInfo where UserID=ManagerID) as UserName from Department)  as a where  DeptName like '%{0}%' and  UserName = '{1}'"
-            , name, manage));
-                return dt;
-            }
+                dt = DBhelper.Select(sql);
+            return dt;
         }
         public void AddDepart(Department dp)
         {
-            string sql =string.Format("insert into Department values ('{0}','{1}','{2}')", dp.DeptName,dp.ManagerID,dp.DeptInfo);
+            string sql = string.Format("insert into Department values ('{0}','{1}','{2}')", dp.DeptName, dp.ManagerID, dp.DeptInfo);
             DBhelper.Change(sql);
         }
 
-        public void EditDepart(Department dp,string OldName)
+        public void EditDepart(Department dp, string OldName)
         {
             string sql = string.Format("update Department set DeptName='{0}',ManagerID='{1}',DeptInfo='{2}'   where DeptName='{3}'",
                 dp.DeptName, dp.ManagerID, dp.DeptInfo, OldName);
@@ -64,11 +50,11 @@ namespace DAL
                  OldName);
             DBhelper.Change(sql);
         }
-        public  bool DepartIsNull(string id)
+        public bool DepartIsNull(string id)
         {
             string sql = "select Count(*) from UserInfo where DeptID=(select DeptID from Department where DeptName='" + id.Trim() + "')";
             DataTable dt = DBhelper.Select(sql);
-            return dt.Rows[0][0].ToString()=="0";
+            return dt.Rows[0][0].ToString() == "0";
         }
 
 

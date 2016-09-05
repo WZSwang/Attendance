@@ -79,6 +79,28 @@ namespace DAL
         }
 
 
+        public DataTable SearchPeople(string id, string name, string dept, int pagesize, int pageIndex)
+        {
+            string sql = string.Format("select ROW_NUMBER() over (order by Department.DeptID) RowNumb,Department.*,UserID,UserName from Department right join UserInfo on UserInfo.DeptID=Department.DeptID  where UserID !='admin' and UserID like '%{0}%' and UserName like '%{1}%' "
+                , id, name);
+            if (dept != "")
+                sql += "and DeptName in (" + dept + ")";
+
+            int StarNum = (pageIndex - 1) * pagesize + 1;
+            int EndNum = pagesize * pageIndex;
+            string sqlComb = "select * from (" + sql + ") A where RowNumb between " + StarNum + " and " + EndNum;
+            DataTable dt = DBhelper.Select(sqlComb);
+            return dt;
+        }
+        public int SearchPeopleCount(string id, string name, string dept)
+        {
+            string sql = string.Format("select * from Department right join UserInfo on UserInfo.DeptID=Department.DeptID  where UserID !='admin' and UserID like '%{0}%' and UserName like '%{1}%' "
+                , id, name);
+            if (dept != "")
+                sql += "and DeptName in (" + dept + ")";
+            DataTable dt = DBhelper.Select(sql);
+            return dt.Rows.Count;
+        }
 
     }
 }

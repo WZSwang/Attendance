@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Entity;
 using DAL;
+using System.Data;
 
 namespace BLL
 {
@@ -33,9 +34,6 @@ namespace BLL
             Userserve.DelPeople(us);
         }
 
-
-
-
         public static bool UserIDPadding(string id)
         {
             return UserServices.UserIDPadding(id);
@@ -43,6 +41,14 @@ namespace BLL
         public static string UserInfos(string id)
         {
             return UserServices.UserInfos(id);
+        }
+        public DataTable SearchPeople(string id, string name, string dept, int pagesize, int pageIndex)
+        {
+            return Userserve.SearchPeople(id, name, dept, pagesize, pageIndex);
+        }
+        public int SearchPeopleCount(string id = "", string name = "", string dept = "")
+        {
+            return Userserve.SearchPeopleCount(id, name, dept);
         }
     }
 }

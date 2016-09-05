@@ -27,6 +27,7 @@ namespace DAL
             sqlcon.Open();
             DataTable dt = new DataTable();
             ad.Fill(dt);
+            sqlcon.Close();
             return dt;
         }
 

@@ -101,6 +101,16 @@ namespace DAL
             DataTable dt = DBhelper.Select(sql);
             return dt.Rows.Count;
         }
+        
+        public DataTable SearchPeopleInManage(string manage, int pagesize, int pageIndex)
+        {
+            string sql = "select ROW_NUMBER() over (order by UserInfo.UserID) RowNumb,Department.*,UserID,UserName from Department right join UserInfo on UserInfo.DeptID = Department.DeptID where ManagerID = '"+ manage + "'";
+            int StarNum = (pageIndex - 1) * pagesize + 1;
+            int EndNum = pagesize * pageIndex;
+            string sqlComb = "select * from (" + sql + ") A where RowNumb between " + StarNum + " and " + EndNum;
+            DataTable dt = DBhelper.Select(sqlComb);
+            return dt;
+        }
 
     }
 }

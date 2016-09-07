@@ -14,13 +14,6 @@
                     <div id="timeline_div" class="templatemo-chart"></div>
                     <div class="col-lg-2 col-md-3 form-group">
                         <asp:DropDownList ID="DropDownListYear" runat="server" CssClass="form-control">
-                            <asp:ListItem>2013</asp:ListItem>
-                            <asp:ListItem>2014</asp:ListItem>
-                            <asp:ListItem>2015</asp:ListItem>
-                            <asp:ListItem>2016</asp:ListItem>
-                            <asp:ListItem>2017</asp:ListItem>
-                            <asp:ListItem>2018</asp:ListItem>
-                            <asp:ListItem>2019</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-lg-1 col-md-1  form-group" style="padding-top: 10px;">
@@ -87,22 +80,5 @@
     </div>
 </asp:Content>
 <asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
-    <script type="text/javascript">
-        var s = "<%=Page.IsPostBack %>";
-        //只在加载时 设置当前时间
-        if (s == "False") {
 
-            var date = new Date();
-            for (var i = 0; i < document.getElementById("<%=DropDownListYear.ClientID %>").options.length; i++) {
-                if (document.getElementById("<%=DropDownListYear.ClientID %>").options[i].text == date.getFullYear())
-                    document.getElementById("<%=DropDownListYear.ClientID %>").options[i].selected = true;
-            }
-
-            for (var i = 0; i < document.getElementById("<%=DropDownListMonth.ClientID %>").options.length; i++) {
-                if (document.getElementById("<%=DropDownListMonth.ClientID %>").options[i].text == (date.getMonth() + 1))
-                    document.getElementById("<%=DropDownListMonth.ClientID %>").options[i].selected = true;
-            }
-
-        }
-    </script>
 </asp:Content>

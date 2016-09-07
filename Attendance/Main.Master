@@ -15,7 +15,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             //定义url,一般为 li下的a 元素的href的值
-            var domainUrl = ['PeopleManage.aspx', 'DepartmentManage.aspx', 'DateSetting.aspx'];
+            var domainUrl = ['DateSetting.aspx', 'PeopleManage.aspx', 'DepartmentManage.aspx'];
             var strUrl = location.href;
             var arrUrl = strUrl.split("/");
             var strPage = arrUrl[arrUrl.length - 1];
@@ -31,7 +31,7 @@
     <form id="form1" name="menuForm" runat="server">
         <!-- Left column -->
         <div class="templatemo-flex-row">
-            <div class="templatemo-sidebar" >
+            <div class="templatemo-sidebar">
                 <header class="templatemo-site-header">
                     <div class="square"></div>
                     <h1>Attendace</h1>
@@ -47,9 +47,9 @@
                     <ul>
                         <%if (UserType == 2)
                             { %>
-                        <li><a href="PeopleManage.aspx"><i class="fa fa-users fa-fw"></i>USER - 用户管理 </a></li>
-                        <li><a href="DepartmentManage.aspx"><i class="fa fa-database fa-fw"></i>DEPART - 部门管理</a></li>
                         <li><a href="DateSetting.aspx"><i class="fa fa-sliders fa-fw"></i>ATTENDAN - 考勤设置</a></li>
+                        <li><a href="PeopleManage.aspx"><i class="fa fa-users fa-fw"></i>USERSINFO - 用户管理 </a></li>
+                        <li><a href="DepartmentManage.aspx"><i class="fa fa-database fa-fw"></i>DEPARTMENT - 部门管理</a></li>
                         <%}
                             else if (UserType == 1)
                             {%>
@@ -82,10 +82,11 @@
                         </ul>
                     </div>
                 </div>
-                <div class="templatemo-content-container">
+                <div class="templatemo-content-container" >
+                     
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
                     </asp:ContentPlaceHolder>
-                    <footer class="text-right">
+                    <footer class="text-right" >
                         <p>
                             Copyright &copy; 2016 N1412 
             | Designed by <a href="#" target="_parent">WeCiao</a>
@@ -94,12 +95,13 @@
                 </div>
             </div>
         </div>
-
-        <!-- JS -->
-        <script src="Scripts/jquery-1.4.1.js"></script>
-        <!-- jQuery -->
-        <asp:ContentPlaceHolder ID="ContentPlaceHolderHide" runat="server">
-        </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderHide" runat="server">
+    </asp:ContentPlaceHolder>
     </form>
+    <!-- JS -->
+    <script type="text/javascript" src="../Scripts/jquery-1.11.2.min.js"></script>        
+    <!-- jQuery -->
+    <script type="text/javascript" src="../Scripts/bootstrap-filestyle.min.js"></script>
+    <script type="text/javascript" src="../Scripts/templatemo-script.js"></script>
 </body>
 </html>

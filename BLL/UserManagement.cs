@@ -50,5 +50,9 @@ namespace BLL
         {
             return Userserve.SearchPeopleCount(id, name, dept);
         }
+        public DataTable SearchPeopleInManage(string manage, int pagesize, int pageIndex)
+        {
+            return Userserve.SearchPeopleInManage(manage, pagesize, pageIndex);
+        }
     }
 }

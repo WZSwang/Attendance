@@ -83,6 +83,7 @@
     <Content Include="Manage\AttendanceManage.aspx" />
     <Content Include="Manage\CheckAttendance.aspx" />
     <Content Include="Scripts\bootstrap-filestyle.min.js" />
+    <Content Include="Scripts\jquery-1.11.2.min.js" />
     <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\templatemo-script.js" />

@@ -17,6 +17,10 @@ namespace Attendance
         {
             if (!IsPostBack)
             {
+                for (int i = DateTime.Now.Year - 3; i <= DateTime.Now.Year + 3; i++)
+                    DropDownListYear.Items.Add(i.ToString()); 
+                DropDownListYear.SelectedValue = DateTime.Now.Year.ToString();
+                DropDownListMonth.SelectedValue = DateTime.Now.Month.ToString();
                 gdvinfo.DataBind();
             }
         }

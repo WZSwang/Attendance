@@ -46,8 +46,8 @@ namespace Entity
             set { date = value; }
         }
 
-        private byte status;
-        public byte Status
+        private int status;
+        public int Status
         {
             get { return status; }
             set { status = value; }

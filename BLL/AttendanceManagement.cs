@@ -12,14 +12,22 @@ namespace BLL
     {
         AttendanceServices Atten = new AttendanceServices();
 
-        public IList<AttendanceSetting> GetDateStatus(string date)
+        public String GetDateStatus(string date)
         {
             return Atten.GetDateStatus(date);
         }
 
-        public void ChangeDateStatus(string date, string satus)
+        public void ChangeDateStatus(List<string> date)
         {
-            Atten.ChangeDateStatus(date, satus);
+            Atten.ChangeDateStatus(date);
+        }
+        public void DeleteDate(string date)
+        {
+            Atten.DeleteDate(date);
+        }
+        public Dictionary<DateTime, int> DateInfo(int year, int month)
+        {
+            return Atten.DateInfo(year,month);
         }
     }
 }

@@ -12,17 +12,23 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 
+
     <script type="text/javascript">
         $(document).ready(function () {
             //定义url,一般为 li下的a 元素的href的值
             var domainUrl = ['DateSetting.aspx', 'PeopleManage.aspx', 'DepartmentManage.aspx'];
+            var ManageUrl = ['AttendanceManage.aspx', 'ApplyHolidy.aspx'];
+            var UserUrl = ['CheckAttendance.aspx', 'ApplyManage.aspx'];
             var strUrl = location.href;
             var arrUrl = strUrl.split("/");
             var strPage = arrUrl[arrUrl.length - 1];
             $(".templatemo-left-nav li").each(function (i) {
-                if (strPage.indexOf(domainUrl[i]) == 0) {
+                if (strPage.indexOf(domainUrl[i]) == 0) 
                     $(this).children('a').addClass("active");
-                }
+                if (strPage.indexOf(ManageUrl[i]) == 0)
+                    $(this).children('a').addClass("active");
+                if (strPage.indexOf(UserUrl[i]) == 0)
+                    $(this).children('a').addClass("active");
             });
         });
     </script>
@@ -53,15 +59,15 @@
                         <%}
                             else if (UserType == 1)
                             {%>
-                        <li><a href="ScheduleManage.aspx"><i class="fa fa-list  fa-fw"></i>考勤管理</a></li>
-                        <li><a href="ScheduleManage.aspx"><i class="fa fa-check fa-fw"></i>请假审批</a></li>
+                        <li><a href="AttendanceManage.aspx"><i class="fa fa-list  fa-fw"></i>ATTENDAN - 考勤管理</a></li>
+                        <li><a href="ApplyHolidy.aspx"><i class="fa fa-check fa-fw"></i>APPLYHOLIDAY - 请假审批</a></li>
                         <%}
                             else
                             { %>
-                        <li><a href="ScheduleManage.aspx"><i class="fa fa-user fa-fw"></i>我的考勤</a></li>
-                        <li><a href="ScheduleManage.aspx"><i class="fa fa-edit fa-fw"></i>请假申请</a></li>
+                        <li><a href="CheckAttendance.aspx"><i class="fa fa-user fa-fw"></i>MYATTENDAN - 我的考勤</a></li>
+                        <li><a href="ApplyManage.aspx"><i class="fa fa-edit fa-fw"></i>APPLYMANAGE - 请假申请</a></li>
                         <%} %>
-                        <li><a href="ScheduleManage.aspx"><i class="fa fa-pencil fa-fw"></i>INFO - 资料编辑</a></li>
+                        <li><a href="#"><i class="fa fa-pencil fa-fw"></i>INFO - 资料编辑</a></li>
                         <li>
                             <asp:LinkButton Text='<i class="fa fa-eject fa-fw"></i>EXIT - 退出登录' runat="server" ID="lnkSignOut" OnClick="lnkSignOut_Click" />
 

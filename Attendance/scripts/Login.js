@@ -53,9 +53,9 @@ $(document).ready(function () {
                 if (msg == "Admin") {
                     location.href = "Admin/DateSetting.aspx";//location.href实现客户端页面的跳转  
                 } else if (msg == "Manage") {
-                    location.href = "Index.aspx";
+                    location.href = "Manage/AttendanceManage.aspx";
                 } else if (msg == "People") {
-                    location.href = "Index.aspx";
+                    location.href = "User/CheckAttendance.aspx";
                 } else if (msg == "false") {
                     $("#Tips").css("display", "block");
                 } else

@@ -334,6 +334,4 @@
     </div>
 
     <asp:HiddenField ID="DepartName" runat="server" />
-    <asp:Label ID="LabelCurrentPage" runat="server" Text="<%# ((GridView)Container.NamingContainer).PageIndex + 1 %>"></asp:Label>
-    <asp:Label ID="LabelPageCount" runat="server" Text="<%# ((GridView)Container.NamingContainer).PageCount %>"></asp:Label>
 </asp:Content>

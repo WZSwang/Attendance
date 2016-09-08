@@ -81,12 +81,13 @@
     </None>
     <Content Include="Manage\ApplyHolidy.aspx" />
     <Content Include="Manage\AttendanceManage.aspx" />
-    <Content Include="Manage\CheckAttendance.aspx" />
     <Content Include="Scripts\bootstrap-filestyle.min.js" />
     <Content Include="Scripts\jquery-1.11.2.min.js" />
     <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\templatemo-script.js" />
+    <Content Include="User\ApplyManage.aspx" />
+    <Content Include="User\CheckAttendance.aspx" />
     <Content Include="Web.sitemap">
       <SubType>Designer</SubType>
     </Content>
@@ -185,13 +186,6 @@
     <Compile Include="Manage\AttendanceManage.aspx.designer.cs">
       <DependentUpon>AttendanceManage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Manage\CheckAttendance.aspx.cs">
-      <DependentUpon>CheckAttendance.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Manage\CheckAttendance.aspx.designer.cs">
-      <DependentUpon>CheckAttendance.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateUser.aspx.cs">
       <DependentUpon>UpdateUser.aspx</DependentUpon>
@@ -199,6 +193,20 @@
     </Compile>
     <Compile Include="UpdateUser.aspx.designer.cs">
       <DependentUpon>UpdateUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\ApplyManage.aspx.cs">
+      <DependentUpon>ApplyManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\ApplyManage.aspx.designer.cs">
+      <DependentUpon>ApplyManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\CheckAttendance.aspx.cs">
+      <DependentUpon>CheckAttendance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\CheckAttendance.aspx.designer.cs">
+      <DependentUpon>CheckAttendance.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

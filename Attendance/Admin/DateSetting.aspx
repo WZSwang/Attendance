@@ -56,13 +56,13 @@
     <div class="templatemo-content-widget no-padding">
         <div class="panel panel-default table-responsive">
             <asp:GridView ID="gdvinfo" CssClass="table table-striped table-bordered templatemo-user-table gdvinfo" runat="server" AutoGenerateColumns="False" AllowSorting="True"
-                GridLines="None" OnPageIndexChanging="gdvinfo_PageIndexChanging" OnRowDataBound="gdvinfo_RowDataBound">
+                GridLines="None"  OnRowDataBound="gdvinfo_RowDataBound">
                 <EmptyDataTemplate>
                     <div style="text-align: center">请选择日期并点击显示按钮</div>
                 </EmptyDataTemplate>
                 <Columns>
                     <asp:BoundField DataField="Date" HeaderText="日期" DataFormatString="{0:yyyy-MM-dd}" />
-                    <asp:BoundField HeaderText="星期" DataField="Week" />
+                    <asp:BoundField HeaderText="星期" />
                     <asp:TemplateField HeaderText="状态">
                         <ItemTemplate>
                             <asp:DropDownList ID="DropDownListState" runat="server" CssClass="form-control" Style="width: 80%">
@@ -73,6 +73,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
+                <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White"></HeaderStyle>
                 <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />
                 <PagerSettings Mode="NumericFirstLast" />
             </asp:GridView>
@@ -80,5 +81,4 @@
     </div>
 </asp:Content>
 <asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
-
 </asp:Content>

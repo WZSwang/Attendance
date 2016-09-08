@@ -31,6 +31,31 @@ namespace DAL
             return dt;
         }
 
+        public static void TransactioChange(List<string> sqllist)
+        {
+            SqlConnection sqlcon = new SqlConnection(conf);
+            sqlcon.Open();
+            SqlTransaction sqltra = sqlcon.BeginTransaction();
+            try
+            {
+                foreach (string sql in sqllist)
+                {
+                    SqlCommand sqlcom = new SqlCommand(sql, sqlcon, sqltra);
+                    sqlcom.ExecuteNonQuery();
+                }
+                sqltra.Commit();
+            }
+            catch
+            {
+                sqltra.Rollback();
+            }
+            finally
+            {
+                sqlcon.Close();
+            }
+        }
+
+
 
 
 

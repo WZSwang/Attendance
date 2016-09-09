@@ -674,6 +674,18 @@ input[type="radio"]:checked + label span {
     position: fixed;
 }
 
+.TipBoxMax {
+    z-index: 9;
+    top: 50%;
+    left: 50%;
+    width:800px;
+    height:500px;
+    margin-left: -400px;
+    margin-top: -250px;
+    display: none;
+    position: fixed;
+}
+
 
 
 .MessageBox {

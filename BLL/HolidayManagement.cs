@@ -16,5 +16,9 @@ namespace BLL
         {
             return holiSer.SearchApprove(title, start, end, Status, pagesize, pageIndex);
         }
+        public int SearchApproveCount(string title = "", string start = "", string end = "", string Status = "")
+        {
+            return holiSer.SearchApproveCount(title, start, end, Status);
+        }
     }
 }

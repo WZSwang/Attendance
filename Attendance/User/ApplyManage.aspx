@@ -50,7 +50,7 @@
             });
 
             $("#<%=btnin.ClientID %>").click(function () {
-                var NUM = document.getElementById("<% =tnid.ClientID%>").value;
+               var NUM = document.getElementById("tnid.ClientID").value;
                 if (NUM == "") {
                     document.getElementById("<%=lblbrith0.ClientID %>").style.display = "block";
                     document.getElementById("<%=lblbrith0.ClientID %>").innerText = "请输入员工ID";
@@ -82,13 +82,13 @@
                 if (document.getElementById("<%=lblbrith0.ClientID %>").innerText == "已经存在的ID,请更换")
                     return false;
 
-                var tnname = document.getElementById("<% =tnname.ClientID%>").value;
+                var tnname = document.getElementById(" =tnname.ClientID%>").value;
                 if (tnname == "") {
                     document.getElementById("<%=lblbrith0.ClientID %>").style.display = "block";
                     document.getElementById("<%=lblbrith0.ClientID %>").innerText = "请输入员工姓名";
                     return false;
                 }
-                var drpdename = document.getElementById("<% =drpdename.ClientID%>").value;
+                var drpdename = document.getElementById("=drpdename.ClientID%>").value;
                 if (drpdename == -1) {
                     document.getElementById("<%=lblbrith0.ClientID %>").style.display = "block";
                     document.getElementById("<%=lblbrith0.ClientID %>").innerText = "请选择用户类型";
@@ -158,23 +158,32 @@
                 <div class="col-1">
                     <div id="timeline_div" class="templatemo-chart"></div>
                     <div class="row form-group">
-                        <div class="col-lg-4 col-md-4 form-group">
-                            <asp:TextBox ID="TxtSearchID" runat="server" CssClass="form-control margin-bottom-5" placeholder="请输入用户ID" Style="float: left"></asp:TextBox>
-                            <asp:TextBox ID="TxtSearchName" runat="server" CssClass="form-control" placeholder="请输入用户名" Style="float: left"></asp:TextBox>
+                        <div class="col-lg-2 col-md-2 form-group">
+                            <asp:TextBox ID="txtSearchTitle" runat="server" CssClass="form-control margin-bottom-5" placeholder="标题" Style="float: left"></asp:TextBox>
                         </div>
-                        <div class="col-lg-6 col-md-6 form-group">
-                            <p>部门：</p>
-                            <asp:Panel ID="PanelCheckList" runat="server" Style="float: left;" Wrap="False" ScrollBars="Horizontal" Width="100%"></asp:Panel>
+                        <div class="col-lg-2 col-md-2 form-group">
+                            <asp:TextBox ID="txtSearchStar" runat="server" CssClass="form-control margin-bottom-5" placeholder="起始时间" Style="float: left"></asp:TextBox>
+                           
+                        </div>
+                        <div class="col-lg-2 col-md-2 form-group">
+                            <asp:TextBox ID="txtSearchEnd" runat="server" CssClass="form-control" placeholder="结束时间" Style="float: left"></asp:TextBox>
+                        </div>
+                        <div class="col-lg-4 col-md-4 form-group" style="padding-top:8px;">
+                           <p style="float:left">请假单状态：</p> 
+                            <asp:RadioButtonList ID="rblStatus" runat="server" RepeatDirection="Horizontal" >
+                                <asp:ListItem Value="0"><span></span>待审批</asp:ListItem>
+                                <asp:ListItem Value="1"><span></span>归档</asp:ListItem>
+                                <asp:ListItem Value="" Selected="True"><span></span>全部</asp:ListItem>
+                            </asp:RadioButtonList>
                         </div>
                         <div class="col-lg-2 col-md-12  form-group">
-                            <p>&nbsp</p>
-                            <asp:Button ID="btnSearch" runat="server" Text="搜索" CssClass="templatemo-blue-button"
+                            <asp:Button ID="btnSearch" runat="server" Text="查询" CssClass="templatemo-blue-button"
                                 OnClick="btnSearch_Click" />
                         </div>
                     </div>
                 </div>
             </div>
-            <input id="btnadd" type="button" value="添加" class="templatemo-blue-button" />
+            <input id="btnadd" type="button" value="请假" class="templatemo-blue-button" />
         </div>
     </div>
 
@@ -260,42 +269,36 @@
 </asp:Content>
 
 <asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
-    <div id="divaddout" class="panel panel-default margin-10 TipBox" style="display: none">
+    <div id="divaddout" class="panel panel-default margin-10 TipBoxMax" style="display: none">
         <div class="panel-heading" runat="server">
-            <h2 class="text-uppercase"><+>添加用户</h2>
+            <h2 class="text-uppercase"><+>请假信息</h2>
         </div>
         <div class="panel-body" runat="server">
-            <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">
-                    <label for="inputFirstName"><span style='color: red;'>*</span>用户ID：</label>
-                    <asp:TextBox ID="tnid" runat="server" class="form-control"></asp:TextBox>
+                    <label for="inputFirstName">请假单号：</label>
+                    <asp:Label ID="labApplyID" runat="server" Text=""></asp:Label>
                 </div>
                 <div class="col-lg-6 col-md-6 form-group">
-                    <label for="inputLastName"><span style='color: red;'>*</span>用户姓名：</label>
-                    <asp:TextBox ID="tnname" runat="server" class="form-control"></asp:TextBox>
+                    <label for="inputLastName">申请人：</label>
+                    <asp:TextBox ID="txtApplyName" runat="server" class="form-control"></asp:TextBox>
                 </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-6 col-md-6 form-group">
-                    <label for="inputFirstName"><span style='color: red;'>*</span>用户类型：</label>
-                    <asp:DropDownList ID="drpdename" runat="server" class="form-control">
-                        <asp:ListItem Value="-1">--请选择--</asp:ListItem>
-                        <asp:ListItem Value="0">员工</asp:ListItem>
-                        <asp:ListItem Value="1">主管</asp:ListItem>
-                    </asp:DropDownList>
+                <div class="col-lg-12 col-md-12 form-group">
+                    <label for="inputFirstName"><span style='color: red;'>*</span>标题：</label>
+                    <asp:TextBox ID="txtApplyTitle" runat="server" class="form-control"></asp:TextBox>
                 </div>
-                <div class="col-lg-6 col-md-6 form-group">
-                    <label for="inputLastName">所属部门：</label>
-                    <asp:DropDownList ID="drponame" runat="server" class="form-control">
-                    </asp:DropDownList>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-12 col-md-10 form-group">
-                    <label for="inputFirstName">手机：</label>
+                <div class="col-lg-6 col-md-10 form-group">
+                    <label for="inputFirstName"><span style='color: red;'>*</span>起始时间：</label>
                     <asp:TextBox ID="txttel0" runat="server" class="form-control"></asp:TextBox>
                 </div>
-            </div>
+                <div class="col-lg-6 col-md-10 form-group">
+                    <label for="inputFirstName"><span style='color: red;'>*</span>结束时间：</label>
+                    <asp:TextBox ID="TextBox1" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            
+                <div class="col-lg-12 col-md-10 form-group">
+                    <label for="inputFirstName"><span style='color: red;'>*</span>请假原因：</label>
+                    <asp:TextBox ID="txtApplyRes" runat="server" class="form-control" rows="3" TextMode="MultiLine"></asp:TextBox>
+                </div>
             <div class="row form-group" style="text-align: center;">
                 <div class="col-lg-12 col-md-12 form-group">
                     <asp:Label ID="lblbrith0" runat="server" Text="" Style="display: none; color: #d7425c"></asp:Label>

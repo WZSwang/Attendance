@@ -21,7 +21,21 @@ namespace DAL
             int EndNum = pagesize * pageIndex;
             string sqlComb = "select * from (" + sql + ") A where RowNumb between " + StarNum + " and " + EndNum;
             DataTable dt = DBhelper.Select(sqlComb);
+            
+
             return dt;
+
+            ConvertHelper.convertToList<AttendanceSetting>(dt);
+        }
+        public int SearchApproveCount(string title, string start, string end, string Status)
+        {
+            string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '未审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApproveUser where Title like '%" + title + "%'";
+            if (start != "")
+                sql += " and ApplyDate between '" + start + "' and '" + end + "'";
+            if (Status != "")
+                sql += " and Status = '" + Status + "'";
+            DataTable dt = DBhelper.Select(sql);
+            return dt.Rows.Count;
         }
     }
 }

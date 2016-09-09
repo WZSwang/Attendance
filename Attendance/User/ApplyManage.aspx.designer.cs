@@ -13,31 +13,40 @@ namespace Attendance.User {
     public partial class ApplyManage {
         
         /// <summary>
-        /// TxtSearchID 控件。
+        /// txtSearchTitle 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtSearchID;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchTitle;
         
         /// <summary>
-        /// TxtSearchName 控件。
+        /// txtSearchStar 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtSearchName;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchStar;
         
         /// <summary>
-        /// PanelCheckList 控件。
+        /// txtSearchEnd 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelCheckList;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchEnd;
+        
+        /// <summary>
+        /// rblStatus 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblStatus;
         
         /// <summary>
         /// btnSearch 控件。
@@ -58,40 +67,31 @@ namespace Attendance.User {
         protected global::System.Web.UI.WebControls.GridView gdvinfo;
         
         /// <summary>
-        /// tnid 控件。
+        /// labApplyID 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tnid;
+        protected global::System.Web.UI.WebControls.Label labApplyID;
         
         /// <summary>
-        /// tnname 控件。
+        /// txtApplyName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tnname;
+        protected global::System.Web.UI.WebControls.TextBox txtApplyName;
         
         /// <summary>
-        /// drpdename 控件。
+        /// txtApplyTitle 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpdename;
-        
-        /// <summary>
-        /// drponame 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drponame;
+        protected global::System.Web.UI.WebControls.TextBox txtApplyTitle;
         
         /// <summary>
         /// txttel0 控件。
@@ -101,6 +101,24 @@ namespace Attendance.User {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txttel0;
+        
+        /// <summary>
+        /// TextBox1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        
+        /// <summary>
+        /// txtApplyRes 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtApplyRes;
         
         /// <summary>
         /// lblbrith0 控件。

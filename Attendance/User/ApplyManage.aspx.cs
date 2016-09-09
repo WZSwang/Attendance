@@ -20,10 +20,10 @@ namespace Attendance.User
         {
             if (!IsPostBack)
             {
-                ViewState["PageCount"] = (Math.Ceiling(hm.SearchApprove("", "", "", "", 999, 1).Rows.Count / 10.0)).ToString();
+                ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCount() / 10.0)).ToString();
                 ViewState["CurrentPage"] = "1";
 
-                Bind();
+               Bind();
             }
         }
 
@@ -49,34 +49,14 @@ namespace Attendance.User
 
         protected void btnin_Click(object sender, EventArgs e)
         {
-            UserInfo use = new UserInfo();
-            use.UserID = tnid.Text;
-            use.UserName = tnname.Text;
-            use.UserType = Convert.ToByte(drpdename.SelectedValue);
-            byte DeptID;
-            if (byte.TryParse(drponame.SelectedValue, out DeptID))
-                use.DeptID = DeptID;
-            else
-                use.DeptID = null;
-            use.Cellphone = txttel0.Text;
             //um.AddPeople(use);
             Response.Redirect("PeopleManage.aspx");
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string dept = "";
-            foreach (CheckBox c in PanelCheckList.Controls)
-            {
-                if (c.Checked == true)
-                    dept += "'" + c.Text.Substring(13) + "',";
-            }
-            if (dept != "")
-                dept = dept.Remove(dept.Count() - 1);
-            else
-                dept = "";
             ViewState["CurrentPage"] = "1";
-            //ViewState["PageCount"] = (Math.Ceiling(um.SearchPeopleCount(TxtSearchID.Text, TxtSearchName.Text, dept) / 10.0)).ToString();
+            ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCount(txtSearchTitle.Text,txtSearchStar.Text,txtSearchEnd.Text,rblStatus.SelectedValue) / 10.0)).ToString();
             Bind();
         }
 
@@ -126,22 +106,12 @@ namespace Attendance.User
             string sortExpression = this.gdvinfo.Attributes["SortExpression"];
             string sortDirection = this.gdvinfo.Attributes["SortDirection"];
             DataTable dtBind = new DataTable();
-
-            string dept = "";
-            foreach (CheckBox c in PanelCheckList.Controls)
-            {
-                if (c.Checked == true)
-                    dept += "'" + c.Text.Substring(13) + "',";
-            }
-            if (dept != "")
-                dept = dept.Remove(dept.Count() - 1);
-            else
-                dept = "";
+            
 
             int pageindex = Convert.ToInt32(ViewState["CurrentPage"]);
 
             // 调用业务数据获取方法
-            dtBind = hm.SearchApprove("", "", "", "", 999, 1);
+            dtBind = hm.SearchApprove(txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue, gdvinfo.PageSize, pageindex);
 
             // 根据GridView排序数据列及排序方向设置显示的默认数据视图
             if ((!string.IsNullOrEmpty(sortExpression)) && (!string.IsNullOrEmpty(sortDirection)))
@@ -157,19 +127,7 @@ namespace Attendance.User
             gdvinfo.BottomPagerRow.Visible = true;
             SetPager();
         }
-
-        protected void CheckBoxHead_CheckedChanged(object sender, EventArgs e)
-        {
-            //遍历所有的checkbox
-            foreach (GridViewRow row in gdvinfo.Rows)
-            {
-                CheckBox cb = (CheckBox)row.FindControl("CheckBoxList");
-                if ((sender as CheckBox).Checked)
-                    cb.Checked = true;
-                else
-                    cb.Checked = false;
-            }
-        }
+        
 
         protected void btndelete_Click(object sender, EventArgs e)
         {
@@ -237,4 +195,5 @@ namespace Attendance.User
 
         #endregion
     }
+
 }

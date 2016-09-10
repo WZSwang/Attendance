@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Approve.cs" />
+    <Compile Include="ApproveJoinUserInfo.cs" />
+    <Compile Include="AttendanceInfo.cs" />
     <Compile Include="AttendanceSetting.cs" />
     <Compile Include="ConvertHelper.cs" />
     <Compile Include="Department.cs" />

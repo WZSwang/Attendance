@@ -82,7 +82,7 @@ namespace Attendance.User {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApplyName;
+        protected global::System.Web.UI.WebControls.Label txtApplyName;
         
         /// <summary>
         /// txtApplyTitle 控件。
@@ -94,22 +94,22 @@ namespace Attendance.User {
         protected global::System.Web.UI.WebControls.TextBox txtApplyTitle;
         
         /// <summary>
-        /// txttel0 控件。
+        /// txtApplyStart 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txttel0;
+        protected global::System.Web.UI.WebControls.TextBox txtApplyStart;
         
         /// <summary>
-        /// TextBox1 控件。
+        /// txtApplyEnd 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtApplyEnd;
         
         /// <summary>
         /// txtApplyRes 控件。
@@ -154,43 +154,52 @@ namespace Attendance.User {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtId;
+        protected global::System.Web.UI.WebControls.Label txtId;
         
         /// <summary>
-        /// txtname 控件。
+        /// LabEditName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtname;
+        protected global::System.Web.UI.WebControls.Label LabEditName;
         
         /// <summary>
-        /// drpdenameedit 控件。
+        /// txtEditTitle 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpdenameedit;
+        protected global::System.Web.UI.WebControls.TextBox txtEditTitle;
         
         /// <summary>
-        /// drponameedit 控件。
+        /// txtEditStart 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drponameedit;
+        protected global::System.Web.UI.WebControls.TextBox txtEditStart;
         
         /// <summary>
-        /// txttel 控件。
+        /// txtEidtEnd 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txttel;
+        protected global::System.Web.UI.WebControls.TextBox txtEidtEnd;
+        
+        /// <summary>
+        /// txtEditRes 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEditRes;
         
         /// <summary>
         /// lblbrith 控件。
@@ -209,6 +218,69 @@ namespace Attendance.User {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnedit;
+        
+        /// <summary>
+        /// divView 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divView;
+        
+        /// <summary>
+        /// LabViewID 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabViewID;
+        
+        /// <summary>
+        /// LabViewName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabViewName;
+        
+        /// <summary>
+        /// txtViewTitle 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtViewTitle;
+        
+        /// <summary>
+        /// txtViewStar 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtViewStar;
+        
+        /// <summary>
+        /// txtViewEnd 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtViewEnd;
+        
+        /// <summary>
+        /// txtViewRes 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtViewRes;
         
         /// <summary>
         /// yesexit 控件。

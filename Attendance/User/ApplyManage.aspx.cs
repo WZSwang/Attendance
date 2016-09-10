@@ -20,10 +20,15 @@ namespace Attendance.User
         {
             if (!IsPostBack)
             {
-                ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCount() / 10.0)).ToString();
+                UserInfo us = Session["user"] as UserInfo;
+                ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCountByUser(us.UserID) / 10.0)).ToString();
                 ViewState["CurrentPage"] = "1";
-
-               Bind();
+                ViewState["sortExpression"] = "ApproveID";
+                ViewState["sortDirection"] = "ASC";
+                txtApplyName.Text = us.UserName;
+                LabEditName.Text = us.UserName;
+                editId.Value = us.UserID;
+                Bind();
             }
         }
 
@@ -44,105 +49,103 @@ namespace Attendance.User
                 ddl.Items.Add(li);
             }
             ddl.SelectedValue = ViewState["CurrentPage"].ToString();
-
         }
 
         protected void btnin_Click(object sender, EventArgs e)
         {
-            //um.AddPeople(use);
-            Response.Redirect("PeopleManage.aspx");
+            Approve ap = new Approve();
+            ap.ApplyUser = txtApplyName.Text;
+            ap.Title = txtApplyTitle.Text;
+            ap.BeginDate = Convert.ToDateTime(txtApplyStart.Text);
+            ap.EndDate = Convert.ToDateTime(txtApplyEnd.Text);
+            ap.Reason = txtApplyRes.Text;
+            hm.AddApprove(ap);
+            Response.Redirect("ApplyManage.aspx");
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            UserInfo us = Session["user"] as UserInfo;
             ViewState["CurrentPage"] = "1";
-            ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCount(txtSearchTitle.Text,txtSearchStar.Text,txtSearchEnd.Text,rblStatus.SelectedValue) / 10.0)).ToString();
+            ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCountByUser(us.UserID,txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue) / 10.0)).ToString();
             Bind();
         }
 
         protected void btnedit_Click(object sender, EventArgs e)
         {
-            //bool f = true;
-            UserInfo us = new UserInfo();
-            us.UserID = editId.Value;
-            us.UserName = txtname.Text;
-            us.UserType = Convert.ToByte(drpdenameedit.SelectedValue);
-            byte DeptID;
-            if (byte.TryParse(drponameedit.SelectedValue, out DeptID))
-                us.DeptID = DeptID;
-            else
-                us.DeptID = null;
-            us.Cellphone = txttel.Text;
-            //um.EditPeople(us);
+            Approve ap = new Approve();
+            ap.ApproveID = Convert.ToInt32(editId.Value);
+            ap.Title = txtEditTitle.Text;
+            ap.BeginDate = Convert.ToDateTime(txtEditStart.Text);
+            ap.EndDate = Convert.ToDateTime(txtEidtEnd.Text);
+            ap.Reason = txtEditRes.Text;
+            hm.EditApprove(ap);
             Bind();
-
         }
 
 
         protected void gdvinfo_Sorting(object sender, GridViewSortEventArgs e)
         {
             string sortExpression = e.SortExpression.ToString();
-
-            // 假定为排序方向为“顺序”
-            string sortDirection = "ASC";
-
             // “ASC”与事件参数获取到的排序方向进行比较，进行GridView排序方向参数的修改
-            if (sortExpression == this.gdvinfo.Attributes["SortExpression"])
-            {
+            if (sortExpression == ViewState["sortExpression"].ToString())
                 //获得下一次的排序状态
-                sortDirection = (this.gdvinfo.Attributes["SortDirection"].ToString() == sortDirection ? "DESC" : "ASC");
-            }
+                ViewState["sortDirection"] = (ViewState["sortDirection"].ToString() == "ASC" ? "DESC" : "ASC");
+            else
+                // 重新设定GridView排序数据列及排序方向
+                ViewState["sortExpression"] = sortExpression;
 
-            // 重新设定GridView排序数据列及排序方向
-            this.gdvinfo.Attributes["SortExpression"] = sortExpression;
-            this.gdvinfo.Attributes["SortDirection"] = sortDirection;
             this.Bind();
+        }
+        protected void gdvinfo_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[6].Text == "归档")
+                {
+                    LinkButton lb = e.Row.FindControl("lbtnView") as LinkButton;
+                    lb.Visible = true;
+                }
+                else
+                {
+                    (e.Row.FindControl("ImageButonEdit") as Button).Visible = true;
+                    (e.Row.FindControl("ImageButonDelete") as Button).Visible = true;
+                }
+            }
         }
 
 
         private void Bind()
         {
             // 获取GridView排序数据列及排序方向
-            string sortExpression = this.gdvinfo.Attributes["SortExpression"];
-            string sortDirection = this.gdvinfo.Attributes["SortDirection"];
-            DataTable dtBind = new DataTable();
-            
+            string sortExpression = ViewState["sortExpression"].ToString();
+            string sortDirection = ViewState["sortDirection"].ToString();
 
             int pageindex = Convert.ToInt32(ViewState["CurrentPage"]);
 
+            UserInfo us = Session["user"] as UserInfo;
+
             // 调用业务数据获取方法
-            dtBind = hm.SearchApprove(txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue, gdvinfo.PageSize, pageindex);
-
-            // 根据GridView排序数据列及排序方向设置显示的默认数据视图
-            if ((!string.IsNullOrEmpty(sortExpression)) && (!string.IsNullOrEmpty(sortDirection)))
-            {
-                dtBind.DefaultView.Sort = string.Format("{0} {1}", sortExpression, sortDirection);
-            }
-
+            List<ApproveJoinUserInfo> dtBind = hm.SearchApproveByUser(us.UserID,txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue, gdvinfo.PageSize, pageindex, sortExpression, sortDirection);
 
             // GridView绑定并显示数据
             //  if(dtBind.Rows.Count>0)
             this.gdvinfo.DataSource = dtBind;
             this.gdvinfo.DataBind();
-            gdvinfo.BottomPagerRow.Visible = true;
-            SetPager();
+            try
+            {
+                gdvinfo.BottomPagerRow.Visible = true;
+                SetPager();
+            }
+            catch { }
+
         }
-        
+
 
         protected void btndelete_Click(object sender, EventArgs e)
         {
-            //遍历所有的checkbox
-            foreach (GridViewRow row in gdvinfo.Rows)
-            {
-                CheckBox cb = (CheckBox)row.FindControl("CheckBoxList");
-                if (cb.Checked)
-                {
-                    Label lb = (Label)row.FindControl("LabelID");
-                    //um.DelPeople(lb.Text);
-                }
-            }
-            ViewState["CurrentPage"] = "1";
-            Bind();
+            hm.DeleteApprove(editId.Value);
+            Response.Redirect("ApplyManage.aspx");
         }
 
         protected void btnFirst_Click(object sender, EventArgs e)
@@ -182,18 +185,19 @@ namespace Attendance.User
         #region AJAX静态方法
 
         [WebMethod]
-        public static string GetStr(string str)
+        public static string GetRes(string str)
         {
-            return UserManagement.UserIDPadding(str) ? "true" : "false";
+            return HolidayManagement.GetRes(str);
         }
 
         [WebMethod]
-        public static string UserInfos(string str)
+        public static string DateIsFull(string star,string end,string  id)
         {
-            return UserManagement.UserInfos(str);
+            return HolidayManagement.DateIsFull(star,end, id);
         }
 
         #endregion
+
     }
 
 }

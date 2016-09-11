@@ -27,7 +27,9 @@ namespace DAL
         {
             string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '待审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApplyUser where ApplyUser='" + User + "' and Title like '%" + title + "%'";
             if (start != "")
-                sql += " and ApplyDate between '" + start + "' and '" + end + "'";
+                sql += " and ApplyDate >= '" + start + "'";
+            if (end != "")
+                sql += " and ApplyDate <= '" + end + "' ";
             if (Status != "")
                 sql += " and Status = '" + Status + "'";
 

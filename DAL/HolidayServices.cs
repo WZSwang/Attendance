@@ -9,20 +9,7 @@ namespace DAL
 {
     public class HolidayServices
     {
-        public List<ApproveJoinUserInfo> SearchApprove(string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
-        {
-            string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '待审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApplyUser where Title like '%" + title + "%'";
-            if (start != "")
-                sql += " and ApplyDate between '" + start + "' and '" + end + "'";
-            if (Status != "")
-                sql += " and Status = '" + Status + "'";
 
-            int StarNum = (pageIndex - 1) * pagesize + 1;
-            int EndNum = pagesize * pageIndex;
-            string sqlComb = "select * from (" + sql + ") A where RowNumb between " + StarNum + " and " + EndNum + " order by " + sortExpression + " " + sortDirection; ;
-            DataTable dt = DBhelper.Select(sqlComb);
-            return ConvertHelper.convertToList<ApproveJoinUserInfo>(dt).ToList();
-        }
         public List<ApproveJoinUserInfo> SearchApproveByUser(string User, string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
         {
             string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '待审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApplyUser where ApplyUser='" + User + "' and Title like '%" + title + "%'";
@@ -43,7 +30,9 @@ namespace DAL
         {
             string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '待审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApplyUser where Title like '%" + title + "%'";
             if (start != "")
-                sql += " and ApplyDate between '" + start + "' and '" + end + "'";
+                sql += " and ApplyDate >= '" + start + "'";
+            if (end != "")
+                sql += " and ApplyDate <= '" + end + "' ";
             if (Status != "")
                 sql += " and Status = '" + Status + "'";
             DataTable dt = DBhelper.Select(sql);
@@ -53,7 +42,9 @@ namespace DAL
         {
             string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '待审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApplyUser where ApplyUser='" + User + "' and Title like '%" + title + "%'";
             if (start != "")
-                sql += " and ApplyDate between '" + start + "' and '" + end + "'";
+                sql += " and ApplyDate >= '" + start + "'";
+            if (end != "")
+                sql += " and ApplyDate <= '" + end + "' ";
             if (Status != "")
                 sql += " and Status = '" + Status + "'";
             DataTable dt = DBhelper.Select(sql);
@@ -82,10 +73,12 @@ namespace DAL
             string sql = "select Reason from Approve  where ApproveID = '" + date + "'";
             return DBhelper.Select(sql).Rows[0][0].ToString();
         }
-        public static string DateIsFull(string star, string end, string id)
+        public static string DateIsFull(string star, string end, string id,string appid)
         {
-            string sql = string.Format("select * from Approve  where  BeginDate between '{0}' and '{1}' or EndDate between '{0}' and '{1}' and ApplyUser  = '{2}'"
-                , star, end, id);
+            string sql = string.Format("select * from Approve  where ApplyUser  = '{0}' and(BeginDate between '{1}' and '{2}' or EndDate between '{1}' and '{2}')",
+                id,star, end);
+            if (appid != "")
+                sql += " and ApproveID!='"+ appid + "'";
             return DBhelper.Select(sql).Rows.Count > 0 ? "true" : "false";
         }
 

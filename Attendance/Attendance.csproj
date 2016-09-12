@@ -81,105 +81,7 @@
     <Content Include="Scripts\artDialog\license.txt" />
     <Content Include="Scripts\artDialog\plugins\iframeTools.js" />
     <Content Include="Scripts\artDialog\plugins\iframeTools.source.js" />
-    <Content Include="Scripts\artDialog\skins\aero.css" />
-    <Content Include="Scripts\artDialog\skins\aero\aero_s.png" />
-    <Content Include="Scripts\artDialog\skins\aero\aero_s2.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_close.hover.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_close.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_e.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_n.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_ne.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_nw.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_s.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_se.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_sw.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_title_icon.png" />
-    <Content Include="Scripts\artDialog\skins\aero\ie6\aui_w.png" />
-    <Content Include="Scripts\artDialog\skins\black.css" />
-    <Content Include="Scripts\artDialog\skins\black\bg.png" />
-    <Content Include="Scripts\artDialog\skins\black\bg2.png" />
-    <Content Include="Scripts\artDialog\skins\black\bg_css3.png" />
-    <Content Include="Scripts\artDialog\skins\black\bg_css3_2.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\close.hover.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\close.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\e.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\n.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\ne.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\nw.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\s.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\se.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\sw.png" />
-    <Content Include="Scripts\artDialog\skins\black\ie6\w.png" />
-    <Content Include="Scripts\artDialog\skins\blue.css" />
-    <Content Include="Scripts\artDialog\skins\blue\bg.png" />
-    <Content Include="Scripts\artDialog\skins\blue\bg2.png" />
-    <Content Include="Scripts\artDialog\skins\blue\bg_css3.png" />
-    <Content Include="Scripts\artDialog\skins\blue\bg_css3_2.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\close.hover.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\close.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\e.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\n.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\ne.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\nw.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\s.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\se.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\sw.png" />
-    <Content Include="Scripts\artDialog\skins\blue\ie6\w.png" />
-    <Content Include="Scripts\artDialog\skins\chrome.css" />
-    <Content Include="Scripts\artDialog\skins\chrome\border.png" />
-    <Content Include="Scripts\artDialog\skins\chrome\chrome_s.png" />
     <Content Include="Scripts\artDialog\skins\default.css" />
-    <Content Include="Scripts\artDialog\skins\green.css" />
-    <Content Include="Scripts\artDialog\skins\green\bg.png" />
-    <Content Include="Scripts\artDialog\skins\green\bg2.png" />
-    <Content Include="Scripts\artDialog\skins\green\bg_css3.png" />
-    <Content Include="Scripts\artDialog\skins\green\bg_css3_2.png" />
-    <Content Include="Scripts\artDialog\skins\green\color_bg.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\close.hover.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\close.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\e.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\n.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\ne.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\nw.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\s.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\se.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\sw.png" />
-    <Content Include="Scripts\artDialog\skins\green\ie6\w.png" />
-    <Content Include="Scripts\artDialog\skins\icons\error.png" />
-    <Content Include="Scripts\artDialog\skins\icons\face-sad.png" />
-    <Content Include="Scripts\artDialog\skins\icons\face-smile.png" />
-    <Content Include="Scripts\artDialog\skins\icons\loading.gif" />
-    <Content Include="Scripts\artDialog\skins\icons\question.png" />
-    <Content Include="Scripts\artDialog\skins\icons\succeed.png" />
-    <Content Include="Scripts\artDialog\skins\icons\warning.png" />
-    <Content Include="Scripts\artDialog\skins\idialog.css" />
-    <Content Include="Scripts\artDialog\skins\idialog\idialog_s.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\idialog_s2.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_close.hover.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_close.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_e.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_n.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_ne.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_nw.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_s.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_se.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_sw.png" />
-    <Content Include="Scripts\artDialog\skins\idialog\ie6\aui_w.png" />
-    <Content Include="Scripts\artDialog\skins\opera.css" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_close.hover.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_close.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_e.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_n.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_ne.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_nw.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_s.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_se.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_sw.png" />
-    <Content Include="Scripts\artDialog\skins\opera\ie6\aui_w.png" />
-    <Content Include="Scripts\artDialog\skins\opera\s1.png" />
-    <Content Include="Scripts\artDialog\skins\opera\s2.png" />
-    <Content Include="Scripts\artDialog\skins\simple.css" />
-    <Content Include="Scripts\artDialog\skins\twitter.css" />
     <Content Include="Scripts\artDialog\_doc\ajaxContent\content.json" />
     <Content Include="Scripts\artDialog\_doc\commercial_license.doc" />
     <Content Include="Scripts\artDialog\_doc\highlight\LICENSE" />
@@ -245,9 +147,6 @@
     <Content Include="Scripts\My97DatePicker\skin\default\datepicker.css" />
     <Content Include="Scripts\My97DatePicker\skin\default\img.gif" />
     <Content Include="Scripts\My97DatePicker\skin\WdatePicker.css" />
-    <Content Include="Scripts\My97DatePicker\skin\whyGreen\bg.jpg" />
-    <Content Include="Scripts\My97DatePicker\skin\whyGreen\datepicker.css" />
-    <Content Include="Scripts\My97DatePicker\skin\whyGreen\img.gif" />
     <Content Include="Scripts\My97DatePicker\WdatePicker.js" />
     <Content Include="Scripts\My97DatePicker\开发包\lang\en.js" />
     <Content Include="Scripts\My97DatePicker\开发包\lang\zh-cn.js" />
@@ -261,6 +160,7 @@
     <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\img.gif" />
     <Content Include="Scripts\templatemo-script.js" />
+    <Content Include="UserControl\ControlTemplate.ascx" />
     <Content Include="User\ApplyManage.aspx" />
     <Content Include="User\CheckAttendance.aspx" />
     <Content Include="Web.sitemap">
@@ -368,6 +268,13 @@
     </Compile>
     <Compile Include="UpdateUser.aspx.designer.cs">
       <DependentUpon>UpdateUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ControlTemplate.ascx.cs">
+      <DependentUpon>ControlTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ControlTemplate.ascx.designer.cs">
+      <DependentUpon>ControlTemplate.ascx</DependentUpon>
     </Compile>
     <Compile Include="User\ApplyManage.aspx.cs">
       <DependentUpon>ApplyManage.aspx</DependentUpon>

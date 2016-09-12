@@ -12,10 +12,6 @@ namespace BLL
     {
         HolidayServices holiSer = new HolidayServices();
 
-        public List<ApproveJoinUserInfo> SearchApprove(string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
-        {
-            return holiSer.SearchApprove(title, start, end, Status, pagesize, pageIndex, sortExpression, sortDirection);
-        }
         public List<ApproveJoinUserInfo> SearchApproveByUser(string User, string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
         {
             return holiSer.SearchApproveByUser(User, title, start, end, Status, pagesize, pageIndex, sortExpression, sortDirection);
@@ -44,9 +40,9 @@ namespace BLL
         {
             return HolidayServices.GetRes(date);
         }
-        public static string DateIsFull(string star, string end, string id)
+        public static string DateIsFull(string star, string end, string id, string appid)
         {
-            return HolidayServices.DateIsFull(star, end, id);
+            return HolidayServices.DateIsFull(star, end, id, appid);
         }
     }
 }

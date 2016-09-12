@@ -103,6 +103,15 @@ namespace Attendance.User {
         protected global::System.Web.UI.WebControls.TextBox txtApplyStart;
         
         /// <summary>
+        /// drpApplyStart 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpApplyStart;
+        
+        /// <summary>
         /// txtApplyEnd 控件。
         /// </summary>
         /// <remarks>
@@ -110,6 +119,15 @@ namespace Attendance.User {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApplyEnd;
+        
+        /// <summary>
+        /// drpApplyEnd 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpApplyEnd;
         
         /// <summary>
         /// txtApplyRes 控件。
@@ -184,6 +202,15 @@ namespace Attendance.User {
         protected global::System.Web.UI.WebControls.TextBox txtEditStart;
         
         /// <summary>
+        /// drpEditStart 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpEditStart;
+        
+        /// <summary>
         /// txtEidtEnd 控件。
         /// </summary>
         /// <remarks>
@@ -191,6 +218,15 @@ namespace Attendance.User {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEidtEnd;
+        
+        /// <summary>
+        /// drpEidtEnd 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpEidtEnd;
         
         /// <summary>
         /// txtEditRes 控件。
@@ -299,5 +335,14 @@ namespace Attendance.User {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField editId;
+        
+        /// <summary>
+        /// AppID 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField AppID;
     }
 }

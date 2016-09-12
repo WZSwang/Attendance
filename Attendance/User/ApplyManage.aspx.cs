@@ -21,43 +21,26 @@ namespace Attendance.User
             if (!IsPostBack)
             {
                 UserInfo us = Session["user"] as UserInfo;
-                ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCountByUser(us.UserID) / 10.0)).ToString();
+                ViewState["pageRows"] = (Math.Ceiling(hm.SearchApproveCountByUser(us.UserID) / 10.0)).ToString();
                 ViewState["CurrentPage"] = "1";
+                ViewState["PageSize"] = gdvinfo.PageSize;
                 ViewState["sortExpression"] = "ApproveID";
                 ViewState["sortDirection"] = "ASC";
-                txtApplyName.Text = us.UserName;
-                LabEditName.Text = us.UserName;
+                txtApplyName.Text = LabEditName.Text = LabViewName.Text = us.UserName;
                 editId.Value = us.UserID;
                 Bind();
             }
         }
 
-        public void SetPager()
-        {
-            GridViewRow pagerRow = gdvinfo.BottomPagerRow;
-            LinkButton btnPrev = (LinkButton)pagerRow.Cells[0].FindControl("btnPrev");
-            btnPrev.Enabled = ViewState["CurrentPage"].ToString() != "1";
-            LinkButton btnNext = (LinkButton)pagerRow.Cells[0].FindControl("btnNext");
-            btnNext.Enabled = ViewState["CurrentPage"].ToString() != ViewState["PageCount"].ToString();
 
-
-            //绑定数据到下拉表
-            DropDownList ddl = pagerRow.FindControl("ddlIndex") as DropDownList;
-            for (int i = 1; i <= Convert.ToInt32(ViewState["PageCount"]); i++)
-            {
-                ListItem li = new ListItem("第" + i + "页", i.ToString());
-                ddl.Items.Add(li);
-            }
-            ddl.SelectedValue = ViewState["CurrentPage"].ToString();
-        }
 
         protected void btnin_Click(object sender, EventArgs e)
         {
             Approve ap = new Approve();
             ap.ApplyUser = txtApplyName.Text;
             ap.Title = txtApplyTitle.Text;
-            ap.BeginDate = Convert.ToDateTime(txtApplyStart.Text);
-            ap.EndDate = Convert.ToDateTime(txtApplyEnd.Text);
+            ap.BeginDate = Convert.ToDateTime(txtApplyStart.Text + " " + drpApplyStart.SelectedValue);
+            ap.EndDate = Convert.ToDateTime(txtApplyEnd.Text + " " + drpApplyEnd.SelectedValue);
             ap.Reason = txtApplyRes.Text;
             hm.AddApprove(ap);
             Response.Redirect("ApplyManage.aspx");
@@ -67,17 +50,17 @@ namespace Attendance.User
         {
             UserInfo us = Session["user"] as UserInfo;
             ViewState["CurrentPage"] = "1";
-            ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCountByUser(us.UserID,txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue) / 10.0)).ToString();
+            ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCountByUser(us.UserID, txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue) / 10.0)).ToString();
             Bind();
         }
 
         protected void btnedit_Click(object sender, EventArgs e)
         {
             Approve ap = new Approve();
-            ap.ApproveID = Convert.ToInt32(editId.Value);
+            ap.ApproveID = Convert.ToInt32(AppID.Value);
             ap.Title = txtEditTitle.Text;
-            ap.BeginDate = Convert.ToDateTime(txtEditStart.Text);
-            ap.EndDate = Convert.ToDateTime(txtEidtEnd.Text);
+            ap.BeginDate = Convert.ToDateTime(txtEditStart.Text + " " + drpEditStart.SelectedValue);
+            ap.EndDate = Convert.ToDateTime(txtEidtEnd.Text + " " + drpEidtEnd.SelectedValue);
             ap.Reason = txtEditRes.Text;
             hm.EditApprove(ap);
             Bind();
@@ -123,62 +106,33 @@ namespace Attendance.User
 
             int pageindex = Convert.ToInt32(ViewState["CurrentPage"]);
 
-            UserInfo us = Session["user"] as UserInfo;
+            
 
+            UserInfo us = Session["user"] as UserInfo;
             // 调用业务数据获取方法
-            List<ApproveJoinUserInfo> dtBind = hm.SearchApproveByUser(us.UserID,txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue, gdvinfo.PageSize, pageindex, sortExpression, sortDirection);
+            List<ApproveJoinUserInfo> dtBind = hm.SearchApproveByUser(us.UserID, txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue, gdvinfo.PageSize, pageindex, sortExpression, sortDirection);
 
             // GridView绑定并显示数据
-            //  if(dtBind.Rows.Count>0)
             this.gdvinfo.DataSource = dtBind;
             this.gdvinfo.DataBind();
-            try
-            {
+            //try
+            //{
                 gdvinfo.BottomPagerRow.Visible = true;
-                SetPager();
-            }
-            catch { }
+                UserControl.ControlTemplate bottomPage=gdvinfo.BottomPagerRow.FindControl("ControlTemplate") as UserControl.ControlTemplate;
+                bottomPage.SetPager();
+                //SetPager();
+            //}
+            //catch { }
 
         }
 
 
         protected void btndelete_Click(object sender, EventArgs e)
         {
-            hm.DeleteApprove(editId.Value);
+            hm.DeleteApprove(AppID.Value);
             Response.Redirect("ApplyManage.aspx");
         }
 
-        protected void btnFirst_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = "1";
-            Bind();
-        }
-
-        protected void btnPrev_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) - 1;
-            Bind();
-        }
-
-        protected void btnNext_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) + 1;
-            Bind();
-        }
-
-        protected void btnLast_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = ViewState["PageCount"];
-            Bind();
-        }
-
-        protected void ddlIndex_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList ddls = sender as DropDownList;
-            ViewState["CurrentPage"] = int.Parse(ddls.SelectedValue);
-            Bind();
-
-        }
 
 
 
@@ -191,9 +145,9 @@ namespace Attendance.User
         }
 
         [WebMethod]
-        public static string DateIsFull(string star,string end,string  id)
+        public static string DateIsFull(string star, string end, string id, string appid)
         {
-            return HolidayManagement.DateIsFull(star,end, id);
+            return HolidayManagement.DateIsFull(star, end, id, appid);
         }
 
         #endregion

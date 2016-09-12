@@ -71,3 +71,11 @@ C:\Users\wecia\Desktop\Attendance2016-7-22\Entity\bin\Debug\Entity.pdb
 C:\Users\wecia\Desktop\Attendance2016-7-22\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
 C:\Users\wecia\Desktop\Attendance2016-7-22\Entity\obj\Debug\Entity.dll
 C:\Users\wecia\Desktop\Attendance2016-7-22\Entity\obj\Debug\Entity.pdb
+C:\Users\wecia\Desktop\Attendance2016-7-25\Entity\bin\Debug\Entity.dll
+C:\Users\wecia\Desktop\Attendance2016-7-25\Entity\bin\Debug\Entity.pdb
+C:\Users\wecia\Desktop\Attendance2016-7-25\Entity\obj\Debug\Entity.dll
+C:\Users\wecia\Desktop\Attendance2016-7-25\Entity\obj\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-7-25\Entity\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-7-25\Entity\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-7-25\Entity\obj\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-7-25\Entity\obj\Debug\Entity.pdb

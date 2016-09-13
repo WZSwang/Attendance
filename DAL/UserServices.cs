@@ -14,9 +14,10 @@ namespace DAL
             string sql = "select * from UserInfo where UserID='" + us.UserID + "' and Password='" + us.Password + "'";
             if (DBhelper.Select(sql).Rows.Count == 0)
                 return false;
-            else
-                us.UserType = Convert.ToByte( DBhelper.Select(sql).Rows[0]["UserType"]);
-                us.UserName = DBhelper.Select(sql).Rows[0]["UserName"].ToString();
+           
+            us.UserType = Convert.ToByte(DBhelper.Select(sql).Rows[0]["UserType"]);
+            us.UserName = DBhelper.Select(sql).Rows[0]["UserName"].ToString();
+            us.DeptID = Convert.ToInt32(DBhelper.Select(sql).Rows[0]["DeptID"]);
             return true;
         }
         public void AddPeople(UserInfo us)
@@ -101,10 +102,10 @@ namespace DAL
             DataTable dt = DBhelper.Select(sql);
             return dt.Rows.Count;
         }
-        
+
         public DataTable SearchPeopleInManage(string manage, int pagesize, int pageIndex)
         {
-            string sql = "select ROW_NUMBER() over (order by UserInfo.UserID) RowNumb,Department.*,UserID,UserName from Department right join UserInfo on UserInfo.DeptID = Department.DeptID where ManagerID = '"+ manage + "'";
+            string sql = "select ROW_NUMBER() over (order by UserInfo.UserID) RowNumb,Department.*,UserID,UserName from Department right join UserInfo on UserInfo.DeptID = Department.DeptID where ManagerID = '" + manage + "'";
             int StarNum = (pageIndex - 1) * pagesize + 1;
             int EndNum = pagesize * pageIndex;
             string sqlComb = "select * from (" + sql + ") A where RowNumb between " + StarNum + " and " + EndNum;

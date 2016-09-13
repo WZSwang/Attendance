@@ -82,5 +82,34 @@ namespace DAL
             return DBhelper.Select(sql).Rows.Count > 0 ? "true" : "false";
         }
 
+        public List<ApproveJoinUserInfo> SearchApproveByManage(string User, string Usname, string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
+        {
+            string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '待审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApplyUser where DeptID='" + User + "' and Title like '%" + title + "%' and UserName like '%"+Usname+"%'";
+            if (start != "")
+                sql += " and ApplyDate >= '" + start + "'";
+            if (end != "")
+                sql += " and ApplyDate <= '" + end + "' ";
+            if (Status != "")
+                sql += " and Status = '" + Status + "'";
+
+            int StarNum = (pageIndex - 1) * pagesize + 1;
+            int EndNum = pagesize * pageIndex;
+            string sqlComb = "select * from (" + sql + ") A where RowNumb between " + StarNum + " and " + EndNum + " order by " + sortExpression + " " + sortDirection; ;
+            DataTable dt = DBhelper.Select(sqlComb);
+            return ConvertHelper.convertToList<ApproveJoinUserInfo>(dt).ToList();
+        }
+        public int SearchApproveCountByManage(string User,string Usname, string title, string start, string end, string Status)
+        {
+            string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '待审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApplyUser where DeptID='" + User + "' and Title like '%" + title + "%' and UserName like '%" + Usname + "%'";
+            if (start != "")
+                sql += " and ApplyDate >= '" + start + "'";
+            if (end != "")
+                sql += " and ApplyDate <= '" + end + "' ";
+            if (Status != "")
+                sql += " and Status = '" + Status + "'";
+            DataTable dt = DBhelper.Select(sql);
+            return dt.Rows.Count;
+        }
+
     }
 }

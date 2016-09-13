@@ -79,3 +79,11 @@ C:\Users\Administrator\Desktop\Attendance2016-7-25\Entity\bin\Debug\Entity.dll
 C:\Users\Administrator\Desktop\Attendance2016-7-25\Entity\bin\Debug\Entity.pdb
 C:\Users\Administrator\Desktop\Attendance2016-7-25\Entity\obj\Debug\Entity.dll
 C:\Users\Administrator\Desktop\Attendance2016-7-25\Entity\obj\Debug\Entity.pdb
+C:\Users\wecia\Desktop\Attendance2016-7-26\Entity\bin\Debug\Entity.dll
+C:\Users\wecia\Desktop\Attendance2016-7-26\Entity\bin\Debug\Entity.pdb
+C:\Users\wecia\Desktop\Attendance2016-7-26\Entity\obj\Debug\Entity.dll
+C:\Users\wecia\Desktop\Attendance2016-7-26\Entity\obj\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-7-27\Entity\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-7-27\Entity\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-7-27\Entity\obj\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-7-27\Entity\obj\Debug\Entity.pdb

@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ControlTemplate.ascx.cs" Inherits="Attendance.UserControl.ControlTemplate" %>
 
-                    <div class="row form-group">
+                    <div class="row form-group" style="width:100%; margin-top:10px">
                         <div class="col-lg-3 col-md-1 form-group">
                         </div>
                         <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">

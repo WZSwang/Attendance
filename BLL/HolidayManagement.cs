@@ -11,7 +11,6 @@ namespace BLL
     public class HolidayManagement
     {
         HolidayServices holiSer = new HolidayServices();
-
         public List<ApproveJoinUserInfo> SearchApproveByUser(string User, string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
         {
             return holiSer.SearchApproveByUser(User, title, start, end, Status, pagesize, pageIndex, sortExpression, sortDirection);
@@ -44,5 +43,15 @@ namespace BLL
         {
             return HolidayServices.DateIsFull(star, end, id, appid);
         }
+
+        public List<ApproveJoinUserInfo> SearchApproveByManage(string User, string Usname, string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
+        {
+            return holiSer.SearchApproveByManage(User, Usname, title, start, end, Status, pagesize, pageIndex, sortExpression, sortDirection);
+        }
+        public int SearchApproveCountByManage(string User, string Usname = "", string title = "", string start = "", string end = "", string Status = "")
+        {
+            return holiSer.SearchApproveCountByManage(User, Usname, title, start, end, Status);
+        }
+
     }
 }

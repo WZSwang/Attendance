@@ -13,7 +13,6 @@ namespace Attendance.User
 {
     public partial class ApplyManage : System.Web.UI.Page
     {
-        DeparmentManagement pm = new DeparmentManagement();
         HolidayManagement hm = new HolidayManagement();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -21,14 +20,12 @@ namespace Attendance.User
             if (!IsPostBack)
             {
                 UserInfo us = Session["user"] as UserInfo;
-                ViewState["pageRows"] = (Math.Ceiling(hm.SearchApproveCountByUser(us.UserID) / 10.0)).ToString();
-                ViewState["CurrentPage"] = "1";
-                ViewState["PageSize"] = gdvinfo.PageSize;
                 ViewState["sortExpression"] = "ApproveID";
                 ViewState["sortDirection"] = "ASC";
                 txtApplyName.Text = LabEditName.Text = LabViewName.Text = us.UserName;
                 editId.Value = us.UserID;
-                Bind();
+                ControlTemplate.SetPager(hm.SearchApproveCountByUser(us.UserID), gdvinfo.PageSize);
+                Bind(sender, e);
             }
         }
 
@@ -49,9 +46,8 @@ namespace Attendance.User
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             UserInfo us = Session["user"] as UserInfo;
-            ViewState["CurrentPage"] = "1";
-            ViewState["PageCount"] = (Math.Ceiling(hm.SearchApproveCountByUser(us.UserID, txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue) / 10.0)).ToString();
-            Bind();
+            ControlTemplate.SetPager(hm.SearchApproveCountByUser(us.UserID, txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue), gdvinfo.PageSize);
+            Bind(sender, e);
         }
 
         protected void btnedit_Click(object sender, EventArgs e)
@@ -63,7 +59,7 @@ namespace Attendance.User
             ap.EndDate = Convert.ToDateTime(txtEidtEnd.Text + " " + drpEidtEnd.SelectedValue);
             ap.Reason = txtEditRes.Text;
             hm.EditApprove(ap);
-            Bind();
+            Bind(sender, e);
         }
 
 
@@ -78,7 +74,7 @@ namespace Attendance.User
                 // 重新设定GridView排序数据列及排序方向
                 ViewState["sortExpression"] = sortExpression;
 
-            this.Bind();
+            Bind(sender, e);
         }
         protected void gdvinfo_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -97,33 +93,15 @@ namespace Attendance.User
             }
         }
 
-
-        private void Bind()
+        public void Bind(object sender, EventArgs e)
         {
-            // 获取GridView排序数据列及排序方向
+            UserInfo us = Session["user"] as UserInfo;
             string sortExpression = ViewState["sortExpression"].ToString();
             string sortDirection = ViewState["sortDirection"].ToString();
-
-            int pageindex = Convert.ToInt32(ViewState["CurrentPage"]);
-
-            
-
-            UserInfo us = Session["user"] as UserInfo;
-            // 调用业务数据获取方法
-            List<ApproveJoinUserInfo> dtBind = hm.SearchApproveByUser(us.UserID, txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue, gdvinfo.PageSize, pageindex, sortExpression, sortDirection);
-
+            List<ApproveJoinUserInfo> dtBind = hm.SearchApproveByUser(us.UserID, txtSearchTitle.Text, txtSearchStar.Text, txtSearchEnd.Text, rblStatus.SelectedValue, ControlTemplate.pageSize, ControlTemplate.pageIndex, sortExpression, sortDirection);
             // GridView绑定并显示数据
             this.gdvinfo.DataSource = dtBind;
             this.gdvinfo.DataBind();
-            //try
-            //{
-                gdvinfo.BottomPagerRow.Visible = true;
-                UserControl.ControlTemplate bottomPage=gdvinfo.BottomPagerRow.FindControl("ControlTemplate") as UserControl.ControlTemplate;
-                bottomPage.SetPager();
-                //SetPager();
-            //}
-            //catch { }
-
         }
 
 

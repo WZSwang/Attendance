@@ -25,7 +25,6 @@ namespace AttendanceSystem.HttpHandler
             if (uman.Login(ref us))
             {
                 FormsAuthentication.SetAuthCookie(us.UserID, false);
-                FormsAuthentication.SignOut();
                 context.Session["User"] = us;
                 if(us.UserType==2)
                     context.Response.Write("Admin");

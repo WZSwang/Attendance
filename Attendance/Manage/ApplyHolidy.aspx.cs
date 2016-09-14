@@ -48,11 +48,6 @@ namespace Attendance.Manage
 
             Bind(sender, e);
         }
-        protected void gdvinfo_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-
-        }
-
         public void Bind(object sender, EventArgs e)
         {
             UserInfo us = Session["user"] as UserInfo;
@@ -65,10 +60,12 @@ namespace Attendance.Manage
         }
 
 
-        protected void btndelete_Click(object sender, EventArgs e)
+
+        protected void btnedit_Click(object sender, EventArgs e)
         {
-            hm.DeleteApprove(AppID.Value);
-            Response.Redirect("ApplyManage.aspx");
+            UserInfo us = Session["user"] as UserInfo;
+            hm.AppleApprove(us.UserID, ddlRes.SelectedValue, TxtText.Text, AppID.Value);
+            Bind( sender,  e);
         }
 
 
@@ -83,17 +80,12 @@ namespace Attendance.Manage
         }
 
         [WebMethod]
-        public static string DateIsFull(string star, string end, string id, string appid)
+        public static string GetApply(string str)
         {
-            return HolidayManagement.DateIsFull(star, end, id, appid);
+            return HolidayManagement.GetApply(str);
         }
 
         #endregion
-
-        protected void btnedit_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

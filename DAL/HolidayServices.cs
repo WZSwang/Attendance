@@ -52,7 +52,8 @@ namespace DAL
         }
         public void AddApprove(Approve ap)
         {
-            string sql = string.Format("insert into Approve values ((select userid from UserInfo where UserName='{0}'),'{1}','{2}','{3}','{4}',(select ManagerID from Department  where DeptID= (select DeptID from UserInfo where UserName='{0}')),getdate(),null,'0',null,null)"
+            //(select ManagerID from Department  where DeptID= (select DeptID from UserInfo where UserName='{0}'))
+            string sql = string.Format("insert into Approve values ((select userid from UserInfo where UserName='{0}'),'{1}','{2}','{3}','{4}',null,getdate(),null,'0',null,null)"
                 , ap.ApplyUser, ap.Title, ap.BeginDate, ap.EndDate, ap.Reason);
 
             DBhelper.Change(sql);
@@ -61,6 +62,12 @@ namespace DAL
         {
             string sql = string.Format(" update Approve set Title='{0}',BeginDate='{1}',EndDate='{2}',Reason='{3}' where ApproveID='{4}'"
                 , ap.Title, ap.BeginDate, ap.EndDate, ap.Reason, ap.ApproveID);
+            DBhelper.Change(sql);
+        }
+        public void AppleApprove(string Uid,string Res, string Rema,string AppId)
+        {
+            string sql = string.Format(" update Approve set ApproveUser='{0}', ApproveDate=GETDATE() ,Status='1',Result='{1}',Remark='{2}' where ApproveID='{3}'"
+                , Uid,Res,Rema,AppId );
             DBhelper.Change(sql);
         }
         public void DeleteApprove(string id)
@@ -81,7 +88,14 @@ namespace DAL
                 sql += " and ApproveID!='"+ appid + "'";
             return DBhelper.Select(sql).Rows.Count > 0 ? "true" : "false";
         }
-
+        public static string GetApply(string str)
+        {
+            string sql = "select * from Approve left join UserInfo on UserInfo.UserID=Approve.ApproveUser where ApproveID  = '" + str + "'";
+            DataTable dt = DBhelper.Select(sql);
+            string res = dt.Rows[0]["Result"].ToString()+","+ dt.Rows[0]["UserName"].ToString() + "," + dt.Rows[0]["ApproveDate"].ToString() + "," + dt.Rows[0]["Remark"].ToString();
+            return res;
+        }
+        
         public List<ApproveJoinUserInfo> SearchApproveByManage(string User, string Usname, string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
         {
             string sql = "select ROW_NUMBER() over (order by Approve.ApproveID) RowNumb,*,statusname= case Status when '1' then '归档' else '待审核' end  from Approve left join UserInfo on UserInfo.UserID=Approve.ApplyUser where DeptID='" + User + "' and Title like '%" + title + "%' and UserName like '%"+Usname+"%'";
@@ -110,6 +124,7 @@ namespace DAL
             DataTable dt = DBhelper.Select(sql);
             return dt.Rows.Count;
         }
+
 
     }
 }

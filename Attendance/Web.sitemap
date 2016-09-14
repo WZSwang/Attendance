@@ -19,9 +19,9 @@
     </siteMapNode>
 
     <siteMapNode url="" title="员工"  description="" >
-      <siteMapNode url="Schedu4leManage.aspx" title="我的考勤">
+      <siteMapNode url="User/CheckAttendance.aspx" title="我的考勤">
       </siteMapNode>
-      <siteMapNode url="ScheduleMa5nage.aspx" title="请假申请">
+      <siteMapNode url="User/ApplyManage.aspx" title="请假申请">
       </siteMapNode>
     </siteMapNode>
 

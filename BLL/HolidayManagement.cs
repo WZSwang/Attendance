@@ -31,6 +31,10 @@ namespace BLL
         {
             holiSer.EditApprove(ap);
         }
+        public void AppleApprove(string Uid, string Res, string Rema, string AppId)
+        {
+            holiSer.AppleApprove(Uid, Res, Rema, AppId);
+        }
         public void DeleteApprove(string id)
         {
             holiSer.DeleteApprove(id);
@@ -43,7 +47,10 @@ namespace BLL
         {
             return HolidayServices.DateIsFull(star, end, id, appid);
         }
-
+        public static string GetApply(string str)
+        {
+            return HolidayServices.GetApply(str);
+        }
         public List<ApproveJoinUserInfo> SearchApproveByManage(string User, string Usname, string title, string start, string end, string Status, int pagesize, int pageIndex, string sortExpression, string sortDirection)
         {
             return holiSer.SearchApproveByManage(User, Usname, title, start, end, Status, pagesize, pageIndex, sortExpression, sortDirection);

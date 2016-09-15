@@ -43,6 +43,7 @@
     <Compile Include="ApproveJoinUserInfo.cs" />
     <Compile Include="AttendanceInfo.cs" />
     <Compile Include="AttendanceSetting.cs" />
+    <Compile Include="AttendanceView.cs" />
     <Compile Include="ConvertHelper.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

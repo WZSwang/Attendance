@@ -63,15 +63,9 @@
                 <Columns>
                     <asp:BoundField DataField="Date" HeaderText="日期" DataFormatString="{0:yyyy-MM-dd}" />
                     <asp:BoundField HeaderText="星期" />
-                    <asp:TemplateField HeaderText="状态">
-                        <ItemTemplate>
-                            <asp:DropDownList ID="DropDownListState" runat="server" CssClass="form-control" Style="width: 80%">
-                                <asp:ListItem Value="0">默认</asp:ListItem>
-                                <asp:ListItem Value="1" style="color: red">上班</asp:ListItem>
-                                <asp:ListItem Value="2" style="color: green">休假</asp:ListItem>
-                            </asp:DropDownList>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                    <asp:BoundField DataField="First" HeaderText="首次打卡时间"  />
+                    <asp:BoundField DataField="Last" HeaderText="最后打卡时间"   />
+                    <asp:BoundField HeaderText="考勤状态" DataField="Status"/>
                 </Columns>
                 <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White"></HeaderStyle>
                 <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />

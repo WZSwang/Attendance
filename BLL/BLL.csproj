@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttendanceInfoManagement.cs" />
     <Compile Include="AttendanceManagement.cs" />
     <Compile Include="DeparmentManagement.cs" />
     <Compile Include="HolidayManagement.cs" />

@@ -54,5 +54,9 @@ namespace BLL
         {
             return Userserve.SearchPeopleInManage(manage, pagesize, pageIndex);
         }
+        public void UpdateAttanceInfo(List<AttendanceInfo> list)
+        {
+            Userserve.UpdateAttanceInfo(list);
+        }
     }
 }

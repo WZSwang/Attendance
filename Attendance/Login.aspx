@@ -228,8 +228,8 @@
             this.value = "";
             this.style.opacity = "1";
         })
+        $(".enterplorer-banner").fadeIn(1000);
         $("#aboutus").click(function () {
-            $(".enterplorer-banner").fadeIn(1000);
             $("#divdown").css("top", "50%");
             $("#aboutc").fadeIn(200);
             $("#xhx").slideUp(200);

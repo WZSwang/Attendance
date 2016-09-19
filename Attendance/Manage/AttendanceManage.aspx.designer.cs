@@ -13,15 +13,6 @@ namespace Attendance.Manage {
     public partial class AttendanceManage {
         
         /// <summary>
-        /// FileUploadExcel 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadExcel;
-        
-        /// <summary>
         /// btnAdd 控件。
         /// </summary>
         /// <remarks>
@@ -31,15 +22,6 @@ namespace Attendance.Manage {
         protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// LabTips 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabTips;
-        
-        /// <summary>
         /// gdvinfo 控件。
         /// </summary>
         /// <remarks>
@@ -47,15 +29,6 @@ namespace Attendance.Manage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gdvinfo;
-        
-        /// <summary>
-        /// divaddout 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divaddout;
         
         /// <summary>
         /// DropDownListYear 控件。
@@ -85,22 +58,13 @@ namespace Attendance.Manage {
         protected global::System.Web.UI.WebControls.Button BtnShow;
         
         /// <summary>
-        /// BtnClose 控件。
+        /// LabTip 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnClose;
-        
-        /// <summary>
-        /// gdvView 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gdvView;
+        protected global::System.Web.UI.WebControls.Label LabTip;
         
         /// <summary>
         /// hidUser 控件。
@@ -110,14 +74,5 @@ namespace Attendance.Manage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hidUser;
-        
-        /// <summary>
-        /// addoutc 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl addoutc;
     }
 }

@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttendanceInfoServices.cs" />
     <Compile Include="AttendanceServices.cs" />
     <Compile Include="DBhelper.cs" />
     <Compile Include="DepartmentServices.cs" />

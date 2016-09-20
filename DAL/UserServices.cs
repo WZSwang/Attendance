@@ -14,10 +14,11 @@ namespace DAL
             string sql = "select * from UserInfo where UserID='" + us.UserID + "' and Password='" + us.Password + "'";
             if (DBhelper.Select(sql).Rows.Count == 0)
                 return false;
-           
+
             us.UserType = Convert.ToByte(DBhelper.Select(sql).Rows[0]["UserType"]);
             us.UserName = DBhelper.Select(sql).Rows[0]["UserName"].ToString();
-            us.DeptID = Convert.ToInt32(DBhelper.Select(sql).Rows[0]["DeptID"]);
+            if (us.UserType != 2)
+                us.DeptID = Convert.ToInt32(DBhelper.Select(sql).Rows[0]["DeptID"]);
             return true;
         }
         public void AddPeople(UserInfo us)
@@ -111,6 +112,16 @@ namespace DAL
             string sqlComb = "select * from (" + sql + ") A where RowNumb between " + StarNum + " and " + EndNum;
             DataTable dt = DBhelper.Select(sqlComb);
             return dt;
+        }
+
+        public void UpdateAttanceInfo(List<AttendanceInfo> list)
+        {
+            string sql = "";
+            foreach (AttendanceInfo item in list)
+            {
+                sql += "insert into AttendanceInfo values('"+item.UserID+"','"+item.FaceTime+"') ";
+            }
+            DBhelper.Change(sql);
         }
 
     }

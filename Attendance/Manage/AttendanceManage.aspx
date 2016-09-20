@@ -6,8 +6,8 @@
         $(function () {
             $(".ImageButonEdit").click(function () {
                 //display
-                $(".TipBox").fadeIn(500);
-                $("#addoutc").fadeIn(500);
+                $(".TipBoxComantion").fadeIn(500);
+                $(".out").fadeIn(500);
 
                 //getelement
                 var obj = event.srcElement;
@@ -17,17 +17,10 @@
                 var depart = obj.children[1].innerText;
                 document.getElementById("<%=hidUser.ClientID%>").value = obj.children[1].innerText.trim();
                 return false;
-             });
-            $("#addoutc").click(function () {
-                $("#addoutc").fadeOut(500);
-                $("#exitout").fadeOut(500);
-                $("#divaddout").fadeOut(500);
             });
-            $(".TipClose").click(function () {
-                $("#addoutc").fadeOut(500);
-                $("#divaddout").fadeOut(500);
-                $(".diveditout").fadeOut(500);
-                $("#editoutc").fadeOut(500);
+            $(".out,#<%= BtnClose.ClientID%>").click(function () {
+                $(".out").fadeOut(500);
+                $(".TipBoxComantion").fadeOut(500);
             });
         });
     </script>
@@ -39,16 +32,19 @@
         <div class="panel-body">
             <div class="templatemo-flex-row flex-content-row">
                 <div class="col-1">
-                    <div id="timeline_div" class="templatemo-chart"></div>
                     <div class="col-lg-1 col-md-12  form-group">
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         <!-- <input type="file" name="fileToUpload" id="fileToUpload" class="margin-bottom-10"> -->
-                        <input type="file" name="fileToUpload" id="fileToUpload" class="filestyle" data-buttonname="btn-primary" data-buttonbefore="true" data-icon="false">
+                        <%--<input type="file" name="fileToUpload" id="FileUploadExcel" runat="server" class="filestyle" data-buttonname="btn-primary" data-buttonbefore="true" data-icon="false" />--%>
+                        <asp:FileUpload ID="FileUploadExcel" runat="server" class="filestyle" data-buttonname="btn-primary" data-buttonbefore="true" data-icon="false" />
                         <p>支持的最大文件大小为 5 MB.</p>
                     </div>
-                    <div class="col-lg-3 col-md-12  form-group">
-                        <asp:Button ID="btnAdd" runat="server" Text="导入" CssClass="templatemo-blue-button" />
+                    <div class="col-lg-2 col-md-12  form-group">
+                        <asp:Button ID="btnAdd" runat="server" Text="导入" CssClass="templatemo-blue-button" OnClick="btnAdd_Click" />
+                    </div>
+                    <div class="col-lg-2 col-md-12  form-group">
+                        <asp:Label ID="LabTips" runat="server"></asp:Label>
                     </div>
                 </div>
             </div>
@@ -125,7 +121,7 @@
 
 </asp:Content>
 <asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
-    <div id="divaddout" class="panel panel-default margin-10 TipBox" style="display: none">
+    <div id="divaddout" class="panel panel-default margin-10 TipBoxComantion" style="display: none" runat="server">
         <div class="panel-heading" runat="server">
             <h2 class="text-uppercase">查看考勤</h2>
         </div>
@@ -134,7 +130,6 @@
                 <div class="col-1">
                     <div class="col-lg-1 col-md-12  form-group">
                     </div>
-                    <div id="timeline_div" class="templatemo-chart"></div>
                     <div class="col-lg-2 col-md-3 form-group">
                         <asp:DropDownList ID="DropDownListYear" runat="server" CssClass="form-control">
                         </asp:DropDownList>
@@ -164,12 +159,34 @@
                     <div class="col-lg-2 col-md-12  form-group">
                         <asp:Button ID="BtnShow" runat="server" Text="显示" class="templatemo-blue-button" OnClick="BtnShow_Click" />
                     </div>
-                    <div class="col-lg-1 col-md-12  form-group">
-                       
+                    <div class="col-lg-2 col-md-12  form-group">
+                        <asp:Button ID="BtnClose" runat="server" Text="关闭" class="templatemo-blue-button" OnClientClick="return false;" />
                     </div>
-                    <div class="col-lg-2 col-md-12  form-group text-right" style="padding-top: 10px;">
-                        <asp:Label ID="LabTip" runat="server" Text='<i class="fa fa-check "></i>保存成功！' Visible="false"></asp:Label>
+
+
+                    <div class="col-lg-12 col-md-12  form-group">
+                        <div class="templatemo-content-widget no-padding">
+                            <div class="panel panel-default table-responsive" style=" height:400px; overflow-y: scroll;">
+                                <asp:GridView ID="gdvView" CssClass="table table-striped table-bordered templatemo-user-table gdvinfo" runat="server" AutoGenerateColumns="False" AllowSorting="True"
+                                    GridLines="None" OnRowDataBound="gdvView_RowDataBound">
+                                    <EmptyDataTemplate>
+                                        <div style="text-align: center">请选择日期并点击显示按钮</div>
+                                    </EmptyDataTemplate>
+                                    <Columns>
+                                        <asp:BoundField DataField="Date" HeaderText="日期" DataFormatString="{0:yyyy-MM-dd}" />
+                                        <asp:BoundField HeaderText="星期" />
+                                        <asp:BoundField DataField="First" HeaderText="首次打卡时间" />
+                                        <asp:BoundField DataField="Last" HeaderText="最后打卡时间" />
+                                        <asp:BoundField HeaderText="考勤状态" DataField="Status" />
+                                    </Columns>
+                                    <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White"></HeaderStyle>
+                                    <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />
+                                    <PagerSettings Mode="NumericFirstLast" />
+                                </asp:GridView>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
             </div>
@@ -177,5 +194,5 @@
     </div>
 
     <asp:HiddenField ID="hidUser" runat="server" />
-    <div id="addoutc" class="out"></div>
+    <div id="addoutc" class="out" runat="server"></div>
 </asp:Content>

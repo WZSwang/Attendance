@@ -87,7 +87,7 @@
                     <asp:BoundField DataField="statusname" HeaderText="请假单状态" />
                     <asp:TemplateField HeaderText="" ShowHeader="False">
                         <ItemTemplate>
-                            <asp:LinkButton ID="lbtnView" runat="server"  CssClass="InfoView">查看</asp:LinkButton>
+                            <asp:LinkButton ID="lbtnView" runat="server"  CssClass="InfoView" Visible="false">查看</asp:LinkButton>
                             <asp:Button ID="ImageButonEdit" runat="server" Text="修改" Visible="false" CssClass="templatemo-edit-btn ImageButonEdit" BackColo="white" OnClientClick=" return false;  " />
                             <asp:Button ID="ImageButonDelete" runat="server" Text="删除" Visible="false" CssClass="templatemo-edit-btn ImageButonDelete" OnClientClick=" return false;" />
                         </ItemTemplate>

@@ -128,6 +128,12 @@ namespace Attendance.User
             return HolidayManagement.DateIsFull(star, end, id, appid);
         }
 
+        [WebMethod]
+        public static string GetApply(string str)
+        {
+            return HolidayManagement.GetApply(str);
+        }
+
         #endregion
 
     }

@@ -100,7 +100,6 @@
 
 <asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
     <div id="diveditout" class="TipBoxComantion diveditout">
-
         <div class="templatemo-flex-row flex-content-row">
             <div class="col-2">
                 <div class="panel panel-default margin-10">
@@ -223,7 +222,7 @@
                 var userid = obj.children[0].innerText;
                 $("#<%=LabViewID.ClientID %>").text(userid);
                 $("#<%=AppID.ClientID %>").val(userid);
-                $("#<%=LabViewName.ClientID %>").text(obj.children[1].innerText); 
+                $("#<%=LabViewName.ClientID %>").text(obj.children[1].innerText);
                 $("#<%=txtViewTitle.ClientID %>").val(obj.children[2].innerText);
                 $("#<%=LabHoliTime.ClientID %>").text(obj.children[5].innerText);
 

@@ -20,8 +20,8 @@ namespace Attendance
         {
             if (!IsPostBack)
             {
-                ViewState["PageCount"] = (Math.Ceiling(um.SearchPeopleCount() / 10.0)).ToString();
-                ViewState["CurrentPage"] = "1";
+                ControlTemplate.SetPager(Convert.ToInt32(Math.Ceiling(um.SearchPeopleCount() / 10.0)), gdvinfo.PageSize);
+                Bind();
                 //添加 职位 下拉框
                 drponame.DataSource = pm.GetAllDepart();
                 drponame.DataValueField = "DeptID";
@@ -34,29 +34,8 @@ namespace Attendance
                 drponameedit.DataTextField = "DeptName";
                 drponameedit.DataBind();
                 drponameedit.Items.Insert(0, new ListItem("--请选择--", ""));
-                Bind();
             }
             CheckBoxNew();
-        }
-
-        public void SetPager()
-        {
-            GridViewRow pagerRow = gdvinfo.BottomPagerRow;
-            LinkButton btnPrev = (LinkButton)pagerRow.Cells[0].FindControl("btnPrev");
-            btnPrev.Enabled = ViewState["CurrentPage"].ToString() != "1";
-            LinkButton btnNext = (LinkButton)pagerRow.Cells[0].FindControl("btnNext");
-            btnNext.Enabled = ViewState["CurrentPage"].ToString() != ViewState["PageCount"].ToString();
-
-            
-            //绑定数据到下拉表
-            DropDownList ddl = pagerRow.FindControl("ddlIndex") as DropDownList;
-            for (int i = 1; i <= Convert.ToInt32( ViewState["PageCount"]); i++)
-            {
-                ListItem li = new ListItem("第"+i+"页",i.ToString());
-                ddl.Items.Add(li);
-            }
-            ddl.SelectedValue = ViewState["CurrentPage"].ToString();
-
         }
 
         public void CheckBoxNew()
@@ -100,8 +79,8 @@ namespace Attendance
                 dept = dept.Remove(dept.Count() - 1);
             else
                 dept = "";
-            ViewState["CurrentPage"] = "1";
-            ViewState["PageCount"] = (Math.Ceiling(um.SearchPeopleCount(TxtSearchID.Text, TxtSearchName.Text, dept) / 10.0)).ToString();
+
+            ControlTemplate.SetPager(Convert.ToInt32(Math.Ceiling(um.SearchPeopleCount(TxtSearchID.Text, TxtSearchName.Text, dept) / 10.0)), gdvinfo.PageSize);
             Bind();
         }
 
@@ -158,7 +137,7 @@ namespace Attendance
         }
 
 
-        private void Bind()
+        public void Bind(object sender = null, EventArgs e = null)
         {
             // 获取GridView排序数据列及排序方向
             string sortExpression = this.gdvinfo.Attributes["SortExpression"];
@@ -176,10 +155,8 @@ namespace Attendance
             else
                 dept = "";
 
-            int pageindex = Convert.ToInt32(ViewState["CurrentPage"]);
-
             // 调用业务数据获取方法
-            dtBind = um.SearchPeople(TxtSearchID.Text, TxtSearchName.Text, dept, gdvinfo.PageSize, pageindex);
+            dtBind = um.SearchPeople(TxtSearchID.Text, TxtSearchName.Text, dept, ControlTemplate.pageSize, ControlTemplate.pageIndex);
 
             // 根据GridView排序数据列及排序方向设置显示的默认数据视图
             if ((!string.IsNullOrEmpty(sortExpression)) && (!string.IsNullOrEmpty(sortDirection)))
@@ -192,13 +169,8 @@ namespace Attendance
             //  if(dtBind.Rows.Count>0)
             this.gdvinfo.DataSource = dtBind;
             this.gdvinfo.DataBind();
-            gdvinfo.BottomPagerRow.Visible = true;
-            SetPager();
         }
 
-        protected void gdvinfo_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-        }
 
         protected void CheckBoxHead_CheckedChanged(object sender, EventArgs e)
         {
@@ -225,40 +197,7 @@ namespace Attendance
                     um.DelPeople(lb.Text);
                 }
             }
-            ViewState["CurrentPage"] = "1";
-            Bind();
-        }
-
-        protected void btnFirst_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = "1";
-            Bind();
-        }
-
-        protected void btnPrev_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) - 1;
-            Bind();
-        }
-
-        protected void btnNext_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) + 1;
-            Bind();
-        }
-
-        protected void btnLast_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = ViewState["PageCount"];
-            Bind();
-        }
-
-        protected void ddlIndex_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList ddls = sender as DropDownList;
-            ViewState["CurrentPage"] = int.Parse(ddls.SelectedValue);
-            Bind();
-
+            Response.Redirect("PeopleManage.aspx");
         }
 
 

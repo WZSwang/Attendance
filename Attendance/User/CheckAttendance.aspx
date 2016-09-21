@@ -71,6 +71,10 @@
                 <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />
                 <PagerSettings Mode="NumericFirstLast" />
             </asp:GridView>
+            <asp:Calendar ID="Calinfo" runat="server"  CssClass="table table-striped table-bordered templatemo-user-table gdvinfo" FirstDayOfWeek="Monday" SelectionMode="None" ShowNextPrevMonth="False" ShowTitle="False" Height="500px" OnDayRender="Calinfo_DayRender">
+                <DayHeaderStyle  CssClass="white-text templatemo-sort-by" ForeColor="White" BackColor="#39ADB4" Height="35px"/>
+            </asp:Calendar>
+
         </div>
     </div>
 </asp:Content>

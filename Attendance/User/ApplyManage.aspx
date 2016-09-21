@@ -87,7 +87,7 @@
                     <asp:BoundField DataField="statusname" HeaderText="请假单状态" />
                     <asp:TemplateField HeaderText="" ShowHeader="False">
                         <ItemTemplate>
-                            <asp:LinkButton ID="lbtnView" runat="server"  CssClass="InfoView" Visible="false">查看</asp:LinkButton>
+                            <asp:LinkButton ID="lbtnView" runat="server" CssClass="InfoView" Visible="false">查看</asp:LinkButton>
                             <asp:Button ID="ImageButonEdit" runat="server" Text="修改" Visible="false" CssClass="templatemo-edit-btn ImageButonEdit" BackColo="white" OnClientClick=" return false;  " />
                             <asp:Button ID="ImageButonDelete" runat="server" Text="删除" Visible="false" CssClass="templatemo-edit-btn ImageButonDelete" OnClientClick=" return false;" />
                         </ItemTemplate>
@@ -203,40 +203,100 @@
     </div>
 
 
-    <div id="divView" class="panel panel-default margin-10 TipBoxMax divView" runat="server" style="display: none">
-        <div class="panel-heading" runat="server">
-            <h2 class="text-uppercase"><+>查看信息</h2>
-        </div>
-        <div class="panel-body" runat="server">
-            <div class="col-lg-6 col-md-6 form-group">
-                <label for="inputFirstName">请假单号：</label>
-                <asp:Label ID="LabViewID" runat="server" Text=""></asp:Label>
-            </div>
-            <div class="col-lg-6 col-md-6 form-group">
-                <label for="inputLastName">申请人：</label>
-                <asp:Label ID="LabViewName" runat="server" Text=""></asp:Label>
-            </div>
-            <div class="col-lg-12 col-md-12 form-group">
-                <label for="inputFirstName"><span style='color: red;'>*</span>标题：</label>
-                <asp:TextBox ID="txtViewTitle" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-            </div>
-            <div class="col-lg-6 col-md-10 form-group">
-                <label for="inputFirstName"><span style='color: red;'>*</span>起始时间：</label>
-                <asp:TextBox ID="txtViewStar" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-            </div>
-            <div class="col-lg-6 col-md-10 form-group">
-                <label for="inputFirstName"><span style='color: red;'>*</span>结束时间：</label>
-                <asp:TextBox ID="txtViewEnd" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-            </div>
+    <div id="divView" class="TipBoxComantion divView" runat="server" style="display: none">
+        <div class="templatemo-flex-row flex-content-row">
+            <div class="col-2">
+                <div class="panel panel-default margin-10">
+                    <div class="panel-heading">
+                        <h2 class="text-uppercase"><+>请假信息</h2>
+                    </div>
+                    <div class="panel-body" runat="server">
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label for="inputFirstName" style="float: left">请假单号：</label>
+                            <asp:Label ID="LabViewID" runat="server" Text="???" Style="float: left"></asp:Label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label for="inputLastName">申请人：</label>
+                            <asp:Label ID="LabViewName" runat="server" Text="???"></asp:Label>
+                        </div>
+                        <div class="col-lg-2 col-md-2 form-group" style="padding-top: 5px;">
+                            <label for="inputFirstName" style="float: left"><span style='color: red;'>*</span>标题：</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 form-group">
+                            <asp:TextBox ID="txtViewTitle" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label for="inputFirstName"><span style='color: red;'>*</span>起始时间：</label><br />
+                            <asp:TextBox ID="txtViewStar" runat="server" class="form-control" Style="width: 60%; float: left" ReadOnly="true"></asp:TextBox>
+                            <asp:DropDownList ID="drpViewStart" runat="server" CssClass="form-control" Style="width: 40%; float: left" Enabled="false">
+                                <asp:ListItem Selected="True" Value="08:30:00">8:30</asp:ListItem>
+                                <asp:ListItem Value="11:50:00">11:50</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label for="inputFirstName"><span style='color: red;'>*</span>结束时间：</label><br />
+                            <asp:TextBox ID="txtViewEnd" runat="server" class="form-control" Style="width: 60%; float: left" ReadOnly="true"></asp:TextBox>
+                            <asp:DropDownList ID="drpViewEnd" runat="server" CssClass="form-control" Style="width: 40%; float: left" Enabled="false">
+                                <asp:ListItem Value="11:50:00">11:50</asp:ListItem>
+                                <asp:ListItem Selected="True" Value="17:00:00">17:00</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
 
-            <div class="col-lg-12 col-md-10 form-group">
-                <label for="inputFirstName"><span style='color: red;'>*</span>请假原因：</label>
-                <asp:TextBox ID="txtViewRes" runat="server" class="form-control" Rows="3" TextMode="MultiLine" ReadOnly="true"></asp:TextBox>
+                        <div class="col-lg-12 col-md-10 form-group">
+                            <label for="inputFirstName"><span style='color: red;'>*</span>请假原因：</label>
+                            <asp:TextBox ID="txtViewRes" runat="server" class="form-control" Rows="2" TextMode="MultiLine" ReadOnly="true"></asp:TextBox>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div class="form-group text-right">
-                <button class="templatemo-white-button" type="reset" onclick="TipClose()">关闭</button>
+            <div class="col-1">
+                <div class="panel panel-default margin-10">
+                    <div class="panel-heading">
+                        <h2 class="text-uppercase"><+>审批信息</h2>
+                    </div>
+                    <div class="panel-body" runat="server">
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <label for="inputFirstName">请假时间：</label>
+                            <asp:Label ID="LabHoliTime" runat="server" Text=""></asp:Label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group" style="padding-top: 5px;">
+                            <label for="inputFirstName"><span style='color: red;'>*</span>申请结果：</label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <asp:DropDownList ID="ddlRes" runat="server" CssClass="form-control" Style="float: left" Enabled="false" >
+                                <asp:ListItem Selected="True" Value="">请选择</asp:ListItem>
+                                <asp:ListItem Value="1">同意</asp:ListItem>
+                                <asp:ListItem Value="0">不同意</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="col-lg-12 col-md-10 form-group">
+                            <label for="inputFirstName">审批人：</label>
+                            <asp:Label ID="LabName" runat="server" Text=""></asp:Label>
+                        </div>
+                        <div class="col-lg-12 col-md-10 form-group">
+                            <label for="inputFirstName">审批时间：</label>
+                            <asp:Label ID="LabAppleTime" runat="server" Text=""></asp:Label>
+                        </div>
+
+                        <div class="col-lg-12 col-md-10 form-group">
+                            <label for="inputFirstName">备注：</label>
+                            <asp:TextBox ID="TxtText" runat="server" class="form-control" Rows="3" TextMode="MultiLine" ReadOnly="true"></asp:TextBox>
+                        </div>
+
+                        <div class="row form-group" style="text-align: center;">
+                            <div class="col-lg-12 col-md-12 form-group">
+                                <asp:Label ID="Label3" runat="server" Text="" Style="display: none; color: #d7425c"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="form-group text-right">
+                            <button class="templatemo-white-button" type="reset" onclick="TipClose()">关闭</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 
     <div id="exitout" class="templatemo-content-widget pink-bg MessageBox" style="display: none">
@@ -379,10 +439,26 @@
                     obj = obj.parentElement;
                 }
                 var userid = obj.children[0].innerText;
-                document.getElementById("<%=LabViewID.ClientID %>").innerText = userid;
-                document.getElementById("<%=txtViewTitle.ClientID %>").value = obj.children[2].innerText;
-                document.getElementById("<%=txtViewStar.ClientID %>").value = obj.children[3].innerText;
-                document.getElementById("<%=txtViewEnd.ClientID %>").value = obj.children[4].innerText;
+                $("#<%=LabViewID.ClientID %>").text(userid);
+                $("#<%=AppID.ClientID %>").val(userid);
+                $("#<%=LabViewName.ClientID %>").text(obj.children[1].innerText);
+                $("#<%=txtViewTitle.ClientID %>").val(obj.children[2].innerText);
+                $("#<%=LabHoliTime.ClientID %>").text(obj.children[5].innerText);
+
+                var startime = obj.children[3].innerText;
+                $("#<%=txtViewStar.ClientID %>").val(startime.substr(0, 10));
+                for (var i = 0; i < document.getElementById("<%=drpViewStart.ClientID %>").options.length; i++) {
+                    if (document.getElementById("<%=drpViewStart.ClientID %>").options[i].text == startime.substr(11, 5).trim())
+                        document.getElementById("<%=drpViewStart.ClientID %>").options[i].selected = true;
+                }
+
+                var endtime = obj.children[4].innerText;
+                $("#<%=txtViewEnd.ClientID %>").val(endtime.substr(0, 10));
+                for (var i = 0; i < document.getElementById("<%=drpViewEnd.ClientID %>").options.length; i++) {
+                    if (document.getElementById("<%=drpViewEnd.ClientID %>").options[i].text == endtime.substr(11, 5).trim())
+                        document.getElementById("<%=drpViewEnd.ClientID %>").options[i].selected = true;
+                }
+
                 $.ajax({
                     type: "Post",
                     url: "ApplyManage.aspx/GetRes",
@@ -397,6 +473,28 @@
                         alert(err);
                     }
                 });
+
+                $.ajax({
+                    type: "Post",
+                    url: "ApplyManage.aspx/GetApply",
+                    async: false,
+                    data: "{'str':'" + userid + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        var ss = (data.d).split(",");
+                        for (var i = 0; i < document.getElementById("<%=ddlRes.ClientID %>").options.length; i++) {
+                                if (document.getElementById("<%=ddlRes.ClientID %>").options[i].value == ss[0])
+                                    document.getElementById("<%=ddlRes.ClientID %>").options[i].selected = true;
+                            }
+                            $("#<%=LabName.ClientID %>").text(ss[1]);
+                            $("#<%=LabAppleTime.ClientID %>").text(ss[2]);
+                            $("#<%=TxtText.ClientID %>").val(ss[3]);
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
                 document.getElementById("<%=lblbrith.ClientID %>").style.display = "none";
                 return false;
             });

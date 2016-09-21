@@ -1,7 +1,172 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DepartmentManage.aspx.cs" Inherits="Attendance.Admin.DepartmentManage" %>
 
+<%@ Register Src="~/UserControl/ControlTemplate.ascx" TagPrefix="uc1" TagName="ControlTemplate" %>
+
+
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
     <title>Attendance - Depart</title>
+</asp:Content>
+
+
+<asp:Content ID="main" ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
+    <div class="templatemo-content-widget white-bg">
+        <h2 class="text-uppercase">搜索 / 添加</h2>
+        <div class="panel-body">
+            <div class="templatemo-flex-row flex-content-row">
+                <div class="col-1">
+                    <div id="timeline_div" class="templatemo-chart"></div>
+                    <div class="col-lg-1 col-md-12  form-group">
+                    </div>
+                    <div class="col-lg-4 col-md-3 form-group">
+                        <asp:TextBox ID="TxtSearchID" runat="server" CssClass="form-control" placeholder="请输入部门名称" Style="float: left"></asp:TextBox>
+                    </div>
+                    <div class="col-lg-4 col-md-3 form-group">
+                        <asp:DropDownList ID="drpManage" runat="server" CssClass="form-control" Style="float: left"></asp:DropDownList>
+                    </div>
+                    <div class="col-lg-3 col-md-12  form-group">
+                        <asp:Button ID="btnSearch" runat="server" Text="搜索" CssClass="templatemo-blue-button"
+                            OnClick="btnSearch_Click" />
+                    </div>
+                </div>
+
+            </div>
+            <input id="btnadd" type="button" value='添加新部门' class="templatemo-blue-button" />
+        </div>
+    </div>
+
+    <div class="templatemo-content-widget no-padding">
+        <div class="panel panel-default table-responsive">
+            <asp:GridView ID="gdvinfo" CssClass="table table-striped table-bordered templatemo-user-table gdvinfo" runat="server"
+                AutoGenerateColumns="False" OnRowDataBound="gdvinfo_RowDataBound" AllowPaging="True" Style="text-align: center">
+                <EmptyDataTemplate>
+                    <div style="text-align: center">没有查询到数据，请检查查询条件是否正确</div>
+                </EmptyDataTemplate>
+                <Columns>
+                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">序号</div>' InsertVisible="False">
+                        <ItemStyle HorizontalAlign="Center" />
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <ItemTemplate>
+                            <asp:Label ID="LabelNum" runat="server" Text='<%# Bind("RowNumb") %>' />
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">部门名称</div>'>
+                        <ItemTemplate>
+                            <asp:Label ID="LabelDeptName" runat="server" Text='<%# Bind("DeptName") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">主管</div>'>
+                        <ItemTemplate>
+                            <asp:Label ID="LabelName" runat="server" Text='<%# Bind("UserName") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="" ShowHeader="False">
+                        <ItemTemplate>
+                            <asp:Button ID="ImageButonEdit" runat="server" Text="修改" CssClass="templatemo-edit-btn ImageButonEdit" OnClientClick=" return false;" />
+                            <asp:Button ID="ImageButonDelete" runat="server" Text="删除" CssClass="templatemo-edit-btn ImageButonDelete" OnClientClick=" return false;" Visible="false" />
+                        </ItemTemplate>
+                        <ControlStyle BorderStyle="None" Height="30px" Width="50px" />
+                    </asp:TemplateField>
+                </Columns>
+                <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />
+                <PagerSettings Mode="NumericFirstLast" />
+            </asp:GridView>
+            <uc1:ControlTemplate runat="server" ID="ControlTemplate" OnDateBind="Bind" />
+        </div>
+    </div>
+
+</asp:Content>
+<asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
+    <div id="divaddout" class="panel panel-default margin-10 TipBox" style="display: none">
+        <div class="panel-heading" runat="server">
+            <h2 class="text-uppercase">添加新部门</h2>
+        </div>
+        <div class="panel-body" runat="server">
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-6 form-group">
+                    <label for="inputFirstName"><span style='color: red;'>*</span>部门名称：</label>
+                    <asp:TextBox ID="tnid" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="col-lg-12 col-md-6 form-group">
+                    <label for="inputLastName">主管：</label>
+                    <asp:DropDownList ID="drpdename" runat="server" class="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-10 form-group">
+                    <label for="inputFirstName">部门说明：</label>
+                    <asp:TextBox ID="TxtInfo" runat="server" class="form-control" Rows="3"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row form-group" style="text-align: center;">
+                <div class="col-lg-12 col-md-12 form-group">
+                    <asp:Label ID="lblbrith0" runat="server" Text="" Style="display: none; color: #d7425c"></asp:Label>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <asp:Button ID="btnin" runat="server" Text="添加新部门" OnClick="btnin_Click" CssClass="templatemo-blue-button" />
+                <button class="templatemo-white-button" type="reset" onclick="TipClose()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="diveditout" class="panel panel-default margin-10 TipBox diveditout" runat="server" style="display: none">
+        <div class="panel-heading" runat="server">
+            <h2 class="text-uppercase"><+>修改信息</h2>
+        </div>
+        <div class="panel-body" runat="server">
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-6 form-group">
+                    <label for="inputFirstName"><span style='color: red;'>*</span>部门名称：</label>
+                    <asp:TextBox ID="txtId" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="col-lg-12 col-md-6 form-group">
+                    <label for="inputLastName">主管：</label>
+                    <asp:DropDownList ID="drpdenameedit" runat="server" class="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-10 form-group">
+                    <label for="inputFirstName">部门说明：</label>
+                    <asp:TextBox ID="TxtEditInfo" runat="server" class="form-control" Rows="3"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row form-group" style="text-align: center;">
+                <div class="col-lg-12 col-md-12 form-group">
+                    <asp:Label ID="lblbrith" runat="server" Text="" Style="display: none; color: #d7425c"></asp:Label>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <asp:Button ID="btnedit" runat="server" Text="确认修改" CssClass="templatemo-blue-button" OnClick="btnedit_Click" />
+                <button class="templatemo-white-button" type="reset" onclick="TipClose()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="addoutc" class="out"></div>
+    <div id="editoutc" class="out"></div>
+
+    <div id="exitout" class="templatemo-content-widget pink-bg MessageBox" style="display: none">
+        <i class="fa fa-times" onclick="TipClose()"></i>
+        <h2 class="text-uppercase margin-bottom-10">&lt;!&gt;注意</h2>
+        <p class="margin-bottom-0">此操作无法撤销,确定要删除选择的部门吗？ </p>
+        <div class=" text-right" style="margin-top: 40px;">
+            <div class="col-lg-12 col-md-12 form-group">
+                <asp:Button ID="yesexit" runat="server" Text="删除" class="templatemo-white-button" Style="border: 0px; color: #D7425C" OnClick="btndelete_Click" />
+            </div>
+        </div>
+    </div>
+
+    <asp:HiddenField ID="DepartName" runat="server" />
+</asp:Content>
+
+
+<asp:Content ID="script" ContentPlaceHolderID="Script" runat="server">
+    
     <script type="text/javascript">
         $(document).ready(function () {
             $("#<%=btnin.ClientID %>").click(function () {
@@ -155,183 +320,4 @@
             $(".MessageBox").fadeOut(500);
         }
     </script>
-
-</asp:Content>
-
-
-<asp:Content ID="main" ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
-    <div class="templatemo-content-widget white-bg">
-        <h2 class="text-uppercase">搜索 / 添加</h2>
-        <div class="panel-body">
-            <div class="templatemo-flex-row flex-content-row">
-                <div class="col-1">
-                    <div id="timeline_div" class="templatemo-chart"></div>
-                    <div class="col-lg-1 col-md-12  form-group">
-                    </div>
-                    <div class="col-lg-4 col-md-3 form-group">
-                        <asp:TextBox ID="TxtSearchID" runat="server" CssClass="form-control" placeholder="请输入部门名称" Style="float: left"></asp:TextBox>
-                    </div>
-                    <div class="col-lg-4 col-md-3 form-group">
-                        <asp:DropDownList ID="drpManage" runat="server" CssClass="form-control" Style="float: left"></asp:DropDownList>
-                    </div>
-                    <div class="col-lg-3 col-md-12  form-group">
-                        <asp:Button ID="btnSearch" runat="server" Text="搜索" CssClass="templatemo-blue-button"
-                            OnClick="btnSearch_Click" />
-                    </div>
-                </div>
-
-            </div>
-            <input id="btnadd" type="button" value='添加新部门' class="templatemo-blue-button" />
-        </div>
-    </div>
-
-    <div class="templatemo-content-widget no-padding">
-        <div class="panel panel-default table-responsive">
-            <asp:GridView ID="gdvinfo" CssClass="table table-striped table-bordered templatemo-user-table gdvinfo" runat="server"
-                AutoGenerateColumns="False" OnRowDataBound="gdvinfo_RowDataBound" AllowPaging="True" Style="text-align: center" OnPageIndexChanging="gdvinfo_PageIndexChanging">
-                <EmptyDataTemplate>
-                    <div style="text-align: center">没有查询到数据，请检查查询条件是否正确</div>
-                </EmptyDataTemplate>
-                <Columns>
-                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">序号</div>' InsertVisible="False">
-                        <ItemStyle HorizontalAlign="Center" />
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <ItemTemplate>
-                            <asp:Label ID="LabelNum" runat="server" Text='<%# Bind("RowNumb") %>' />
-                        </ItemTemplate>
-                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">部门名称</div>'>
-                        <ItemTemplate>
-                            <asp:Label ID="LabelDeptName" runat="server" Text='<%# Bind("DeptName") %>'></asp:Label>
-                        </ItemTemplate>
-                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText='<div style="width:100%;text-align :center">主管</div>'>
-                        <ItemTemplate>
-                            <asp:Label ID="LabelName" runat="server" Text='<%# Bind("UserName") %>'></asp:Label>
-                        </ItemTemplate>
-                        <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White" />
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="" ShowHeader="False">
-                        <ItemTemplate>
-                            <asp:Button ID="ImageButonEdit" runat="server" Text="修改" CssClass="templatemo-edit-btn ImageButonEdit" OnClientClick=" return false;" />
-                            <asp:Button ID="ImageButonDelete" runat="server" Text="删除" CssClass="templatemo-edit-btn ImageButonDelete" OnClientClick=" return false;" Visible="false" />
-                        </ItemTemplate>
-                        <ControlStyle BorderStyle="None" Height="30px" Width="50px" />
-                    </asp:TemplateField>
-                </Columns>
-                <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />
-                <PagerSettings Mode="NumericFirstLast" />
-
-                <PagerTemplate>
-                    <div class="row form-group" >
-                        <div class="col-lg-3 col-md-1 form-group">
-                        </div>
-                        <div class="col-lg-1 col-md-1 form-group" style="padding-top:10px">
-                            <asp:LinkButton ID="btnFirst" runat="server" Text="首页" OnClick="btnFirst_Click" />
-                        </div>
-                        <div class="col-lg-1 col-md-1 form-group" style="padding-top:10px">
-                            <asp:LinkButton ID="btnPrev" runat="server" Text="上一页" OnClick="btnPrev_Click" />
-                        </div>
-                        <div class="col-lg-2 col-md-2 form-group" style="padding-top:3px">
-                            <asp:DropDownList ID="ddlIndex" runat="server" OnSelectedIndexChanged="ddlIndex_SelectedIndexChanged" AutoPostBack="True" CssClass="form-control" Width="130px"></asp:DropDownList>
-                        </div>
-                        <div class="col-lg-1 col-md-1 form-group" style="padding-top:10px">
-                            <asp:LinkButton ID="btnNext" runat="server" Text="下一页" OnClick="btnNext_Click" />
-                        </div>
-                        <div class="col-lg-1 col-md-1 form-group" style="padding-top:10px">
-                            <asp:LinkButton ID="btnLast" runat="server" Text="末页" OnClick="btnLast_Click" />
-                        </div>
-                    </div>
-                </PagerTemplate>
-            </asp:GridView>
-        </div>
-    </div>
-
-</asp:Content>
-<asp:Content ID="Hide" ContentPlaceHolderID="ContentPlaceHolderHide" runat="server">
-    <div id="divaddout" class="panel panel-default margin-10 TipBox" style="display: none">
-        <div class="panel-heading" runat="server">
-            <h2 class="text-uppercase">添加新部门</h2>
-        </div>
-        <div class="panel-body" runat="server">
-            <div class="row form-group">
-                <div class="col-lg-12 col-md-6 form-group">
-                    <label for="inputFirstName"><span style='color: red;'>*</span>部门名称：</label>
-                    <asp:TextBox ID="tnid" runat="server" class="form-control"></asp:TextBox>
-                </div>
-                <div class="col-lg-12 col-md-6 form-group">
-                    <label for="inputLastName">主管：</label>
-                    <asp:DropDownList ID="drpdename" runat="server" class="form-control">
-                    </asp:DropDownList>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-12 col-md-10 form-group">
-                    <label for="inputFirstName">部门说明：</label>
-                    <asp:TextBox ID="TxtInfo" runat="server" class="form-control" Rows="3"></asp:TextBox>
-                </div>
-            </div>
-            <div class="row form-group" style="text-align: center;">
-                <div class="col-lg-12 col-md-12 form-group">
-                    <asp:Label ID="lblbrith0" runat="server" Text="" Style="display: none; color: #d7425c"></asp:Label>
-                </div>
-            </div>
-            <div class="form-group text-right">
-                <asp:Button ID="btnin" runat="server" Text="添加新部门" OnClick="btnin_Click" CssClass="templatemo-blue-button" />
-                <button class="templatemo-white-button" type="reset" onclick="TipClose()">取消</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="diveditout" class="panel panel-default margin-10 TipBox diveditout" runat="server" style="display: none">
-        <div class="panel-heading" runat="server">
-            <h2 class="text-uppercase"><+>修改信息</h2>
-        </div>
-        <div class="panel-body" runat="server">
-            <div class="row form-group">
-                <div class="col-lg-12 col-md-6 form-group">
-                    <label for="inputFirstName"><span style='color: red;'>*</span>部门名称：</label>
-                    <asp:TextBox ID="txtId" runat="server" class="form-control"></asp:TextBox>
-                </div>
-                <div class="col-lg-12 col-md-6 form-group">
-                    <label for="inputLastName">主管：</label>
-                    <asp:DropDownList ID="drpdenameedit" runat="server" class="form-control">
-                    </asp:DropDownList>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-12 col-md-10 form-group">
-                    <label for="inputFirstName">部门说明：</label>
-                    <asp:TextBox ID="TxtEditInfo" runat="server" class="form-control" Rows="3"></asp:TextBox>
-                </div>
-            </div>
-            <div class="row form-group" style="text-align: center;">
-                <div class="col-lg-12 col-md-12 form-group">
-                    <asp:Label ID="lblbrith" runat="server" Text="" Style="display: none; color: #d7425c"></asp:Label>
-                </div>
-            </div>
-            <div class="form-group text-right">
-                <asp:Button ID="btnedit" runat="server" Text="确认修改" CssClass="templatemo-blue-button" OnClick="btnedit_Click" />
-                <button class="templatemo-white-button" type="reset" onclick="TipClose()">取消</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="addoutc" class="out"></div>
-    <div id="editoutc" class="out"></div>
-
-    <div id="exitout" class="templatemo-content-widget pink-bg MessageBox" style="display: none">
-        <i class="fa fa-times" onclick="TipClose()"></i>
-        <h2 class="text-uppercase margin-bottom-10">&lt;!&gt;注意</h2>
-        <p class="margin-bottom-0">此操作无法撤销,确定要删除选择的部门吗？ </p>
-        <div class=" text-right" style="margin-top: 40px;">
-            <div class="col-lg-12 col-md-12 form-group">
-                <asp:Button ID="yesexit" runat="server" Text="删除" class="templatemo-white-button" Style="border: 0px; color: #D7425C" OnClick="btndelete_Click" />
-            </div>
-        </div>
-    </div>
-
-    <asp:HiddenField ID="DepartName" runat="server" />
 </asp:Content>

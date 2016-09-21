@@ -53,6 +53,11 @@ namespace Attendance.UserControl
             }
             ddlIndex.SelectedValue = pageIndex.ToString();
 
+
+            if (pageCount == 0)
+                btnsearch.Style.Add("display", "none");
+            else
+                btnsearch.Style.Add("display", "block");
         }
 
         protected void btnFirst_Click(object sender, EventArgs e)

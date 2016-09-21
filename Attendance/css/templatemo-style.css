@@ -690,9 +690,8 @@ input[type="radio"]:checked + label span {
     top: 50%;
     left: 50%;
     width:1000px;
-    height:80%;
     margin-left: -500px;
-    margin-top: -230px;
+    margin-top: -280px;
     display: none;
     position: fixed;
 }

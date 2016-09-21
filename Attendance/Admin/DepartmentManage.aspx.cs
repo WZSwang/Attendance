@@ -20,8 +20,8 @@ namespace Attendance.Admin
         {
             if (!IsPostBack)
             {
-                ViewState["PageCount"] = (Math.Ceiling(dm.GetAllDepart().Rows.Count / 10.0)).ToString();
-                ViewState["CurrentPage"] = "1";
+                ControlTemplate.SetPager(Convert.ToInt32((Math.Ceiling(dm.GetAllDepart().Rows.Count / 10.0))), gdvinfo.PageSize);
+
                 Bind();
                 drpManage.DataSource = um.SearchManage();
                 drpManage.DataValueField = "UserName";
@@ -43,63 +43,32 @@ namespace Attendance.Admin
 
             }
         }
-        public void SetPager()
-        {
-            GridViewRow pagerRow = gdvinfo.BottomPagerRow;
-            LinkButton btnPrev = (LinkButton)pagerRow.Cells[0].FindControl("btnPrev");
-            btnPrev.Enabled = ViewState["CurrentPage"].ToString() != "1";
-            LinkButton btnNext = (LinkButton)pagerRow.Cells[0].FindControl("btnNext");
-            btnNext.Enabled = ViewState["CurrentPage"].ToString() != ViewState["PageCount"].ToString();
-
-
-            //绑定数据到下拉表
-            DropDownList ddl = pagerRow.FindControl("ddlIndex") as DropDownList;
-            for (int i = 1; i <= Convert.ToInt32(ViewState["PageCount"]); i++)
-            {
-                ListItem li = new ListItem("第" + i + "页", i.ToString());
-                ddl.Items.Add(li);
-            }
-            ddl.SelectedValue = ViewState["CurrentPage"].ToString();
-
-        }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            ViewState["CurrentPage"] = "1";
-            ViewState["PageCount"] = (Math.Ceiling(dm.SearchManage(TxtSearchID.Text, drpManage.SelectedValue, gdvinfo.PageSize).Rows.Count / 10.0)).ToString();
+            ControlTemplate.SetPager(Convert.ToInt32(Math.Ceiling(dm.SearchManage(TxtSearchID.Text, drpManage.SelectedValue, gdvinfo.PageSize).Rows.Count / 10.0)), gdvinfo.PageSize);
             Bind();
         }
 
-        public void Bind()
+        public void Bind(object sender = null, EventArgs e = null)
         {
             DataTable dtBind = new DataTable();
-
-            int pageindex = Convert.ToInt32(ViewState["CurrentPage"]);
-
             // 调用业务数据获取方法
-            dtBind = dm.SearchManage(TxtSearchID.Text, drpManage.SelectedValue, gdvinfo.PageSize, pageindex);
-
+            dtBind = dm.SearchManage(TxtSearchID.Text, drpManage.SelectedValue, ControlTemplate.pageSize, ControlTemplate.pageIndex);
             gdvinfo.DataSource = dtBind;
             gdvinfo.DataBind();
-            gdvinfo.BottomPagerRow.Visible = true;
-            SetPager();
         }
 
-        protected void gdvinfo_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gdvinfo.PageIndex = e.NewPageIndex;
-            Bind();
-        }
 
         //在Row绑定时触发
         protected void gdvinfo_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.Cells.Count== 1)
+            if (e.Row.Cells.Count == 1)
                 return;
             //删除按钮 默认隐藏
             Button txt = (Button)e.Row.Cells[3].FindControl("ImageButonDelete");
             Label lb = (Label)e.Row.Cells[1].FindControl("LabelDeptName");
             //找得到删除按钮 部门中没有员工
-            if (txt != null && dm. DepartIsNull(lb.Text))
+            if (txt != null && dm.DepartIsNull(lb.Text))
                 txt.Visible = true;
 
         }
@@ -128,40 +97,7 @@ namespace Attendance.Admin
         {
             string name = DepartName.Value;
             dm.DelteDepart(name);
-            ViewState["CurrentPage"] = "1";
-            Bind();
-        }
-
-        protected void btnFirst_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = "1";
-            Bind();
-        }
-
-        protected void btnPrev_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) - 1;
-            Bind();
-        }
-
-        protected void btnNext_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) + 1;
-            Bind();
-        }
-
-        protected void btnLast_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = ViewState["PageCount"];
-            Bind();
-        }
-
-        protected void ddlIndex_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList ddls = sender as DropDownList;
-            ViewState["CurrentPage"] = int.Parse(ddls.SelectedValue);
-            Bind();
-
+            Response.Redirect("DepartmentManage.aspx");
         }
 
 

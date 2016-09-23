@@ -155,3 +155,10 @@ C:\Users\wecia\Desktop\Attendance2016-7-28\DAL\bin\Debug\Entity.pdb
 C:\Users\wecia\Desktop\Attendance2016-7-28\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\Users\wecia\Desktop\Attendance2016-7-28\DAL\obj\Debug\DAL.dll
 C:\Users\wecia\Desktop\Attendance2016-7-28\DAL\obj\Debug\DAL.pdb
+C:\Users\Administrator\Desktop\Attendance2016-8-1\DAL\bin\Debug\DAL.dll
+C:\Users\Administrator\Desktop\Attendance2016-8-1\DAL\bin\Debug\DAL.pdb
+C:\Users\Administrator\Desktop\Attendance2016-8-1\DAL\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-8-1\DAL\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-8-1\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Attendance2016-8-1\DAL\obj\Debug\DAL.dll
+C:\Users\Administrator\Desktop\Attendance2016-8-1\DAL\obj\Debug\DAL.pdb

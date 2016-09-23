@@ -21,6 +21,7 @@ namespace Attendance.User
                 DropDownListYear.SelectedValue = DateTime.Now.Year.ToString();
                 DropDownListMonth.SelectedValue = DateTime.Now.Month.ToString();
                 gdvinfo.DataBind();
+                Calinfo.VisibleDate = Convert.ToDateTime("2014-02-01");
             }
         }
 
@@ -29,7 +30,7 @@ namespace Attendance.User
             UserInfo us = Session["user"] as UserInfo;
             int year = int.Parse(DropDownListYear.SelectedValue);
             int month = int.Parse(DropDownListMonth.SelectedValue);
-            gdvinfo.DataSource = attenden.GetAttendanceInfo(year, month, us.UserID);
+            gdvinfo.DataSource = attenden.GetAttendanceInfo(2014, 2, us.UserID);
             gdvinfo.DataBind();
         }
 
@@ -55,37 +56,14 @@ namespace Attendance.User
                 UserInfo us = Session["user"] as UserInfo;
                 int year = int.Parse(DropDownListYear.SelectedValue);
                 int month = int.Parse(DropDownListMonth.SelectedValue);
-                List<AttendanceView> list = attenden.GetAttendanceInfo(year, month, us.UserID);
+                List<AttendanceView> list = attenden.GetAttendanceView(2014, 2, us.UserID);
 
                 var q = from day in list where day.Date == e.Day.Date select day;
 
+                e.Cell.Text = "<table style='width:100%;height:100%;text-align:center;' ><tr style='height:20%'><td style='width:20%'>"
+                    + e.Day.Date.Day + "</td>" + q.First().Status + "</tr> </table>";
 
 
-                //e.Cell.Attributes.Add("date", e.Day.Date.ToString("yyyy-MM-dd"));
-                //e.Cell.Attributes.Add("id", "td" + e.Day.Date.ToString("MMdd"));
-                //e.Cell.Attributes.Add("scheduleId", "NO");
-
-                e.Cell.Text = "<table style='width:100%;height:100%' ><tr><td style='width:20%'>" + e.Day.Date.Day + "</td><td>" + q.First().Status + "</td></tr> </table>";
-
-
-                ////打卡人数
-                //foreach (DateTime AssignTime in SetH.getAssignInfo())
-                //{
-                //    if (e.Day.Date.ToString("yyyy-MM-dd").Equals(AssignTime.ToString("yyyy-MM-dd")))
-                //    {
-
-                //        e.Cell.ForeColor = System.Drawing.Color.FromName(userset.ColorSeted);
-                //        e.Cell.Text = e.Day.Date.Day + "</br>" + SetH.getAllAssignByDate(e.Day.Date) + "人打卡";
-
-                //    }
-                //}
-
-                ////休息
-                //if (e.Day.IsWeekend)
-                //{
-                //    e.Cell.ForeColor = System.Drawing.Color.FromName(userset.HolidaySeted);
-                //    e.Cell.Text = e.Day.Date.Day + "</br>休息日";
-                //}
             }
         }
     }

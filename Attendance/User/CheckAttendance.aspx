@@ -16,7 +16,7 @@
                         <asp:DropDownList ID="DropDownListYear" runat="server" CssClass="form-control">
                         </asp:DropDownList>
                     </div>
-                    <div class="col-lg-1 col-md-1  form-group" style="padding-top: 10px;">
+                    <div class="col-lg-1 col-md-1  form-group" style=" padding-top: 10px;">
                         年
                     </div>
                     <div class="col-lg-2 col-md-3 form-group">
@@ -71,7 +71,7 @@
                 <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />
                 <PagerSettings Mode="NumericFirstLast" />
             </asp:GridView>
-            <asp:Calendar ID="Calinfo" runat="server"  CssClass="table table-striped table-bordered templatemo-user-table gdvinfo" FirstDayOfWeek="Monday" SelectionMode="None" ShowNextPrevMonth="False" ShowTitle="False" Height="500px" OnDayRender="Calinfo_DayRender">
+            <asp:Calendar ID="Calinfo" runat="server"  CssClass="table table-striped table-bordered templatemo-user-table" FirstDayOfWeek="Monday" SelectionMode="None" ShowNextPrevMonth="False" ShowTitle="False" Height="500px" OnDayRender="Calinfo_DayRender" BorderStyle="None">
                 <DayHeaderStyle  CssClass="white-text templatemo-sort-by" ForeColor="White" BackColor="#39ADB4" Height="35px"/>
             </asp:Calendar>
 

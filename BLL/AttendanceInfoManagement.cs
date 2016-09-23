@@ -8,13 +8,20 @@ using Entity;
 
 namespace BLL
 {
-    public  class AttendanceInfoManagement
+    public class AttendanceInfoManagement
     {
         AttendanceInfoServices attendan = new AttendanceInfoServices();
 
-        public List<AttendanceView> GetAttendanceInfo(int year, int month,string id)
+        public List<AttendanceView> GetAttendanceInfo(int year, int month, string id)
         {
-          return  attendan.GetAttendanceInfo(year, month, id);
+            return attendan.GetAttendanceInfo(year, month, id);
         }
+
+
+        public List<AttendanceView> GetAttendanceView(int year, int month, string id)
+        {
+            return attendan.GetAttendanceView(year, month, id);
+        }
+
     }
 }

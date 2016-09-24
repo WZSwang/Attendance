@@ -39,9 +39,9 @@
                         月
                     </div>
                     <div class="col-lg-2 col-md-3 form-group">
-                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
-                            <asp:ListItem>列表展示</asp:ListItem>
-                            <asp:ListItem>日历展示</asp:ListItem>
+                        <asp:DropDownList ID="ddrType" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="0">列表展示</asp:ListItem>
+                            <asp:ListItem Value="1">日历展示</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-lg-2 col-md-12  form-group">
@@ -65,13 +65,17 @@
                     <asp:BoundField HeaderText="星期" />
                     <asp:BoundField DataField="First" HeaderText="首次打卡时间"  />
                     <asp:BoundField DataField="Last" HeaderText="最后打卡时间"   />
-                    <asp:BoundField HeaderText="考勤状态" DataField="Status"/>
+                    <asp:TemplateField HeaderText="考勤状态">
+                        <ItemTemplate>
+                            <%# Eval("Status") %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White"></HeaderStyle>
                 <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />
                 <PagerSettings Mode="NumericFirstLast" />
             </asp:GridView>
-            <asp:Calendar ID="Calinfo" runat="server"  CssClass="table table-striped table-bordered templatemo-user-table" FirstDayOfWeek="Monday" SelectionMode="None" ShowNextPrevMonth="False" ShowTitle="False" Height="500px" OnDayRender="Calinfo_DayRender" BorderStyle="None">
+            <asp:Calendar ID="Calinfo" runat="server" Visible="false"  CssClass="table table-striped table-bordered templatemo-user-table" FirstDayOfWeek="Monday" SelectionMode="None" ShowNextPrevMonth="False" ShowTitle="False" Height="500px" OnDayRender="Calinfo_DayRender" BorderStyle="None">
                 <DayHeaderStyle  CssClass="white-text templatemo-sort-by" ForeColor="White" BackColor="#39ADB4" Height="35px"/>
             </asp:Calendar>
 

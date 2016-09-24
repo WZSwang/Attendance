@@ -21,7 +21,6 @@ namespace Attendance.User
                 DropDownListYear.SelectedValue = DateTime.Now.Year.ToString();
                 DropDownListMonth.SelectedValue = DateTime.Now.Month.ToString();
                 gdvinfo.DataBind();
-                Calinfo.VisibleDate = Convert.ToDateTime("2014-02-01");
             }
         }
 
@@ -30,8 +29,19 @@ namespace Attendance.User
             UserInfo us = Session["user"] as UserInfo;
             int year = int.Parse(DropDownListYear.SelectedValue);
             int month = int.Parse(DropDownListMonth.SelectedValue);
-            gdvinfo.DataSource = attenden.GetAttendanceInfo(2014, 2, us.UserID);
-            gdvinfo.DataBind();
+            if(ddrType.SelectedValue=="0")
+            {
+                gdvinfo.Visible = true;
+                Calinfo.Visible = false;
+                gdvinfo.DataSource = attenden.GetAttendanceInfo(year, month, us.UserID);
+                gdvinfo.DataBind();
+            }
+            else
+            {
+                gdvinfo.Visible = false;
+                Calinfo.Visible = true;
+                Calinfo.VisibleDate = Convert.ToDateTime(year+"-" +month+"-01");
+            }
         }
 
         protected void gdvinfo_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -56,7 +66,7 @@ namespace Attendance.User
                 UserInfo us = Session["user"] as UserInfo;
                 int year = int.Parse(DropDownListYear.SelectedValue);
                 int month = int.Parse(DropDownListMonth.SelectedValue);
-                List<AttendanceView> list = attenden.GetAttendanceView(2014, 2, us.UserID);
+                List<AttendanceView> list = attenden.GetAttendanceView(year, month, us.UserID);
 
                 var q = from day in list where day.Date == e.Day.Date select day;
 

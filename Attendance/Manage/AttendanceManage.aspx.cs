@@ -19,9 +19,9 @@ namespace Attendance.Manage
         {
             if (!IsPostBack)
             {
-                ViewState["CurrentPage"] = "1";
+                UserInfo User = Session["User"] as UserInfo;
+                ControlTemplate.SetPager(UserMa.SearchPeopleInManage(User.UserID.ToString(),999,1).Rows.Count,gdvView.PageSize);
                 Bind();
-
                 for (int i = DateTime.Now.Year - 3; i <= DateTime.Now.Year + 3; i++)
                     DropDownListYear.Items.Add(i.ToString());
                 DropDownListYear.SelectedValue = DateTime.Now.Year.ToString();
@@ -52,26 +52,7 @@ namespace Attendance.Manage
         }
 
 
-        public void SetPager()
-        {
-            GridViewRow pagerRow = gdvinfo.BottomPagerRow;
-            LinkButton btnPrev = (LinkButton)pagerRow.Cells[0].FindControl("btnPrev");
-            btnPrev.Enabled = ViewState["CurrentPage"].ToString() != "1";
-            LinkButton btnNext = (LinkButton)pagerRow.Cells[0].FindControl("btnNext");
-            btnNext.Enabled = ViewState["CurrentPage"].ToString() != ViewState["PageCount"].ToString();
-
-
-            //绑定数据到下拉表
-            DropDownList ddl = pagerRow.FindControl("ddlIndex") as DropDownList;
-            for (int i = 1; i <= Convert.ToInt32(ViewState["PageCount"]); i++)
-            {
-                ListItem li = new ListItem("第" + i + "页", i.ToString());
-                ddl.Items.Add(li);
-            }
-            ddl.SelectedValue = ViewState["CurrentPage"].ToString();
-
-        }
-        private void Bind()
+        public void Bind(object sender = null, EventArgs e = null)
         {
             // 获取GridView排序数据列及排序方向
             string sortExpression = this.gdvinfo.Attributes["SortExpression"];
@@ -80,8 +61,7 @@ namespace Attendance.Manage
 
             UserInfo User = Session["User"] as UserInfo;
             //// 调用业务数据获取方法
-            dtBind = UserMa.SearchPeopleInManage(User.UserID.ToString(), gdvinfo.PageSize, Convert.ToInt32(ViewState["CurrentPage"]));
-            ViewState["PageCount"] = (Math.Ceiling(dtBind.Rows.Count / 10.0)).ToString();
+            dtBind = UserMa.SearchPeopleInManage(User.UserID.ToString(), ControlTemplate.pageSize, ControlTemplate.pageIndex);
 
             // 根据GridView排序数据列及排序方向设置显示的默认数据视图
             if ((!string.IsNullOrEmpty(sortExpression)) && (!string.IsNullOrEmpty(sortDirection)))
@@ -89,48 +69,12 @@ namespace Attendance.Manage
                 dtBind.DefaultView.Sort = string.Format("{0} {1}", sortExpression, sortDirection);
             }
 
-
             // GridView绑定并显示数据
-            //  if(dtBind.Rows.Count>0)
             this.gdvinfo.DataSource = dtBind;
             this.gdvinfo.DataBind();
-            if (gdvinfo.BottomPagerRow != null)
-                gdvinfo.BottomPagerRow.Visible = true;
-            SetPager();
         }
 
 
-        protected void btnFirst_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = "1";
-            Bind();
-        }
-
-        protected void btnPrev_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) - 1;
-            Bind();
-        }
-
-        protected void btnNext_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = Convert.ToInt32(ViewState["CurrentPage"]) + 1;
-            Bind();
-        }
-
-        protected void btnLast_Click(object sender, EventArgs e)
-        {
-            ViewState["CurrentPage"] = ViewState["PageCount"];
-            Bind();
-        }
-
-        protected void ddlIndex_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList ddls = sender as DropDownList;
-            ViewState["CurrentPage"] = int.Parse(ddls.SelectedValue);
-            Bind();
-
-        }
 
         protected void BtnShow_Click(object sender, EventArgs e)
         {
@@ -145,6 +89,8 @@ namespace Attendance.Manage
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            divaddout.Style.Add("display", "none");
+            addoutc.Style.Add("display", "none");
             if (FileUploadExcel.HasFile)//判断FileUploadExcel是否为空
             {
                 LabTips.Text = "";

@@ -36,7 +36,7 @@
             <input type="button" value="Login" id="loginclick" onmouseover="mover(this)" onmouseout="mout(this)" />
         </div>
     </div>
-    <span style="position: absolute; right: 50px; bottom: 20px; font-family: 微软雅黑; font-size: 15px; color: White;">©2016 厚浦 N1612班 魏超</span>
+    <span style="position: absolute; right: 50px; bottom: 20px; font-family: 微软雅黑; font-size: 15px; color: White;">©2016 厚浦 N1612 WeCiao</span>
 
     <!--白色下部div层-->
     <div id="divdown">

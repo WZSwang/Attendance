@@ -29,6 +29,10 @@ namespace BLL
         {
             Userserve.EditPeople(us);
         }
+        public void EditUser(UserInfo us)
+        {
+            Userserve.EditUser(us);
+        }
         public void DelPeople(string us)
         {
             Userserve.DelPeople(us);

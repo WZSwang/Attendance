@@ -27,7 +27,7 @@
 
 
     <siteMapNode url="" title="用户管理"  description="" >
-      <siteMapNode url="UpdateUser.aspx" title="资料编辑"  description="" />
+      <siteMapNode url="UpdateUser.aspx" title="个人信息"  description="" />
     </siteMapNode>
 
 

@@ -21,7 +21,6 @@ namespace Attendance.Admin
             if (!IsPostBack)
             {
                 ControlTemplate.SetPager(Convert.ToInt32((Math.Ceiling(dm.GetAllDepart().Rows.Count / 10.0))), gdvinfo.PageSize);
-
                 Bind();
                 drpManage.DataSource = um.SearchManage();
                 drpManage.DataValueField = "UserName";

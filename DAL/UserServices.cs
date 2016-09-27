@@ -55,6 +55,14 @@ namespace DAL
                    , us.UserID, us.UserName, us.Cellphone, us.UserType);
             DBhelper.Change(sql);
         }
+        public void EditUser(UserInfo us)
+        {
+            string sql;
+                sql = string.Format(
+                   "update UserInfo set Password='{1}',Cellphone='{2}' where UserID='{0}'"
+                   ,us.UserID, us.Password, us.Cellphone);
+            DBhelper.Change(sql);
+        }
         public void DelPeople(string us)
         {
             string sql = "delete from userInfo where UserID='" + us + "'";

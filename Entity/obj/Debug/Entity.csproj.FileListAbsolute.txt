@@ -110,3 +110,16 @@ C:\Users\wecia\Desktop\Attendance2016-8-3\Entity\bin\Debug\Entity.pdb
 C:\Users\wecia\Desktop\Attendance2016-8-3\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
 C:\Users\wecia\Desktop\Attendance2016-8-3\Entity\obj\Debug\Entity.dll
 C:\Users\wecia\Desktop\Attendance2016-8-3\Entity\obj\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-8-3\Entity\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-8-3\Entity\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-8-3\Entity\obj\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-8-3\Entity\obj\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-8-4\Entity\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-8-4\Entity\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\Attendance2016-8-4\Entity\obj\Debug\Entity.dll
+C:\Users\Administrator\Desktop\Attendance2016-8-4\Entity\obj\Debug\Entity.pdb
+H:\考勤项目\Attendance2016-8-5\Entity\bin\Debug\Entity.dll
+H:\考勤项目\Attendance2016-8-5\Entity\bin\Debug\Entity.pdb
+H:\考勤项目\Attendance2016-8-5\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+H:\考勤项目\Attendance2016-8-5\Entity\obj\Debug\Entity.dll
+H:\考勤项目\Attendance2016-8-5\Entity\obj\Debug\Entity.pdb

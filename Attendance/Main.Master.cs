@@ -14,7 +14,6 @@ namespace Attendance
         public byte? UserType;
         protected void Page_Load(object sender, EventArgs e)
         {
-            UserType = 2;
             if (Session["User"] != null)
             {
                 UserInfo userInfo = Session["User"] as UserInfo;
@@ -29,7 +28,8 @@ namespace Attendance
         protected void lnkSignOut_Click(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
-            Response.Redirect("../Login.aspx");
+            Session.Clear();
+            Response.Redirect("~/Login.aspx");
         }
     }
 }

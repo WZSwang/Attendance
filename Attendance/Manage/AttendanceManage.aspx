@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="AttendanceManage.aspx.cs" Inherits="Attendance.Manage.AttendanceManage" %>
 
+<%@ Register Src="~/UserControl/ControlTemplate.ascx" TagPrefix="uc1" TagName="ControlTemplate" %>
+
+
 <asp:Content ID="Head" ContentPlaceHolderID="head" runat="server">
     <title>Attendance - Check</title>
     <script type="text/javascript">
@@ -93,29 +96,8 @@
                 </Columns>
                 <HeaderStyle BackColor="#39ADB4" />
                 <PagerSettings Mode="Numeric" />
-
-                <PagerTemplate>
-                    <div class="row form-group">
-                        <div class="col-lg-3 col-md-1 form-group">
-                        </div>
-                        <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">
-                            <asp:LinkButton ID="btnFirst" runat="server" Text="首页" OnClick="btnFirst_Click" />
-                        </div>
-                        <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">
-                            <asp:LinkButton ID="btnPrev" runat="server" Text="上一页" OnClick="btnPrev_Click" />
-                        </div>
-                        <div class="col-lg-2 col-md-2 form-group" style="padding-top: 3px">
-                            <asp:DropDownList ID="ddlIndex" runat="server" OnSelectedIndexChanged="ddlIndex_SelectedIndexChanged" AutoPostBack="True" CssClass="form-control" Width="130px"></asp:DropDownList>
-                        </div>
-                        <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">
-                            <asp:LinkButton ID="btnNext" runat="server" Text="下一页" OnClick="btnNext_Click" />
-                        </div>
-                        <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">
-                            <asp:LinkButton ID="btnLast" runat="server" Text="末页" OnClick="btnLast_Click" />
-                        </div>
-                    </div>
-                </PagerTemplate>
             </asp:GridView>
+            <uc1:ControlTemplate runat="server" ID="ControlTemplate" OnDateBind="Bind" />
         </div>
     </div>
 
@@ -166,7 +148,7 @@
 
                     <div class="col-lg-12 col-md-12  form-group">
                         <div class="templatemo-content-widget no-padding">
-                            <div class="panel panel-default table-responsive" style=" height:400px; overflow-y: scroll;">
+                            <div class="panel panel-default table-responsive" style="height: 400px; overflow-y: scroll;">
                                 <asp:GridView ID="gdvView" CssClass="table table-striped table-bordered templatemo-user-table gdvinfo" runat="server" AutoGenerateColumns="False" AllowSorting="True"
                                     GridLines="None" OnRowDataBound="gdvView_RowDataBound">
                                     <EmptyDataTemplate>
@@ -177,7 +159,11 @@
                                         <asp:BoundField HeaderText="星期" />
                                         <asp:BoundField DataField="First" HeaderText="首次打卡时间" />
                                         <asp:BoundField DataField="Last" HeaderText="最后打卡时间" />
-                                        <asp:BoundField HeaderText="考勤状态" DataField="Status" />
+                                        <asp:TemplateField HeaderText="考勤状态">
+                                            <ItemTemplate>
+                                                <%# Eval("Status") %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                     </Columns>
                                     <HeaderStyle CssClass="white-text templatemo-sort-by" ForeColor="White"></HeaderStyle>
                                     <HeaderStyle BackColor="#39ADB4" VerticalAlign="Middle" />

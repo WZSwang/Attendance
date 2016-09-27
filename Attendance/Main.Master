@@ -18,14 +18,17 @@
             var strUrl = location.href;
             var arrUrl = strUrl.split("/");
             var strPage = arrUrl[arrUrl.length - 1];
-            $(".templatemo-left-nav li").each(function (i) {
-                if (strPage.indexOf(domainUrl[i]) == 0)
-                    $(this).children('a').addClass("active");
-                if (strPage.indexOf(ManageUrl[i]) == 0)
-                    $(this).children('a').addClass("active");
-                if (strPage.indexOf(UserUrl[i]) == 0)
-                    $(this).children('a').addClass("active");
-            });
+            if (strPage == 'UpdateUser.aspx')
+                $(".templatemo-left-nav li:eq(-2)").children('a').addClass("active");
+            else
+                $(".templatemo-left-nav li").each(function (i) {
+                    if (strPage.indexOf(domainUrl[i]) == 0)
+                        $(this).children('a').addClass("active");
+                    else if (strPage.indexOf(ManageUrl[i]) == 0)
+                        $(this).children('a').addClass("active");
+                    else if (strPage.indexOf(UserUrl[i]) == 0)
+                        $(this).children('a').addClass("active");
+                });
         });
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
@@ -50,21 +53,21 @@
                     <ul>
                         <%if (UserType == 2)
                             { %>
-                        <li><a href="DateSetting.aspx"><i class="fa fa-sliders fa-fw"></i>ATTENDAN - 考勤设置</a></li>
-                        <li><a href="PeopleManage.aspx"><i class="fa fa-users fa-fw"></i>USERSINFO - 用户管理 </a></li>
-                        <li><a href="DepartmentManage.aspx"><i class="fa fa-database fa-fw"></i>DEPARTMENT - 部门管理</a></li>
+                        <li><a href="/Admin/DateSetting.aspx"><i class="fa fa-sliders fa-fw"></i>ATTENDAN - 考勤设置</a></li>
+                        <li><a href="/Admin/PeopleManage.aspx"><i class="fa fa-users fa-fw"></i>USERSINFO - 用户管理 </a></li>
+                        <li><a href="/Admin/DepartmentManage.aspx"><i class="fa fa-database fa-fw"></i>DEPARTMENT - 部门管理</a></li>
                         <%}
                             else if (UserType == 1)
                             {%>
-                        <li><a href="AttendanceManage.aspx"><i class="fa fa-list  fa-fw"></i>ATTENDAN - 考勤管理</a></li>
-                        <li><a href="ApplyHolidy.aspx"><i class="fa fa-check fa-fw"></i>APPLYHOLIDAY - 请假审批</a></li>
+                        <li><a href="/Manage/AttendanceManage.aspx"><i class="fa fa-list  fa-fw"></i>ATTENDAN - 考勤管理</a></li>
+                        <li><a href="/Manage/ApplyHolidy.aspx"><i class="fa fa-check fa-fw"></i>APPLYHOLIDAY - 请假审批</a></li>
                         <%}
                             else
                             { %>
-                        <li><a href="CheckAttendance.aspx"><i class="fa fa-user fa-fw"></i>MYATTENDAN - 我的考勤</a></li>
-                        <li><a href="ApplyManage.aspx"><i class="fa fa-edit fa-fw"></i>APPLYMANAGE - 请假申请</a></li>
+                        <li><a href="/User/CheckAttendance.aspx"><i class="fa fa-user fa-fw"></i>MYATTENDAN - 我的考勤</a></li>
+                        <li><a href="/User/ApplyManage.aspx"><i class="fa fa-edit fa-fw"></i>APPLYMANAGE - 请假申请</a></li>
                         <%} %>
-                        <li><a href="#"><i class="fa fa-pencil fa-fw"></i>INFO - 资料编辑</a></li>
+                        <li><a href="/UpdateUser.aspx"><i class="fa fa-pencil fa-fw"></i>INFO - 个人信息</a></li>
                         <li>
                             <asp:LinkButton Text='<i class="fa fa-eject fa-fw"></i>EXIT - 退出登录' runat="server" ID="lnkSignOut" OnClick="lnkSignOut_Click" />
 
@@ -89,7 +92,7 @@
 
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
                     </asp:ContentPlaceHolder>
-                    <footer class="text-right">
+                    <footer class="text-right" >
                         <p>
                             Copyright &copy; 2016 N1412 
             | Designed by <a href="#" target="_parent">WeCiao</a>

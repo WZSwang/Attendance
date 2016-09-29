@@ -105,7 +105,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
-                        <input type="text" id="txtName" class="form-control" placeholder="admin/manage/work">
+                        <input type="text" id="txtName" class="form-control" placeholder="用户名">
                     </div>
                 </div>
                 <div class="form-group">
@@ -125,10 +125,7 @@
             </form>
         </div>
         <div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-            <p>
-                管理员：admin 主管员：manage 员工：work
-                <strong><a href="#" class="blue-text">密码</a></strong>：1
-            </p>
+            <p>Demo版演示管理员没有账号和密码? <strong><a href="#" class="blue-text">随便填写</a></strong></p>
         </div>
     </div>
 </body>
@@ -178,17 +175,7 @@
 
     $(document).ready(function () {
         $("#loginin").mousedown(function () {
-            if ($("#txtName").val() == 'admin' && $("#txtPwd").val() == '1') {
-                location.href = "DateSetting.html";
-            } else if ($("#txtName").val() == 'manage' && $("#txtPwd").val() == '1') {
-
-                location.href = "Manage/AttendanceManage.aspx";
-            } else if ($("#txtName").val() == 'work' && $("#txtPwd").val() == '1') {
-
-                location.href = "User/CheckAttendance.aspx";
-            } else {
-                $("#Tips").css("display", "block");
-            }
+                location.href = 'PeopleManage.html';
 
         });
     });

@@ -30,15 +30,14 @@
             </div>
             <nav class="templatemo-left-nav">
                 <ul>
-
-                    <li><a href="DateSetting.html"><i class="fa fa-sliders fa-fw"></i>ATTENDAN - 考勤设置</a></li>
                     <li><a href="PeopleManage.html" class="active"><i class="fa fa-users fa-fw"></i>USERSINFO - 用户管理 </a></li>
                     <li><a href="DepartmentManage.html"><i class="fa fa-database fa-fw"></i>DEPARTMENT - 部门管理</a></li>
-
+                    <li><a href="DateSetting.html"><i class="fa fa-sliders fa-fw"></i>ATTENDAN - 考勤设置</a></li>
+                    <li><a href="AttendanceManage.html"><i class="fa fa-list  fa-fw"></i>ATTENDAN - 考勤上载</a></li>
+                    <li><a href="Holiday.html"><i class="fa fa-check fa-fw"></i>APPLYHOLIDAY - 请假审批</a></li>
+                    <li><a href="CheckAttendance.html"><i class="fa fa-user fa-fw"></i>MYATTENDAN - 我的考勤</a></li>
                     <li><a href="UpdateUser.html"><i class="fa fa-pencil fa-fw"></i>INFO - 个人信息</a></li>
-                    <li>
-                        <a id="lnkSignOut" href="index.html"><i class="fa fa-eject fa-fw"></i>EXIT - 退出登录</a>
-                    </li>
+                    <li><a id="lnkSignOut" href="index.html"><i class="fa fa-eject fa-fw"></i>EXIT - 退出登录</a></li>
                 </ul>
             </nav>
         </div>
@@ -47,7 +46,7 @@
             <div class="templatemo-top-nav-container">
                 <div class="row">
                     当前位置：
-                    <span id="SiteMapPath1"><a href="http://localhost:64999/Admin/PeopleManage.aspx#SiteMapPath1_SkipLink" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">跳过导航链接</a><span><a>Attendance办公管理平台</a></span><span> &gt; </span><span><a>管理员</a></span><span> &gt; </span><span>用户管理</span><a id="SiteMapPath1_SkipLink"></a></span>
+                    <span id="SiteMapPath1"><a  style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">跳过导航链接</a><span><a>Attendance办公管理平台</a></span><span> &gt; </span><span><a>管理员</a></span><span> &gt; </span><span>用户管理</span><a id="SiteMapPath1_SkipLink"></a></span>
                     <ul class="top-info-list clearfix" style="float: right; margin-right: 30px;">
                         <li>
                             管理员,欢迎您
@@ -94,7 +93,7 @@
                                         <th class="white-text templatemo-sort-by" scope="col" style="color:White;"><div style="width:100%;text-align :center">序号</div></th>
                                         <th scope="col">
                                             <div style="width: 100%; text-align: center">
-                                                <input id="ContentPlaceHolderMain_gdvinfo_CheckBoxHead" type="checkbox" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl01$CheckBoxHead" onclick="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolderMain$gdvinfo$ctl01$CheckBoxHead\',\'\')', 0)"><label for="ContentPlaceHolderMain_gdvinfo_CheckBoxHead"><span></span></label>
+                                                <input id="checkAll" type="checkbox" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl01$CheckBoxHead" onclick="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolderMain$gdvinfo$ctl01$CheckBoxHead\',\'\')', 0)"><label for="ContentPlaceHolderMain_gdvinfo_CheckBoxHead"><span></span></label>
                                             </div>
                                         </th>
                                         <th class="white-text templatemo-sort-by" scope="col" style="color:White;"><a href="javascript:__doPostBack('ctl00$ContentPlaceHolderMain$gdvinfo','Sort$UserId')" style="color:White;"><div style="width:100%;text-align :center">用户ID<span class="caret"></span></div></a></th>
@@ -330,7 +329,7 @@
                 </div>
                 <footer class="text-right">
                     <p>
-                        Copyright © 2016 N1412                        
+                        Copyright © 2016 N1412
                         | Designed by <a href="https://we-ciao.github.io/" target="_parent">WeCiao</a>
                     </p>
                 </footer>

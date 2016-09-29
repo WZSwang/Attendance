@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/templatemo-style.css" rel="stylesheet" />
+    <title>Attendance - People</title>
+    <style type="text/css">
+        td.selected {
+            background-color: #FEF2E8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left column -->
+    <div class="templatemo-flex-row">
+        <div class="templatemo-sidebar">
+            <header class="templatemo-site-header">
+                <div class="square"></div>
+                <h1>Attendace</h1>
+            </header>
+            <div class="profile-photo-container">
+                <img src="Images/WorkRight.png" width="300" height="215" alt="Profile Photo" class="img-responsive">
+                <div class="profile-photo-overlay"></div>
+            </div>
+            <div class="mobile-menu-icon">
+                <i class="fa fa-bars"></i>
+            </div>
+            <nav class="templatemo-left-nav">
+                <ul>
+
+                    <li><a href="DateSetting.html"><i class="fa fa-sliders fa-fw"></i>ATTENDAN - 考勤设置</a></li>
+                    <li><a href="PeopleManage.html"><i class="fa fa-users fa-fw"></i>USERSINFO - 用户管理 </a></li>
+                    <li><a href="DepartmentManage.html" class="active"><i class="fa fa-database fa-fw"></i>DEPARTMENT - 部门管理</a></li>
+
+                    <li><a href="UpdateUser.html"><i class="fa fa-pencil fa-fw"></i>INFO - 个人信息</a></li>
+                    <li>
+                        <a id="lnkSignOut" href="index.html"><i class="fa fa-eject fa-fw"></i>EXIT - 退出登录</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Main content -->
+        <div class="templatemo-content col-1 light-gray-bg">
+            <div class="templatemo-top-nav-container">
+                <div class="row">
+                    当前位置：
+                    <span id="SiteMapPath1"><a style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">跳过导航链接</a><span><a>Attendance办公管理平台</a></span><span> &gt; </span><span><a>管理员</a></span><span> &gt; </span><span>部门管理</span><a id="SiteMapPath1_SkipLink"></a></span>
+                    <ul class="top-info-list clearfix" style="float: right; margin-right: 30px;">
+                        <li>
+                            管理员,欢迎您
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="templatemo-content-container">
+
+                <div class="templatemo-content-widget white-bg">
+                    <h2 class="text-uppercase">搜索 / 添加</h2>
+                    <div class="panel-body">
+                        <div class="templatemo-flex-row flex-content-row">
+                            <div class="col-1">
+                                <div id="timeline_div" class="templatemo-chart"></div>
+                                <div class="col-lg-1 col-md-12  form-group">
+                                </div>
+                                <div class="col-lg-4 col-md-3 form-group">
+                                    <input name="ctl00$ContentPlaceHolderMain$TxtSearchID" type="text" id="ContentPlaceHolderMain_TxtSearchID" class="form-control" placeholder="请输入部门名称" style="float: left">
+                                </div>
+                                <div class="col-lg-4 col-md-3 form-group">
+                                    <select name="ctl00$ContentPlaceHolderMain$drpManage" id="ContentPlaceHolderMain_drpManage" class="form-control" style="float: left">
+                                        <option value="">请选择主管名称</option>
+                                        <option value="龚浩">龚浩</option>
+                                        <option value="王艳">王艳</option>
+                                        <option value="王鹏">王鹏</option>
+                                        <option value="钱欢">钱欢</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-12  form-group">
+                                    <input type="submit" name="ctl00$ContentPlaceHolderMain$btnSearch" value="搜索" id="ContentPlaceHolderMain_btnSearch" class="templatemo-blue-button">
+                                </div>
+                            </div>
+                        </div>
+                        <input id="btnadd" type="button" value="添加新部门" class="templatemo-blue-button">
+                    </div>
+                </div>
+                <div class="templatemo-content-widget no-padding">
+                    <div class="panel panel-default table-responsive">
+                        <div>
+                            <table class="table table-striped table-bordered templatemo-user-table gdvinfo" cellspacing="0" rules="all" border="1" id="ContentPlaceHolderMain_gdvinfo" style="border-collapse:collapse;text-align: center">
+                                <tbody>
+                                    <tr valign="middle" style="background-color:#39ADB4;">
+                                        <th class="white-text templatemo-sort-by" align="center" scope="col" style="color:White;"><div style="width:100%;text-align :center">序号</div></th>
+                                        <th class="white-text templatemo-sort-by" scope="col" style="color:White;"><div style="width:100%;text-align :center">部门名称</div></th>
+                                        <th class="white-text templatemo-sort-by" scope="col" style="color:White;"><div style="width:100%;text-align :center">主管</div></th>
+                                        <th scope="col">&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelNum_0">1</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelDeptName_0">素质拓展部</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelName_0"></span>
+                                        </td>
+                                        <td>
+                                            <input type="submit" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl02$ImageButonEdit" value="修改" onclick=" return false;" id="ContentPlaceHolderMain_gdvinfo_ImageButonEdit_0" class="templatemo-edit-btn ImageButonEdit" style="border-style:None;height:30px;width:50px;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelNum_1">2</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelDeptName_1">实训中心</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelName_1">王鹏</span>
+                                        </td>
+                                        <td>
+                                            <input type="submit" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl03$ImageButonEdit" value="修改" onclick=" return false;" id="ContentPlaceHolderMain_gdvinfo_ImageButonEdit_1" class="templatemo-edit-btn ImageButonEdit" style="border-style:None;height:30px;width:50px;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelNum_2">3</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelDeptName_2">景宁人力</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelName_2"></span>
+                                        </td>
+                                        <td>
+                                            <input type="submit" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl04$ImageButonEdit" value="修改" onclick=" return false;" id="ContentPlaceHolderMain_gdvinfo_ImageButonEdit_2" class="templatemo-edit-btn ImageButonEdit" style="border-style:None;height:30px;width:50px;">
+                                            <input type="submit" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl04$ImageButonDelete" value="删除" onclick=" return false;" id="ContentPlaceHolderMain_gdvinfo_ImageButonDelete_2" class="templatemo-edit-btn ImageButonDelete" style="border-style:None;height:30px;width:50px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelNum_3">4</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelDeptName_3">督导部</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelName_3">王艳</span>
+                                        </td>
+                                        <td>
+                                            <input type="submit" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl05$ImageButonEdit" value="修改" onclick=" return false;" id="ContentPlaceHolderMain_gdvinfo_ImageButonEdit_3" class="templatemo-edit-btn ImageButonEdit" style="border-style:None;height:30px;width:50px;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelNum_4">5</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelDeptName_4">武软共建学院</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelName_4"></span>
+                                        </td>
+                                        <td>
+                                            <input type="submit" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl06$ImageButonEdit" value="修改" onclick=" return false;" id="ContentPlaceHolderMain_gdvinfo_ImageButonEdit_4" class="templatemo-edit-btn ImageButonEdit" style="border-style:None;height:30px;width:50px;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelNum_5">6</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelDeptName_5">后勤管理部</span>
+                                        </td>
+                                        <td>
+                                            <span id="ContentPlaceHolderMain_gdvinfo_LabelName_5">龚浩</span>
+                                        </td>
+                                        <td>
+                                            <input type="submit" name="ctl00$ContentPlaceHolderMain$gdvinfo$ctl07$ImageButonEdit" value="修改" onclick=" return false;" id="ContentPlaceHolderMain_gdvinfo_ImageButonEdit_5" class="templatemo-edit-btn ImageButonEdit" style="border-style:None;height:30px;width:50px;">
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="ContentPlaceHolderMain_ControlTemplate_btnsearch" class="row form-group" style="width:100%;margin-top:10px;display:block;">
+                            <div class="col-lg-3 col-md-1 form-group">
+                            </div>
+                            <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">
+                                <a id="ContentPlaceHolderMain_ControlTemplate_btnFirst" href="javascript:__doPostBack('ctl00$ContentPlaceHolderMain$ControlTemplate$btnFirst','')">首页</a>
+                            </div>
+                            <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">
+                                <a id="ContentPlaceHolderMain_ControlTemplate_btnPrev" class="aspNetDisabled">上一页</a>
+                            </div>
+                            <div class="col-lg-2 col-md-2 form-group" style="padding-top: 3px">
+                                <select name="ctl00$ContentPlaceHolderMain$ControlTemplate$ddlIndex" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolderMain$ControlTemplate$ddlIndex\',\'\')', 0)" id="ContentPlaceHolderMain_ControlTemplate_ddlIndex" class="form-control" style="width:130px;">
+                                    <option selected="selected" value="1">第1页</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">
+                                <a id="ContentPlaceHolderMain_ControlTemplate_btnNext" class="aspNetDisabled">下一页</a>
+                            </div>
+                            <div class="col-lg-1 col-md-1 form-group" style="padding-top: 10px">
+                                <a id="ContentPlaceHolderMain_ControlTemplate_btnLast" href="javascript:__doPostBack('ctl00$ContentPlaceHolderMain$ControlTemplate$btnLast','')">末页</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <footer class="text-right">
+                    <p>
+                        Copyright © 2016 N1412
+                        | Designed by <a href="https://we-ciao.github.io/" target="_parent">WeCiao</a>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <div id="divaddout" class="panel panel-default margin-10 TipBox" style="display: none">
+        <div class="panel-heading">
+            <h2 class="text-uppercase">添加新部门</h2>
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-6 form-group">
+                    <label for="inputFirstName"><span style="color: red;">*</span>部门名称：</label>
+                    <input name="ctl00$ContentPlaceHolderHide$tnid" type="text" id="ContentPlaceHolderHide_tnid" class="form-control">
+                </div>
+                <div class="col-lg-12 col-md-6 form-group">
+                    <label for="inputLastName">主管：</label>
+                    <select name="ctl00$ContentPlaceHolderHide$drpdename" id="ContentPlaceHolderHide_drpdename" class="form-control">
+                        <option value="">--空--</option>
+                        <option value="1005                ">龚浩</option>
+                        <option value="1030                ">王艳</option>
+                        <option value="3009                ">王鹏</option>
+                        <option value="3026                ">钱欢</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-10 form-group">
+                    <label for="inputFirstName">部门说明：</label>
+                    <input name="ctl00$ContentPlaceHolderHide$TxtInfo" type="text" id="ContentPlaceHolderHide_TxtInfo" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group" style="text-align: center;">
+                <div class="col-lg-12 col-md-12 form-group">
+                    <span id="ContentPlaceHolderHide_lblbrith0" style="display: none; color: #d7425c"></span>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <input type="submit" name="ctl00$ContentPlaceHolderHide$btnin" value="添加新部门" id="ContentPlaceHolderHide_btnin" class="templatemo-blue-button">
+                <button class="templatemo-white-button" type="reset" onclick="TipClose()">取消</button>
+            </div>
+        </div>
+    </div>
+    <div id="ContentPlaceHolderHide_diveditout" class="panel panel-default margin-10 TipBox diveditout" style="display: none">
+        <div class="panel-heading">
+            <h2 class="text-uppercase">&lt;+&gt;修改信息</h2>
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-6 form-group">
+                    <label for="inputFirstName"><span style="color: red;">*</span>部门名称：</label>
+                    <input name="ctl00$ContentPlaceHolderHide$txtId" type="text" id="ContentPlaceHolderHide_txtId" class="form-control">
+                </div>
+                <div class="col-lg-12 col-md-6 form-group">
+                    <label for="inputLastName">主管：</label>
+                    <select name="ctl00$ContentPlaceHolderHide$drpdenameedit" id="ContentPlaceHolderHide_drpdenameedit" class="form-control">
+                        <option value="">--空--</option>
+                        <option value="1005                ">龚浩</option>
+                        <option value="1030                ">王艳</option>
+                        <option value="3009                ">王鹏</option>
+                        <option value="3026                ">钱欢</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12 col-md-10 form-group">
+                    <label for="inputFirstName">部门说明：</label>
+                    <input name="ctl00$ContentPlaceHolderHide$TxtEditInfo" type="text" id="ContentPlaceHolderHide_TxtEditInfo" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group" style="text-align: center;">
+                <div class="col-lg-12 col-md-12 form-group">
+                    <span id="ContentPlaceHolderHide_lblbrith" style="display: none; color: #d7425c"></span>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <input type="submit" name="ctl00$ContentPlaceHolderHide$btnedit" value="确认修改" id="ContentPlaceHolderHide_btnedit" class="templatemo-blue-button">
+                <button class="templatemo-white-button" type="reset" onclick="TipClose()">取消</button>
+            </div>
+        </div>
+    </div>
+    <div id="addoutc" class="out"></div>
+    <div id="editoutc" class="out"></div>
+    <div id="exitout" class="templatemo-content-widget pink-bg MessageBox" style="display: none">
+        <i class="fa fa-times" onclick="TipClose()"></i>
+        <h2 class="text-uppercase margin-bottom-10">&lt;!&gt;注意</h2>
+        <p class="margin-bottom-0">此操作无法撤销,确定要删除选择的部门吗？ </p>
+        <div class=" text-right" style="margin-top: 40px;">
+            <div class="col-lg-12 col-md-12 form-group">
+                <input type="submit" name="ctl00$ContentPlaceHolderHide$yesexit" value="删除" id="ContentPlaceHolderHide_yesexit" class="templatemo-white-button" style="border: 0px; color: #D7425C">
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="ctl00$ContentPlaceHolderHide$DepartName" id="ContentPlaceHolderHide_DepartName">
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ContentPlaceHolderHide_btnin").click(function () {
+                var NUM = document.getElementById("ContentPlaceHolderHide_tnid").value;
+                if (NUM == "") {
+                    document.getElementById("ContentPlaceHolderHide_lblbrith0").style.display = "block";
+                    document.getElementById("ContentPlaceHolderHide_lblbrith0").innerText = "请输入部门名称";
+                    return false;
+                }
+                if (document.getElementById("ContentPlaceHolderHide_lblbrith0").innerText == "已经存在的部门名称,请更换")
+                    return false;
+                //禁用按钮的提交
+                return true;
+            });
+
+            $(".ImageButonEdit").click(function () {
+                //display
+                $("#ContentPlaceHolderHide_diveditout").fadeIn(500);
+                $("#editoutc").fadeIn(500);
+
+                //getelement
+                var obj = event.srcElement;
+                while (obj.tagName != "TR") {
+                    obj = obj.parentElement;
+                }
+                var depart = obj.children[1].innerText;
+                document.getElementById("ContentPlaceHolderHide_DepartName").value = obj.children[1].innerText.trim();
+                document.getElementById("ContentPlaceHolderHide_txtId").value = obj.children[1].innerText.trim();
+
+                document.getElementById("ContentPlaceHolderHide_drpdenameedit").options[0].selected = true;
+                for (var i = 0; i < document.getElementById("ContentPlaceHolderHide_drpdenameedit").options.length; i++) {
+                    if (document.getElementById("ContentPlaceHolderHide_drpdenameedit").options[i].text == obj.children[2].innerText.trim())
+                        document.getElementById("ContentPlaceHolderHide_drpdenameedit").options[i].selected = true;
+                }
+                document.getElementById("ContentPlaceHolderHide_TxtEditInfo").value = 'ajax加载...';
+                document.getElementById("ContentPlaceHolderHide_lblbrith").style.display = "none";
+                return true;
+            });
+
+            $("#ContentPlaceHolderHide_btnedit").click(function () {
+                var NUM = document.getElementById("ContentPlaceHolderHide_txtId").value;
+
+                if (NUM == "") {
+                    document.getElementById("ContentPlaceHolderHide_lblbrith").style.display = "block";
+                    document.getElementById("ContentPlaceHolderHide_lblbrith").innerText = "请输入部门名称";
+                    return false;
+                }
+                if (NUM == document.getElementById("ContentPlaceHolderHide_DepartName").value)
+                    return true;
+
+
+                if (document.getElementById("ContentPlaceHolderHide_lblbrith").innerText == "已经存在的部门名称,请更换")
+                    return false;
+
+                //禁用按钮的提交
+                return true;
+            });
+
+            $("#btnadd").click(function () {
+                $("#addoutc").fadeIn(500);
+                $("#divaddout").fadeIn(500);
+            });
+            $(".ImageButonDelete").click(function () {
+                var obj = event.srcElement;
+                while (obj.tagName != "TR") {
+                    obj = obj.parentElement;
+                }
+                document.getElementById("ContentPlaceHolderHide_DepartName").value = obj.children[1].innerText;
+                $("#exitout").fadeIn(500);
+                $("#addoutc").fadeIn(500);
+            });
+            $("#addoutc").click(function () {
+                $("#addoutc").fadeOut(500);
+                $("#exitout").fadeOut(500);
+                $("#divaddout").fadeOut(500);
+            });
+            $("#editoutc").click(function () {
+                $("#editoutc").fadeOut(500);
+                $("#ContentPlaceHolderHide_diveditout").fadeOut(500);
+            });
+            $(".TipClose").click(function () {
+                $("#addoutc").fadeOut(500);
+                $("#divaddout").fadeOut(500);
+                $("#ContentPlaceHolderHide_diveditout").fadeOut(500);
+                $("#editoutc").fadeOut(500);
+            });
+        });
+        function TipClose() {
+            $("#addoutc").fadeOut(500);
+            $("#divaddout").fadeOut(500);
+            $(".diveditout").fadeOut(500);
+            $("#editoutc").fadeOut(500);
+            $(".MessageBox").fadeOut(500);
+        }
+    </script>
+</body>
+</html>

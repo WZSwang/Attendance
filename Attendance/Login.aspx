@@ -42,18 +42,19 @@
     <div id="divdown">
         <div id="xhx"><a href="#" class="links" id="aboutus" style="color: #fff;">> 关 于 我 们 <</a></div>
 
-        <table style="width: 100%; height: 100%; background-color: transparent; padding-top: 20px; font-family: 微软雅黑; font-size: 18px; color: White;">
+        <table style="width: 100%; height: 100%; background-color: transparent; margin-top: 20px; font-family: 微软雅黑; font-size: 18px; color: White;">
             <tr style="text-align: center; height: 50%">
                 <td>
-                    <%--<img alt="" src="Images/renshi.png" class="imgt" style="width: 400px; height: 200px; background-color: red; border: 0px;" onmouseover="this.style.zoom=1.8" onmouseout="this.style.zoom=1" />--%>
+                    <img alt="" src="Images/Work.png" class="imgt" style="width: 300px; height: 215px; background-color: red; border: 0px;" onmouseover="this.style.zoom=1.2" onmouseout="this.style.zoom=1" />
 
                 </td>
                 <td>
-                    <%--  <img alt="" src="Images/qingjia.png" class="imgt" style="width: 400px; height: 200px; background-color: Blue; border: 0px;" onmouseover="this.style.zoom=1.8" onmouseout="this.style.zoom=1" />--%>
+                    <img alt="" src="Images/WorkInfo.png" class="imgt" style="width: 300px; height: 215px;  background-color: Blue; border: 0px;" onmouseover="this.style.zoom=1.2" onmouseout="this.style.zoom=1" />
 
                 </td>
                 <td>
-                    <%-- <img alt="" src="Images/baobiao.png" class="imgt" style="width: 400px; height: 200px; background-color: Green; border: 0px;" onmouseover="this.style.zoom=1.8" onmouseout="this.style.zoom=1" />--%>
+                    <img alt="" src="Images/WorkRight.png" class="imgt" style="width: 300px; height: 215px;  background-color: Green; border: 0px;" onmouseover="this.style.zoom=1.2" onmouseout="this.style.zoom=1" />
+
 
                 </td>
             </tr>
@@ -237,7 +238,6 @@
             $("#divdown").removeClass("movedown");
         })
         $("#aboutc").click(function () {
-            $(".enterplorer-banner").fadeOut(1000);
             $("#divdown").css("top", "90%");
             $("#aboutc").fadeOut(200);
             $("#xhx").slideDown(200);

@@ -42,7 +42,7 @@
                         <asp:Button ID="BtnShow" runat="server" Text="显示" class="templatemo-blue-button" OnClick="BtnShow_Click" />
                     </div>
                     <div class="col-lg-1 col-md-12  form-group">
-                        <asp:Button ID="BtnSave" runat="server" Text="保存" class="templatemo-blue-button" OnClick="BtnSave_Click" />
+                        <asp:Button ID="BtnSave" runat="server" Text="保存" Visible="false" class="templatemo-blue-button" OnClick="BtnSave_Click" />
                     </div>
                     <div class="col-lg-2 col-md-12  form-group text-right" style="padding-top: 10px;">
                         <asp:Label ID="LabTip" runat="server" Text='<i class="fa fa-check "></i>保存成功！' Visible="false"></asp:Label>

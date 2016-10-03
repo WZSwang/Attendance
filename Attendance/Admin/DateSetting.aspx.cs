@@ -42,6 +42,7 @@ namespace Attendance
             }
             gdvinfo.DataSource = list;
             gdvinfo.DataBind();
+            BtnSave.Visible = true;
         }
 
         protected void gdvinfo_RowDataBound(object sender, GridViewRowEventArgs e)
